@@ -13,6 +13,8 @@ import 'package:daily_tracker_diet_app/main.dart' as app;
 
 void main() => run(_testMain);
 
+run(void Function() testMain) {}
+
 void _testMain() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
