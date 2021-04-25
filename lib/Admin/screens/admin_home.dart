@@ -1,6 +1,7 @@
-import 'package:daily_tracker_diet_app/screens/add_meal_screen.dart';
+import 'add_meal_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:daily_tracker_diet_app/Admin/screens/view_user.dart';
 
 class Profile extends StatelessWidget {
   static const String id = 'AdminHome';
@@ -52,6 +53,9 @@ class Profile extends StatelessWidget {
                 height: 40,
               ),
               ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, view_user.id);
+                },
                 leading: Icon(
                   Icons.account_box,
                   size: 30,
