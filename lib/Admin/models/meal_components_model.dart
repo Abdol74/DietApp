@@ -1,43 +1,54 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MealComponentsModel {
-  int _caloriesNumber;
-  int _carb;
-  int _fats;
-  int _protein;
-  int _measure;
-  String _imageUrl;
-  String _mealCategoryId;
-  String _mealDescription;
-  String _mealName;
+  int caloriesNumber;
+  int carb;
+  int fats;
+  int protein;
+  int measure;
+  String imageUrl;
+  String mealCategoryId;
+  String mealDescription;
+  String mealName;
+  String id;
+  MealComponentsModel();
 
-  int get caloriesNumber => _caloriesNumber;
-
-  int get carb => _carb;
-
-  int get fats => _fats;
-
-  int get protien => _protein;
-
-  int get measure => _measure;
-
-  String get imageUrl => _imageUrl;
-
-  String get mealCategoryId => _mealCategoryId;
-
-  String get mealDescription => _mealDescription;
-
-  String get mealName => _mealName;
+  MealComponentsModel.fromMap(Map<String, dynamic> data) {
+    caloriesNumber = data['caloriesNumber'];
+    carb = data['carb'];
+    fats = data['fats'];
+    imageUrl = data['image'];
+    mealCategoryId = data['mealCategoryId'];
+    mealDescription = data['mealDescription'];
+    mealName = data['mealName'];
+    measure = data['measure'];
+    protein = data['protein'];
+    id = data['id'];
+  }
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'mealName': mealName,
+      'image': imageUrl,
+      'caloriesNumber': caloriesNumber,
+      'carb': carb,
+      'fats': fats,
+      'protein': protein,
+      'mealCategoryId': mealCategoryId,
+      'mealDescription': mealDescription,
+      'measure': measure,
+    };
+  }
 
   MealComponentsModel.fromSnapshot(DocumentSnapshot snapshot) {
-    _caloriesNumber = snapshot.data['caloriesNumber'];
-    _carb = snapshot.data['carb'];
-    _fats = snapshot.data['fats'];
-    _imageUrl = snapshot.data['image'];
-    _mealCategoryId = snapshot.data['mealCategoryId'];
-    _mealDescription = snapshot.data['mealDescription'];
-    _mealName = snapshot.data['mealName'];
-    _measure = snapshot.data['measure'];
-    _protein = snapshot.data['protein'];
+    caloriesNumber = snapshot.data['caloriesNumber'];
+    carb = snapshot.data['carb'];
+    fats = snapshot.data['fats'];
+    imageUrl = snapshot.data['image'];
+    mealCategoryId = snapshot.data['mealCategoryId'];
+    mealDescription = snapshot.data['mealDescription'];
+    mealName = snapshot.data['mealName'];
+    measure = snapshot.data['measure'];
+    protein = snapshot.data['protein'];
   }
 }
