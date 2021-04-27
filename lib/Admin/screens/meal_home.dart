@@ -48,7 +48,7 @@ class _ProfileState extends State<ProfileMeal> {
       ),
       drawer: Container(
         width: 250,
-        height: 500,
+        height: 800,
         child: Drawer(
           child: Column(
             children: <Widget>[
@@ -353,7 +353,7 @@ class _ProfileState extends State<ProfileMeal> {
         ),
         onRefresh: _refreshList,
         showChildOpacityTransition: true,
-        color: Colors.teal,
+        color: Color(0xFF09C04F),
       ),
     );
   }

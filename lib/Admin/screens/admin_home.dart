@@ -22,7 +22,7 @@ class Profile extends StatelessWidget {
       ),
       drawer: Container(
         width: 250,
-        height: 500,
+        height: 800,
         child: Drawer(
           child: Column(
             children: <Widget>[
@@ -35,7 +35,7 @@ class Profile extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         width: 100,
-                        height: 100,
+                        height: 400,
                         margin: EdgeInsets.only(top: 30),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
