@@ -6,6 +6,7 @@ import 'package:daily_tracker_diet_app/Admin/screens/meal_home.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/view_user.dart';
 import 'package:provider/provider.dart';
+import 'package:daily_tracker_diet_app/Admin/screens/login_screen.dart';
 
 void main() => runApp(MultiProvider(
       providers: [
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF09B44D),
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: ProfileMeal.id,
+      home: LoginScreen(),
+      //initialRoute: ProfileMeal.id,
       routes: {
         AddMeal.id: (context) => AddMeal(),
         Profile.id: (context) => Profile(),
