@@ -21,8 +21,8 @@ getMeals(MealProvider mealProvider) async {
   mealProvider.mealList = _meals;
 }
 
-uploadMealAndImage(
-    MealComponentsModel meal, bool isUpdating, File localFile) async {
+uploadMealAndImage(MealComponentsModel meal, bool isUpdating, File localFile,
+    Function mealUpdated) async {
   if (localFile != null) {
     print("uploading image");
 
@@ -45,14 +45,14 @@ uploadMealAndImage(
 
     String url = await firebaseStorageRef.getDownloadURL();
     print("download url: $url");
-    _uploadMeal(meal, isUpdating, imageUrl: url);
+    _uploadMeal(meal, isUpdating, mealUpdated, imageUrl: url);
   } else {
     print('...skipping image upload');
-    _uploadMeal(meal, isUpdating);
+    _uploadMeal(meal, isUpdating, mealUpdated);
   }
 }
 
-_uploadMeal(MealComponentsModel meal, bool isUpdating,
+_uploadMeal(MealComponentsModel meal, bool isUpdating, Function mealUpdated,
     {String imageUrl}) async {
   CollectionReference reference =
       Firestore.instance.collection('MealComponents');
@@ -62,9 +62,11 @@ _uploadMeal(MealComponentsModel meal, bool isUpdating,
 
   if (isUpdating) {
     await reference.document(meal.id).updateData(meal.toMap());
+    mealUpdated(meal);
   } else {
     DocumentReference documentReference = await reference.add(meal.toMap());
     meal.id = documentReference.documentID;
     await documentReference.setData(meal.toMap(), merge: true);
+    mealUpdated(meal);
   }
 }
