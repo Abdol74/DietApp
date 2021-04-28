@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/admin_home.dart';
 import 'package:flutter/material.dart';
 
+import 'meal_home.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => new _LoginScreenState();
@@ -136,7 +138,8 @@ class _LoginScreenState extends State<LoginScreen>{
                       height: 50.0,
                       child: RaisedButton(
                         color: Color(0xFF09B44D),
-                        child: Text("Sign in", style: TextStyle(fontFamily: 'Roboto', fontSize: 18, color: const Color(0xffffffff),),),
+                        child: Text("Sign in",
+                          style: TextStyle(fontFamily: 'Roboto', fontSize: 18, color: const Color(0xffffffff),),),
                         onPressed: signIn,
                         shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0),
@@ -176,13 +179,14 @@ class _LoginScreenState extends State<LoginScreen>{
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.only(top: 20, left: 50, right: 100),
+                          padding: EdgeInsets.only(top: 20, left: 50, right: 50),
                           child: Image(
                             height: 60,
                             width: 40,
                             image: AssetImage('assets/images/icons/facebookicon.png'),
                           ),
-                        )
+                        ),
+                        SizedBox(height: 100,),
                       ],
                     ),
 
@@ -218,7 +222,7 @@ class _LoginScreenState extends State<LoginScreen>{
               email: _email, password: _password);
           if (firebaseUser.uid == "RFDhlmQ4h6WxKh2zCWzKXy31ZVr2") {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Profile()));
+                context, MaterialPageRoute(builder: (context) => ProfileMeal()));
           }
         }
         // El else bta3et el user di msh sh8alaa

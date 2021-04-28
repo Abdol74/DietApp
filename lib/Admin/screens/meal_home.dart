@@ -164,8 +164,7 @@ class _ProfileState extends State<ProfileMeal> {
                   SizedBox(height: 20,),
                   Row(
                     children:<Widget> [
-
-                      SizedBox(width: 30,),
+                      SizedBox(width: 130,),
                       Column(
                         children:<Widget>[
                           Container(
@@ -180,157 +179,169 @@ class _ProfileState extends State<ProfileMeal> {
                               mealProvider.meals[index].imageUrl,
                               fit: BoxFit.cover,),),
                           SizedBox(height: 10,),
+                             Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Text(
+                                (mealProvider.meals[index].mealName == null)
+                                    ? 'mealName'
+                                    : mealProvider.meals[index].mealName,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          //////////////////////////
+                          Column(
+                            children: [
+                              SizedBox(height: 10,),
+                              Row(
+                                children: [
+                                  SizedBox(width: 5,),
+                                  Container(
+                                      width:100,
+                                      height:30,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20),
+                                          color: Color(0xFF09C04F),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.grey[400],
+                                              blurRadius: 5,
+                                            )
+                                          ]),
+                                      child: TextButton(
+                                        child: Text('Gradients'),
+
+                                        style: TextButton.styleFrom(
+                                          primary: Colors.white,
+                                        ),
+                                        onPressed: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context){
+                                                return AlertDialog(
+                                                  content: Column(
+                                                    children: [
+                                                      Container(
+                                                        width: 200,
+                                                        height: 200,
+                                                        margin: EdgeInsets.only(top: 30),
+                                                        decoration: BoxDecoration(
+                                                          shape: BoxShape.circle,
+                                                          image: DecorationImage(
+                                                            image: AssetImage("assets/images/logo.png"),
+                                                            fit: BoxFit.fill,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 20,),
+                                                      Row(children:[
+                                                        Text(
+                                                          "FATS ", style: TextStyle(color: Color(0xFF09C04F), fontSize: 18, fontWeight: FontWeight.w400),),
+                                                        SizedBox(width: 10,),
+                                                        Text(mealProvider.meals[index].fats.toString(),
+                                                          style: TextStyle(color: Colors.black, fontSize: 18,),),
+                                                      ],
+                                                      ),
+                                                      SizedBox(height: 20,),
+                                                      Row(children: [
+                                                        Text(
+                                                          "Protein ", style: TextStyle(color: Color(0xFF09C04F), fontSize: 18, fontWeight: FontWeight.w400),),
+                                                        SizedBox(width: 10,),
+                                                        Text(mealProvider.meals[index].protein.toString(),
+                                                          style: TextStyle(color: Colors.black, fontSize: 18,),),
+                                                      ],
+                                                      ),
+                                                      SizedBox(height: 20,),
+                                                      Row(children: [
+                                                        Text(
+                                                          "Carb ", style: TextStyle(color: Color(0xFF09C04F), fontSize: 18, fontWeight: FontWeight.w400),),
+                                                        SizedBox(width: 10,),
+                                                        Text(mealProvider.meals[index].carb.toString(),
+                                                          style: TextStyle(color: Colors.black, fontSize: 18,),),
+                                                      ],
+                                                      ),
+                                                      SizedBox(height: 20,),
+                                                      Row(children: [
+                                                        Text(
+                                                          "Calories ", style: TextStyle(color: Color(0xFF09C04F), fontSize: 18, fontWeight: FontWeight.w400),),
+                                                        SizedBox(width: 10,),
+                                                        Text(mealProvider.meals[index].caloriesNumber.toString(),
+                                                          style: TextStyle(color: Colors.black, fontSize: 18,),),
+                                                      ],
+                                                      ),
+                                                      SizedBox(height: 40,),
+                                                      Row(
+                                                        children: [
+                                                          SizedBox(width: 60,),
+                                                          Container(
+                                                            width: 40,
+                                                            height: 50,
+                                                            decoration: BoxDecoration(
+                                                              shape: BoxShape.circle,
+                                                              color: Color(0xFF09C04F),
+                                                            ),
+                                                            child: TextButton(
+                                                              child: Icon(Icons.edit,
+                                                                size: 25,
+                                                                color:Colors.white ,
+                                                              ),
+                                                              onPressed: () {
+                                                                mealProvider.currentMeal =
+                                                                mealProvider.meals[index];
+                                                                Navigator.of(context).push(
+                                                                  MaterialPageRoute(
+                                                                      builder: (BuildContext context) {
+                                                                        return UpdateMeal(
+                                                                          isUpdating: true,
+                                                                        );
+                                                                      }),
+                                                                );
+                                                              },
+                                                            ),
+                                                          ),
+                                                          SizedBox(width: 40,),
+                                                          Container(
+                                                            width: 40,
+                                                            height: 50,
+                                                            decoration: BoxDecoration(
+                                                              shape: BoxShape.circle,
+                                                              color: Colors.green,
+                                                            ),
+                                                            child:  TextButton(
+                                                                child: Icon(Icons.delete,
+                                                                  size: 25,
+                                                                  color: Colors.white,),
+                                                                onPressed: () {
+                                                                  deleteMeal(mealProvider.meals[index],
+                                                                      updateDeleteMeal);
+                                                                }
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  actions:<Widget> [
+                                                    FlatButton(onPressed: (){},
+                                                      child: Text("Okay"), textColor: Colors.green,
+                                                    ),
+
+                                                  ],
+                                                );
+                                              }
+                                          );
+                                        },
+                                      )
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                       SizedBox(width: 20,),
-                      Column(
-                        children: [
-                          SizedBox(height: 10,),
-                          Row(
-                            children: [
-                              Container(
-                                width:100,
-                                height:30,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.green,
-                                        blurRadius: 5,
-                                      )
-                                    ]),
-
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 20),
-                                  child: Text(
-                                    (mealProvider.meals[index].mealName == null)
-                                        ? 'mealName'
-                                        : mealProvider.meals[index].mealName,
-                                    style: TextStyle(
-                                        color: Colors.green,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 5,),
-                              Container(
-                                  width:100,
-                                  height:30,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Color(0xFF09C04F),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey[400],
-                                          blurRadius: 5,
-                                        )
-                                      ]),
-                                  child: TextButton(
-                                    child: Text('Gradients'),
-                                    style: TextButton.styleFrom(
-                                      primary: Colors.white,
-                                    ),
-                                    onPressed: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context){
-                                            return AlertDialog(
-                                              content: Column(
-                                                children: [
-                                                  Container(
-                                                    width: 200,
-                                                    height: 200,
-                                                    margin: EdgeInsets.only(top: 30),
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      image: DecorationImage(
-                                                        image: AssetImage("assets/images/logo.png"),
-                                                        fit: BoxFit.fill,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(height: 20,),
-                                                  Row(children:[
-                                                    Text(
-                                                      "FATS ", style: TextStyle(color: Color(0xFF09C04F), fontSize: 18, fontWeight: FontWeight.w400),),
-                                                    SizedBox(width: 10,),
-                                                    Text(mealProvider.meals[index].fats.toString(),
-                                                      style: TextStyle(color: Colors.black, fontSize: 18,),),
-                                                  ],
-                                                  ),
-                                                  SizedBox(height: 20,),
-                                                  Row(children: [
-                                                    Text(
-                                                      "Protein ", style: TextStyle(color: Color(0xFF09C04F), fontSize: 18, fontWeight: FontWeight.w400),),
-                                                    SizedBox(width: 10,),
-                                                    Text(mealProvider.meals[index].protein.toString(),
-                                                      style: TextStyle(color: Colors.black, fontSize: 18,),),
-                                                  ],
-                                                  ),
-                                                  SizedBox(height: 20,),
-                                                  Row(children: [
-                                                    Text(
-                                                      "Carb ", style: TextStyle(color: Color(0xFF09C04F), fontSize: 18, fontWeight: FontWeight.w400),),
-                                                    SizedBox(width: 10,),
-                                                    Text(mealProvider.meals[index].carb.toString(),
-                                                      style: TextStyle(color: Colors.black, fontSize: 18,),),
-                                                  ],
-                                                  ),
-                                                  SizedBox(height: 20,),
-                                                  Row(children: [
-                                                    Text(
-                                                      "Calories ", style: TextStyle(color: Color(0xFF09C04F), fontSize: 18, fontWeight: FontWeight.w400),),
-                                                    SizedBox(width: 10,),
-                                                    Text(mealProvider.meals[index].caloriesNumber.toString(),
-                                                      style: TextStyle(color: Colors.black, fontSize: 18,),),
-                                                  ],
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          }
-                                      );
-                                    },
-                                  )
-                              ),
-                            ],
-                          ),
-
-                          Row(
-                            children: [
-                              TextButton(
-                                child: Icon(Icons.edit,
-                                  size: 30,
-                                  color: Color(0xFF09C04F),
-                                ),
-                                onPressed: () {
-                                  mealProvider.currentMeal =
-                                  mealProvider.meals[index];
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) {
-                                          return UpdateMeal(
-                                            isUpdating: true,
-                                          );
-                                        }),
-                                  );
-                                },
-                              ),
-                              TextButton(
-                                  child: Icon(Icons.delete,
-                                    size: 30,
-                                    color: Colors.red,),
-                                  onPressed: () {
-                                    deleteMeal(mealProvider.meals[index],
-                                        updateDeleteMeal);
-                                  }
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                   Padding(
