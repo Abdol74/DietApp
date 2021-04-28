@@ -70,3 +70,25 @@ _uploadMeal(MealComponentsModel meal, bool isUpdating, Function mealUpdated,
     mealUpdated(meal);
   }
 }
+
+deleteMeal(MealComponentsModel meal, Function updateDeleteMeal) async {
+  if (meal.imageUrl != null) {
+    StorageReference storageReference =
+        await FirebaseStorage.instance.getReferenceFromUrl(meal.imageUrl);
+
+    print(storageReference.path);
+
+    await storageReference.delete();
+
+    print('imageDelete');
+  }
+
+  await Firestore.instance
+      .collection('MealComponents')
+      .document(meal.id)
+      .delete();
+
+  print('deleted');
+
+  updateDeleteMeal(meal);
+}

@@ -1,4 +1,5 @@
 import 'package:daily_tracker_diet_app/Admin/Provider/meal_provider.dart';
+import 'package:daily_tracker_diet_app/Admin/models/meal_components_model.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/add&&update_meal.dart';
 import 'package:daily_tracker_diet_app/Admin/helpers/meal_api.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,10 @@ class _ProfileState extends State<ProfileMeal> {
 
     Future<void> _refreshList() async {
       getMeals(mealProvider);
+    }
+
+    updateDeleteMeal(MealComponentsModel meal) {
+      mealProvider.deleteMealFromList(meal);
     }
 
     return Scaffold(
@@ -174,24 +179,38 @@ class _ProfileState extends State<ProfileMeal> {
                       SizedBox(
                         width: 15,
                       ),
-                      ButtonTheme(
-                          minWidth: 50.0,
-                          height: 50.0,
-                          child: RaisedButton(
-                            child: Icon(Icons.update),
-                            onPressed: () {
-                              mealProvider.currentMeal =
-                                  mealProvider.meals[index];
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                                  return UpdateMeal(
-                                    isUpdating: true,
+                      Column(
+                        children: [
+                          ButtonTheme(
+                              minWidth: 10.0,
+                              height: 20.0,
+                              child: RaisedButton(
+                                child: Icon(Icons.edit),
+                                onPressed: () {
+                                  mealProvider.currentMeal =
+                                      mealProvider.meals[index];
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                      return UpdateMeal(
+                                        isUpdating: true,
+                                      );
+                                    }),
                                   );
-                                }),
-                              );
-                            },
-                          )),
+                                },
+                              )),
+                          ButtonTheme(
+                              minWidth: 10.0,
+                              height: 20.0,
+                              child: RaisedButton(
+                                child: Icon(Icons.delete),
+                                onPressed: () {
+                                  deleteMeal(mealProvider.meals[index],
+                                      updateDeleteMeal);
+                                },
+                              )),
+                        ],
+                      ),
                       SizedBox(
                         height: 20,
                       ),

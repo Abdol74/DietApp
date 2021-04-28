@@ -25,4 +25,9 @@ class MealProvider with ChangeNotifier {
     _meals.insert(0, meal);
     notifyListeners();
   }
+
+  deleteMealFromList(MealComponentsModel meal) {
+    _meals.removeWhere((_meal) => _meal.id == meal.id);
+    notifyListeners();
+  }
 }
