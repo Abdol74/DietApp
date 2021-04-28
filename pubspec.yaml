@@ -52,7 +52,6 @@ flutter:
     - assets/images/icons/facebookicon.png
     - assets/images/icons/googleicon.png
     - assets/images/logosmall.png
-    - assets/images/bottomborder.png
 
   fonts:
     - family: Roboto
