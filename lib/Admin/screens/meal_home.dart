@@ -161,213 +161,192 @@ class _ProfileState extends State<ProfileMeal> {
             itemBuilder: (context, index) {
               return Column(
                 children: <Widget>[
+                  SizedBox(height: 20,),
                   Row(
-                    children: <Widget>[
-                      SizedBox(
-                        width: 15,
+                    children:<Widget> [
+
+                      SizedBox(width: 30,),
+                      Column(
+                        children:<Widget>[
+                          Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            child: (mealProvider.meals[index].imageUrl == null)
+                                ? Image.asset('assets/images/person.png')
+                                : Image.network(
+                              mealProvider.meals[index].imageUrl,
+                              fit: BoxFit.cover,),),
+                          SizedBox(height: 10,),
+                        ],
                       ),
-                      Container(
-                        width: 50,
-                        height: 80,
-                        child: (mealProvider.meals[index].imageUrl == null)
-                            ? Image.asset('assets/images/person.png')
-                            : Image.network(
-                                mealProvider.meals[index].imageUrl,
-                                fit: BoxFit.fill,
-                              ),
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
+                      SizedBox(width: 20,),
                       Column(
                         children: [
-                          ButtonTheme(
-                              minWidth: 10.0,
-                              height: 20.0,
-                              child: RaisedButton(
-                                child: Icon(Icons.edit),
+                          SizedBox(height: 10,),
+                          Row(
+                            children: [
+                              Container(
+                                width:100,
+                                height:30,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.green,
+                                        blurRadius: 5,
+                                      )
+                                    ]),
+
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 20),
+                                  child: Text(
+                                    (mealProvider.meals[index].mealName == null)
+                                        ? 'mealName'
+                                        : mealProvider.meals[index].mealName,
+                                    style: TextStyle(
+                                        color: Colors.green,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 5,),
+                              Container(
+                                  width:100,
+                                  height:30,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Color(0xFF09C04F),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey[400],
+                                          blurRadius: 5,
+                                        )
+                                      ]),
+                                  child: TextButton(
+                                    child: Text('Gradients'),
+                                    style: TextButton.styleFrom(
+                                      primary: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context){
+                                            return AlertDialog(
+                                              content: Column(
+                                                children: [
+                                                  Container(
+                                                    width: 200,
+                                                    height: 200,
+                                                    margin: EdgeInsets.only(top: 30),
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      image: DecorationImage(
+                                                        image: AssetImage("assets/images/logo.png"),
+                                                        fit: BoxFit.fill,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 20,),
+                                                  Row(children:[
+                                                    Text(
+                                                      "FATS ", style: TextStyle(color: Color(0xFF09C04F), fontSize: 18, fontWeight: FontWeight.w400),),
+                                                    SizedBox(width: 10,),
+                                                    Text(mealProvider.meals[index].fats.toString(),
+                                                      style: TextStyle(color: Colors.black, fontSize: 18,),),
+                                                  ],
+                                                  ),
+                                                  SizedBox(height: 20,),
+                                                  Row(children: [
+                                                    Text(
+                                                      "Protein ", style: TextStyle(color: Color(0xFF09C04F), fontSize: 18, fontWeight: FontWeight.w400),),
+                                                    SizedBox(width: 10,),
+                                                    Text(mealProvider.meals[index].protein.toString(),
+                                                      style: TextStyle(color: Colors.black, fontSize: 18,),),
+                                                  ],
+                                                  ),
+                                                  SizedBox(height: 20,),
+                                                  Row(children: [
+                                                    Text(
+                                                      "Carb ", style: TextStyle(color: Color(0xFF09C04F), fontSize: 18, fontWeight: FontWeight.w400),),
+                                                    SizedBox(width: 10,),
+                                                    Text(mealProvider.meals[index].carb.toString(),
+                                                      style: TextStyle(color: Colors.black, fontSize: 18,),),
+                                                  ],
+                                                  ),
+                                                  SizedBox(height: 20,),
+                                                  Row(children: [
+                                                    Text(
+                                                      "Calories ", style: TextStyle(color: Color(0xFF09C04F), fontSize: 18, fontWeight: FontWeight.w400),),
+                                                    SizedBox(width: 10,),
+                                                    Text(mealProvider.meals[index].caloriesNumber.toString(),
+                                                      style: TextStyle(color: Colors.black, fontSize: 18,),),
+                                                  ],
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          }
+                                      );
+                                    },
+                                  )
+                              ),
+                            ],
+                          ),
+
+                          Row(
+                            children: [
+                              TextButton(
+                                child: Icon(Icons.edit,
+                                  size: 30,
+                                  color: Color(0xFF09C04F),
+                                ),
                                 onPressed: () {
                                   mealProvider.currentMeal =
-                                      mealProvider.meals[index];
+                                  mealProvider.meals[index];
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                         builder: (BuildContext context) {
-                                      return UpdateMeal(
-                                        isUpdating: true,
-                                      );
-                                    }),
+                                          return UpdateMeal(
+                                            isUpdating: true,
+                                          );
+                                        }),
                                   );
                                 },
-                              )),
-                          ButtonTheme(
-                              minWidth: 10.0,
-                              height: 20.0,
-                              child: RaisedButton(
-                                child: Icon(Icons.delete),
-                                onPressed: () {
-                                  deleteMeal(mealProvider.meals[index],
-                                      updateDeleteMeal);
-                                },
-                              )),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            (mealProvider.meals[index].mealName == null)
-                                ? 'mealName'
-                                : mealProvider.meals[index].mealName,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "1 person per plate",
-                            style: TextStyle(
-                              color: Colors.grey[800],
-                              fontSize: 15,
-                            ),
+                              ),
+                              TextButton(
+                                  child: Icon(Icons.delete,
+                                    size: 30,
+                                    color: Colors.red,),
+                                  onPressed: () {
+                                    deleteMeal(mealProvider.meals[index],
+                                        updateDeleteMeal);
+                                  }
+                              ),
+                            ],
                           ),
                         ],
-                      ),
-                      SizedBox(
-                        width: 40,
-                      ),
-                      Container(
-                        width: 80,
-                        height: 80,
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.green,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 40, left: 12),
-                          child: Text(
-                            mealProvider.meals[index].caloriesNumber.toString(),
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
                       ),
                     ],
                   ),
-                  Row(
-                    children: <Widget>[
-                      SizedBox(
-                        width: 250,
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    child: SizedBox(
+                      width: 400,
+                      child: Divider(
+                        color: Colors.grey[300],
+                        thickness: 3.0,
                       ),
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          color: Colors.grey,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 26, left: 5),
-                          child: Text(
-                            mealProvider.meals[index].protein.toString(),
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 10,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          color: Colors.grey,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 25, left: 08),
-                          child: Text(
-                            mealProvider.meals[index].carb.toString(),
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          color: Colors.grey,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 25, left: 08),
-                          child: Text(
-                            mealProvider.meals[index].fats.toString(),
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               );
             },
 
-            // Container(
-            //   height: 50,
-            //   width: 50,
-            //   padding: EdgeInsets.all(10),
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(32),
-            //     color: Colors.teal.shade50,
-            //     boxShadow: kElevationToShadow[6],
-            //   ),
-            //   child: TextField(
-            //     cursorColor: Color(0xFF09C04F),
-            //     decoration: InputDecoration(
-            //       contentPadding: EdgeInsets.only(bottom: 13, left: 20),
-            //       hintText: "search Meal",
-            //       hintStyle: TextStyle(
-            //         color: Colors.grey[400],
-            //         fontSize: 20,
-            //       ),
-            //       border: InputBorder.none,
-            //       icon: Icon(
-            //         Icons.search,
-            //         color: Colors.grey[400],
-            //         size: 30,
-            //       ),
-            //     ),
-            //   ),
-            // ),
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            // Padding(
-            //   padding: EdgeInsets.symmetric(vertical: 5.0),
-            //   child: SizedBox(
-            //     width: 10,
-            //     child: Divider(
-            //       color: Colors.black12,
-            //       thickness: 5.0,
-            //     ),
-            //   ),
-            // ),
           ),
         ),
         onRefresh: _refreshList,
@@ -375,5 +354,6 @@ class _ProfileState extends State<ProfileMeal> {
         color: Color(0xFF09C04F),
       ),
     );
+
   }
 }
