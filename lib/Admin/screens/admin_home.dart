@@ -21,8 +21,8 @@ class Profile extends StatelessWidget {
         ),
       ),
       drawer: Container(
-        width: 250,
-        height: 800,
+        width: 200,
+        height: 500,
         child: Drawer(
           child: Column(
             children: <Widget>[
@@ -34,14 +34,13 @@ class Profile extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       Container(
-                        width: 100,
-                        height: 400,
+                        width: 50,
+                        height: 100,
                         margin: EdgeInsets.only(top: 30),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             image: AssetImage("assets/images/logo.png"),
-                            fit: BoxFit.fill,
                           ),
                         ),
                       ),

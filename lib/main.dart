@@ -30,13 +30,13 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF09B44D),
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: LoginScreen(),
-      //initialRoute: ProfileMeal.id,
+      initialRoute: LoginScreen.id,
       routes: {
         AddMeal.id: (context) => AddMeal(),
         Profile.id: (context) => Profile(),
         view_user.id: (context) => view_user(),
         ProfileMeal.id: (context) => ProfileMeal(),
+        LoginScreen.id: (context) => LoginScreen(),
       },
     );
   }
