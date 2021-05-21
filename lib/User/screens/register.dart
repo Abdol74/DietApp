@@ -291,10 +291,15 @@ class _registerState extends State<Register> {
                             final newUser =
                                 await _auth.createUserWithEmailAndPassword(
                                     email: email, password: password);
+                            final FirebaseUser user =
+                                await FirebaseAuth.instance.currentUser();
+                            final String uid = user.uid.toString();
                             fireStore.collection('Users').add({
                               'FirstName': firstName,
                               'LastName': lastName,
                               'Email': email,
+                              'id': uid,
+                              'roleId': "1sDEqpaFQmHc9OMz0ESl"
                             });
                             if (newUser != null) {
                               Navigator.pushNamed(context, WelcomeScreen.id);

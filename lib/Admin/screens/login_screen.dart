@@ -1,6 +1,8 @@
 //import 'package:dailytracker/register.dart';
 //import 'package:dailytracker/welcome_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:daily_tracker_diet_app/Admin/models/users_model.dart';
+import 'package:daily_tracker_diet_app/Admin/screens/add_meal_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/admin_home.dart';
 import 'package:flutter/material.dart';
@@ -151,7 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               await _auth.signInWithEmailAndPassword(
                                   email: email, password: password);
                           if (currentUser != null) {
-                            Navigator.pushNamed(context, Profile.id);
+                            authorizeAccess(context);
                           }
                           setState(() {});
                         } catch (e) {
@@ -222,4 +224,22 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+}
+
+authorizeAccess(BuildContext context) {
+  FirebaseAuth.instance.currentUser().then((user) {
+    Firestore.instance
+        .collection('Users')
+        .where('id', isEqualTo: user.uid)
+        .getDocuments()
+        .then((docs) {
+      if (docs.documents[0].exists) {
+        if (docs.documents[0].data['roleId'] == '1sDEqpaFQmHc9OMz0ESl') {
+          Navigator.pushNamed(context, ProfileMeal.id);
+        } else {
+          Navigator.pushNamed(context, Profile.id);
+        }
+      }
+    });
+  });
 }

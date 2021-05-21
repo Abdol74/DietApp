@@ -1,16 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UsersModel {
-  String _roleId ;
-  String _uId ;
+  String roleId;
+  String uId;
+  String email;
+  String firstName;
+  String lastName;
 
-  //getters//
+  UsersModel();
 
- String get uId => _uId ;
- String get roleId => _roleId ;
+  UsersModel.fromMap(Map<String, dynamic> data) {
+    roleId = data['roleId'];
+    uId = data['id'];
+    email = data['Email'];
+    firstName = data['FirstName'];
+    lastName = data['LastName'];
+  }
 
- UsersModel.fromSnapshot(DocumentSnapshot snapshot) {
-   _uId = snapshot.data['uId'];
-   _roleId = snapshot.data['roleId'] ; 
- }
+  UsersModel.fromSnapshot(DocumentSnapshot snapshot) {
+    uId = snapshot.data['uId'];
+    roleId = snapshot.data['roleId'];
+  }
 }
