@@ -6,23 +6,21 @@ class LoginScreen extends StatelessWidget {
   static String id = 'LoginScreen';
   @override
   Widget build(BuildContext context) {
-   // double widthScreen = MediaQuery.of(context).size.width;
+    // double widthScreen = MediaQuery.of(context).size.width;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
           title: Row(
-            children:<Widget>[
+            children: <Widget>[
               Container(
                 padding: EdgeInsets.only(right: 130),
-                child:
-                GestureDetector(
-                  onTap: (){
+                child: GestureDetector(
+                  onTap: () {
                     Navigator.pushNamed(context, WelcomeScreen.id);
                   },
                   child: Image.asset(
                     "assets/images/icons/arrow.png",
-
                     height: 55,
                     width: 20,
                   ),
@@ -30,14 +28,12 @@ class LoginScreen extends StatelessWidget {
               ),
               Container(
                 padding: EdgeInsets.only(left: 80),
-                child:
-                GestureDetector(
-                  onTap: (){
+                child: GestureDetector(
+                  onTap: () {
                     Navigator.pushNamed(context, WelcomeScreen.id);
                   },
                   child: Image.asset(
                     "assets/images/DAILY-TRACKER-logo.png",
-
                     height: 55,
                     width: 90,
                   ),
@@ -46,7 +42,6 @@ class LoginScreen extends StatelessWidget {
             ],
           ),
         ),
-
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -54,7 +49,6 @@ class LoginScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-
           child: Column(
             children: <Widget>[
               Container(
@@ -88,12 +82,12 @@ class LoginScreen extends StatelessWidget {
                         children: <Widget>[
                           Container(
                             padding: EdgeInsets.all(8.0),
-
                             child: TextField(
                               decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Your Name",
-                                  hintStyle: TextStyle(color: Colors.grey[400])),
+                                  hintStyle:
+                                      TextStyle(color: Colors.grey[400])),
                             ),
                           ),
                         ],
@@ -117,12 +111,12 @@ class LoginScreen extends StatelessWidget {
                         children: <Widget>[
                           Container(
                             padding: EdgeInsets.all(8.0),
-
                             child: TextField(
                               decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Password",
-                                  hintStyle: TextStyle(color: Colors.grey[400])),
+                                  hintStyle:
+                                      TextStyle(color: Colors.grey[400])),
                             ),
                           ),
                         ],
@@ -164,18 +158,19 @@ class LoginScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text("Don't have an account?",
-                          style: TextStyle(color: Colors.grey[600]),),
+                        Text(
+                          "Don't have an account?",
+                          style: TextStyle(color: Colors.grey[600]),
+                        ),
                         GestureDetector(
-                          onTap: (){
-                            Navigator.pushNamed(context, Register.id);
+                          onTap: () {
+                            Navigator.pushNamed(context, 'Register');
                           },
-
-                          child: Text("Sign up",
+                          child: Text(
+                            "Sign up",
                             style: TextStyle(
                                 color: Colors.grey[600],
-                                fontWeight: FontWeight.bold
-                            ),
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
@@ -187,7 +182,8 @@ class LoginScreen extends StatelessWidget {
                           child: Image(
                             height: 60,
                             width: 40,
-                            image: AssetImage('assets/images/icons/googleicon.png'),
+                            image: AssetImage(
+                                'assets/images/icons/googleicon.png'),
                           ),
                         ),
                         Container(
@@ -195,7 +191,8 @@ class LoginScreen extends StatelessWidget {
                           child: Image(
                             height: 60,
                             width: 40,
-                            image: AssetImage('assets/images/icons/facbook-icon-png-4.jpg'),
+                            image: AssetImage(
+                                'assets/images/icons/facbook-icon-png-4.jpg'),
                           ),
                         )
                       ],

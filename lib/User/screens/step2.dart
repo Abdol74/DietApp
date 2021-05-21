@@ -1,18 +1,21 @@
-
 import 'package:daily_tracker_diet_app/User/screens/step3.dart';
 import 'package:daily_tracker_diet_app/User/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class StepTwo extends StatefulWidget {
-  static String id ='StepTwoState';
+  static String id = 'StepTwoState';
   @override
   _StepTwoState createState() => _StepTwoState();
 }
 
 class _StepTwoState extends State<StepTwo> {
+  DateTime birthdate;
+  String height, weight, goalWieght;
+  bool gender;
+
   DateTime _datetime;
-  static String id ='StepTwoState';
+  static String id = 'StepTwoState';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,14 +26,12 @@ class _StepTwoState extends State<StepTwo> {
             children: [
               Container(
                 padding: EdgeInsets.only(right: 100),
-                child:
-                GestureDetector(
-                  onTap: (){
+                child: GestureDetector(
+                  onTap: () {
                     Navigator.pushNamed(context, WelcomeScreen.id);
                   },
                   child: Image.asset(
                     "assets/images/icons/arrow.png",
-
                     height: 55,
                     width: 20,
                   ),
@@ -43,15 +44,13 @@ class _StepTwoState extends State<StepTwo> {
                   style: TextStyle(color: Colors.green, fontSize: 20),
                 ),
               ),
-
             ],
           ),
         ),
-        body:
-        Container(
+        body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/croppedbackground2.png'),
+              image: AssetImage('assets/images/croppedbackground.png'),
               fit: BoxFit.cover,
             ),
           ),
@@ -83,8 +82,12 @@ class _StepTwoState extends State<StepTwo> {
                         Container(
                           child: Row(
                             children: <Widget>[
-                              Text("Birthday",
-                                style: TextStyle(fontSize: 20 , color: Colors.grey[700] , fontWeight: FontWeight.bold),
+                              Text(
+                                "Birthday",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.grey[700],
+                                    fontWeight: FontWeight.bold),
                               ),
                               Flexible(
                                 child: Padding(
@@ -95,17 +98,19 @@ class _StepTwoState extends State<StepTwo> {
                                       style: TextStyle(color: Colors.green),
                                     ),
                                     color: Colors.white,
-                                    onPressed: (){
-                                      showDatePicker(context: context,
-                                          initialDate: _datetime == null ? DateTime.now():_datetime,
-                                          firstDate: DateTime(1996),
-                                          lastDate: DateTime(2025)
-                                      ).then((date) {
+                                    onPressed: () {
+                                      showDatePicker(
+                                              context: context,
+                                              initialDate: _datetime == null
+                                                  ? DateTime.now()
+                                                  : _datetime,
+                                              firstDate: DateTime(1996),
+                                              lastDate: DateTime(2025))
+                                          .then((date) {
                                         setState(() {
-                                          _datetime=date;
+                                          _datetime = date;
                                         });
                                       });
-
                                     },
                                   ),
                                 ),
@@ -116,19 +121,25 @@ class _StepTwoState extends State<StepTwo> {
                         Container(
                           child: Row(
                             children: <Widget>[
-                              Text("Height",
-                                style: TextStyle(fontSize: 20 , color: Colors.grey[700],fontWeight: FontWeight.bold),
+                              Text(
+                                "Height",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.grey[700],
+                                    fontWeight: FontWeight.bold),
                               ),
                               Flexible(
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 185),
                                   child: TextField(
+                                    onChanged: (value) {
+                                      height = value;
+                                    },
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
                                         hintText: "0.0cm",
-                                        hintStyle: TextStyle(fontSize: 20 , color: Colors.green)
-
-                                    ),
+                                        hintStyle: TextStyle(
+                                            fontSize: 20, color: Colors.green)),
                                   ),
                                 ),
                               )
@@ -138,19 +149,25 @@ class _StepTwoState extends State<StepTwo> {
                         Container(
                           child: Row(
                             children: <Widget>[
-                              Text("Weight",
-                                style: TextStyle(fontSize: 20 , color: Colors.grey[700],fontWeight: FontWeight.bold),
+                              Text(
+                                "Weight",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.grey[700],
+                                    fontWeight: FontWeight.bold),
                               ),
                               Flexible(
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 185),
                                   child: TextField(
+                                    onChanged: (value) {
+                                      height = value;
+                                    },
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
                                         hintText: "0.0kg",
-                                        hintStyle: TextStyle(fontSize: 20 , color: Colors.green)
-
-                                    ),
+                                        hintStyle: TextStyle(
+                                            fontSize: 20, color: Colors.green)),
                                   ),
                                 ),
                               )
@@ -160,8 +177,12 @@ class _StepTwoState extends State<StepTwo> {
                         Container(
                           child: Row(
                             children: <Widget>[
-                              Text("Goal Weight",
-                                style: TextStyle(fontSize: 20 , color: Colors.grey[700],fontWeight: FontWeight.bold),
+                              Text(
+                                "Goal Weight",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.grey[700],
+                                    fontWeight: FontWeight.bold),
                               ),
                               Flexible(
                                 child: Padding(
@@ -170,9 +191,8 @@ class _StepTwoState extends State<StepTwo> {
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
                                         hintText: "0.0kg",
-                                        hintStyle: TextStyle(fontSize: 20 , color: Colors.green)
-
-                                    ),
+                                        hintStyle: TextStyle(
+                                            fontSize: 20, color: Colors.green)),
                                   ),
                                 ),
                               )
@@ -182,16 +202,18 @@ class _StepTwoState extends State<StepTwo> {
                         Container(
                           child: Row(
                             children: <Widget>[
-                              Text("Gender",
-                                style: TextStyle(fontSize: 20 , color: Colors.grey[700],fontWeight: FontWeight.bold),
+                              Text(
+                                "Gender",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.grey[700],
+                                    fontWeight: FontWeight.bold),
                               ),
                               Flexible(
                                 child: Padding(
                                     padding: EdgeInsets.only(left: 140),
                                     child: ToggleSwitch(
-                                      labels: [
-                                        "Male" , "Female"
-                                      ],
+                                      labels: ["Male", "Female"],
                                       fontSize: 12,
                                       minWidth: 60,
                                       minHeight: 40,
@@ -201,8 +223,7 @@ class _StepTwoState extends State<StepTwo> {
                                       ],
                                       activeBgColor: Colors.white,
                                       inactiveBgColor: Colors.white,
-                                    )
-                                ),
+                                    )),
                               )
                             ],
                           ),
@@ -226,13 +247,14 @@ class _StepTwoState extends State<StepTwo> {
                           ),
                           child: Center(
                             child: GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 Navigator.pushNamed(context, StepThree.id);
                               },
                               child: Text(
                                 "Next",
                                 style: TextStyle(
-                                    color: Colors.white, fontWeight: FontWeight.bold),
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -241,7 +263,6 @@ class _StepTwoState extends State<StepTwo> {
                     ),
                   ),
                 ),
-
               ],
             ),
           ),

@@ -1,29 +1,48 @@
+import 'package:daily_tracker_diet_app/User/screens/step1.dart';
 import 'package:daily_tracker_diet_app/User/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'constants.dart';
 import 'login_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Register extends StatelessWidget {
-  static String id = 'Register';
+class Register extends StatefulWidget {
+  static const String id = 'Register';
+
+  @override
+  _registerState createState() => _registerState();
+}
+
+class _registerState extends State<Register> {
+  final fireStore = Firestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  final _formKey = GlobalKey<FormState>();
+  String firstName = '';
+  String lastName = '';
+  String email = '';
+  String password = '';
+  Pattern pattern =
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar:  AppBar(
+        appBar: AppBar(
           backgroundColor: Colors.white,
           title: Row(
-            children:<Widget>[
+            children: <Widget>[
               Container(
                 padding: EdgeInsets.only(right: 130),
-                child:
-                GestureDetector(
-                  onTap: (){
+                child: GestureDetector(
+                  onTap: () {
                     Navigator.pushNamed(context, WelcomeScreen.id);
                   },
                   child: Image.asset(
-                    "assets//images/icons/arrow.png",
-
+                    "assets/images/icons/arrow.png",
                     height: 55,
                     width: 20,
                   ),
@@ -31,14 +50,12 @@ class Register extends StatelessWidget {
               ),
               Container(
                 padding: EdgeInsets.only(left: 80),
-                child:
-                GestureDetector(
-                  onTap: (){
+                child: GestureDetector(
+                  onTap: () {
                     Navigator.pushNamed(context, WelcomeScreen.id);
                   },
                   child: Image.asset(
-                    "assets/images/DAILY-TRACKER-logo.png",
-
+                    "assets/images/icons/DAILY-TRACKER-logo.png",
                     height: 55,
                     width: 90,
                   ),
@@ -81,112 +98,171 @@ class Register extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.all(25.0),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(40),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 9.0,
-                                offset: Offset(5, 5)),
-                          ]),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "First Name",
-                            hintStyle: TextStyle(color: Colors.grey[400])),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(40),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 9.0,
-                                offset: Offset(5, 5)),
-                          ]),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Last Name",
-                            hintStyle: TextStyle(color: Colors.grey[400])),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(40),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 9.0,
-                                offset: Offset(5, 5)),
-                          ]),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Email",
-                            hintStyle: TextStyle(color: Colors.grey[400])),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(40),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 9.0,
-                                offset: Offset(5, 5)),
-                          ]),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Password",
-                            hintStyle: TextStyle(color: Colors.grey[400])),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(40),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 9.0,
-                                offset: Offset(5, 5)),
-                          ]),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Confirm Password",
-                            hintStyle: TextStyle(color: Colors.grey[400])),
-                      ),
-                    ),
-                  ],
-                ),
+                child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(40),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 9.0,
+                                    offset: Offset(5, 5)),
+                              ]),
+                          child: TextFormField(
+                            textAlign: TextAlign.center,
+                            validator: (val) {
+                              if (val.isEmpty) {
+                                return 'Enter the First Name';
+                              } else if (val.length < 3)
+                                return 'The length of the name must be greater than 3';
+                              else
+                                return null;
+                            },
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "First Name",
+                                hintStyle: TextStyle(color: Colors.grey[400])),
+                            onChanged: (val) {
+                              setState(() => firstName = val);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(40),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 9.0,
+                                    offset: Offset(5, 5)),
+                              ]),
+                          child: TextFormField(
+                            textAlign: TextAlign.center,
+                            validator: (val) {
+                              if (val.isEmpty) {
+                                return 'Enter the Last Name';
+                              } else if (val.length < 3)
+                                return 'The length of the name must be greater than 3';
+                              else
+                                return null;
+                            },
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Last Name",
+                                hintStyle: TextStyle(color: Colors.grey[400])),
+                            onChanged: (val) {
+                              setState(() => lastName = val);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(40),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 9.0,
+                                    offset: Offset(5, 5)),
+                              ]),
+                          child: TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+                            textAlign: TextAlign.center,
+                            validator: (val) {
+                              if (val.isEmpty)
+                                return 'Enter the Email';
+                              else {
+                                RegExp regexp = new RegExp(pattern);
+                                if (!regexp.hasMatch(val))
+                                  return 'Enter a valid Email';
+                                else
+                                  return null;
+                              }
+                            },
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Email",
+                                hintStyle: TextStyle(color: Colors.grey[400])),
+                            onChanged: (val) {
+                              setState(() => email = val);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(40),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 9.0,
+                                    offset: Offset(5, 5)),
+                              ]),
+                          child: TextFormField(
+                            controller: _passwordController,
+                            textAlign: TextAlign.center,
+                            validator: (String value) => value.length < 6
+                                ? 'Please enter atleast 6 characters'
+                                : null,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Password",
+                                hintStyle: TextStyle(color: Colors.grey[400])),
+                            onChanged: (val) {
+                              setState(() => password = val);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(40),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 9.0,
+                                    offset: Offset(5, 5)),
+                              ]),
+                          child: TextFormField(
+                            controller: _confirmPasswordController,
+                            validator: (val) {
+                              if (val != _passwordController.value.text) {
+                                return 'passwords don\'t match';
+                              } else
+                                return null;
+                            },
+                            obscureText: true,
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Confirm Password",
+                                hintStyle: TextStyle(color: Colors.grey[400])),
+                          ),
+                        ),
+                      ],
+                    )),
               ),
               SizedBox(
                 height: 5,
@@ -202,11 +278,32 @@ class Register extends StatelessWidget {
                   ]),
                 ),
                 child: Center(
-                  child: Text(
-                    "Finish",
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
+                  child: RaisedButton(
+                      child: Text(
+                        "Finish",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          print(firstName);
+                          try {
+                            final newUser =
+                                await _auth.createUserWithEmailAndPassword(
+                                    email: email, password: password);
+                            fireStore.collection('Users').add({
+                              'FirstName': firstName,
+                              'LastName': lastName,
+                              'Email': email,
+                            });
+                            if (newUser != null) {
+                              Navigator.pushNamed(context, WelcomeScreen.id);
+                            }
+                          } catch (e) {
+                            print(e);
+                          }
+                        }
+                      }),
                 ),
               ),
               SizedBox(

@@ -1,5 +1,4 @@
-
-import 'file:///C:/Users/Smart%20Lap/AndroidStudioProjects/DietApp/lib/User/screens/register.dart';
+import 'register.dart';
 import 'welcome_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,14 +14,12 @@ class StepFour extends StatelessWidget {
             children: [
               Container(
                 padding: EdgeInsets.only(right: 100),
-                child:
-                GestureDetector(
-                  onTap: (){
+                child: GestureDetector(
+                  onTap: () {
                     Navigator.pushNamed(context, WelcomeScreen.id);
                   },
                   child: Image.asset(
                     "assets/images/icons/arrow.png",
-
                     height: 55,
                     width: 20,
                   ),
@@ -35,7 +32,6 @@ class StepFour extends StatelessWidget {
                   style: TextStyle(color: Colors.green, fontSize: 20),
                 ),
               ),
-
             ],
           ),
         ),
@@ -48,9 +44,7 @@ class StepFour extends StatelessWidget {
           ),
           child: Column(
             children: <Widget>[
-
               Container(
-
                 child: Center(
                   child: Text(
                     "Your Goal is",
@@ -67,7 +61,7 @@ class StepFour extends StatelessWidget {
               Column(
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.only(bottom:10 ),
+                    padding: EdgeInsets.only(bottom: 10),
                     child: Image(
                       width: 270,
                       height: 150,
@@ -188,8 +182,8 @@ class StepFour extends StatelessWidget {
                 ),
                 child: Center(
                   child: GestureDetector(
-                    onTap: (){
-                      Navigator.pushNamed(context, Register.id);
+                    onTap: () {
+                      Navigator.pushNamed(context, 'Register');
                     },
                     child: Text(
                       "Next",
