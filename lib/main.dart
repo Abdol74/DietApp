@@ -3,6 +3,7 @@ import 'package:daily_tracker_diet_app/Admin/Provider/meal_provider.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/add_meal_screen.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/admin_home.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/meal_home.dart';
+import 'package:daily_tracker_diet_app/User/screens/calender_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/view_user.dart';
 import 'package:provider/provider.dart';
@@ -37,20 +38,19 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF09B44D),
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: LoginScreen.id,
+      initialRoute: Register.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         StepOne.id: (context) => StepOne(),
         StepTwo.id: (context) => StepTwo(),
-        StepThree.id: (context) => StepThree(),
-        StepFour.id: (context) => StepFour(),
         'Register': (context) => Register(),
         AddMeal.id: (context) => AddMeal(),
         Profile.id: (context) => Profile(),
         view_user.id: (context) => view_user(),
         ProfileMeal.id: (context) => ProfileMeal(),
         LoginScreen.id: (context) => LoginScreen(),
+        calenderScreen.id: (context) => calenderScreen(),
       },
     );
   }

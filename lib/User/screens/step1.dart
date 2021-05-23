@@ -1,9 +1,13 @@
 import 'package:daily_tracker_diet_app/User/screens/step2.dart';
 import 'welcome_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:daily_tracker_diet_app/User/screens/step4.dart';
 
 class StepOne extends StatelessWidget {
   static String id = ' StepOne ';
+  final String uId;
+  final String clientName;
+  StepOne({this.uId, this.clientName});
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +97,11 @@ class StepOne extends StatelessWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, StepTwo.id);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return StepTwo(
+                            currentClientId: uId, clientName: clientName);
+                      }));
                     },
                     child: Text(
                       "Get Started",

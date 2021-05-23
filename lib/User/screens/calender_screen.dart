@@ -4,6 +4,8 @@ import 'package:daily_tracker_diet_app/User/models/bottom_navigation_bar.dart';
 
 class calenderScreen extends StatefulWidget {
   static const String id = 'calender_screen';
+  final double numberOfCalories;
+  calenderScreen({this.numberOfCalories});
   @override
   _calenderScreenState createState() => _calenderScreenState();
 }
@@ -143,7 +145,7 @@ class _calenderScreenState extends State<calenderScreen> {
                       Expanded(
                           child: Column(children: <Widget>[
                         Text(
-                          'Calories',
+                          '${widget.numberOfCalories}',
                           style: TextStyle(
                               color: Color(0xFF09B44D),
                               fontWeight: FontWeight.bold,

@@ -1,3 +1,5 @@
+import 'package:daily_tracker_diet_app/User/screens/step2.dart';
+
 import 'constants.dart';
 import 'package:daily_tracker_diet_app/User/screens/login_screen.dart';
 import 'package:daily_tracker_diet_app/User/screens/step1.dart';
@@ -8,6 +10,9 @@ class WelcomeScreen extends StatelessWidget {
   static String id = 'WelcomeScreen ';
   final _auth = FirebaseAuth.instance;
   FirebaseUser loggedInUser;
+  final String uId;
+  final String clientName;
+  WelcomeScreen({this.uId, this.clientName});
 
   void getCurrentUser() async {
     try {
@@ -46,7 +51,13 @@ class WelcomeScreen extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                     onPressed: () {
-                      Navigator.pushNamed(context, StepOne.id);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return StepOne(
+                          uId: uId,
+                          clientName: clientName,
+                        );
+                      }));
                     },
                     color: kPrimaryColor,
                     child: Text(
