@@ -1,22 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:daily_tracker_diet_app/User/models/bottom_navigation_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:daily_tracker_diet_app/User/models/Workout_Column.dart';
+
+final _firestore = Firestore.instance;
+FirebaseUser loggedInUser;
 
 class calenderScreen extends StatefulWidget {
   static const String id = 'calender_screen';
-  final double numberOfCalories;
-  calenderScreen({this.numberOfCalories});
   @override
   _calenderScreenState createState() => _calenderScreenState();
 }
 
 class _calenderScreenState extends State<calenderScreen> {
   CalendarController _controller1 = CalendarController();
+  final clientdataController = TextEditingController();
+  final _auth = FirebaseAuth.instance;
+  String clientName;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getCurrentUser();
+  }
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser();
+      if (user != null) {
+        loggedInUser = user;
+        print(loggedInUser.email);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void messagesStream() async {
+    await for (var snapshot
+        in _firestore.collection('UserWorkouts').snapshots()) {
+      for (var UserWorkout in snapshot.documents) {
+        print(UserWorkout.data);
+      }
+    }
   }
 
   @override
@@ -30,7 +59,7 @@ class _calenderScreenState extends State<calenderScreen> {
         title: Row(
           children: <Widget>[
             Image.asset(
-              'images/calendar-grid-61.png',
+              'images/icons/calendar-grid-61.png',
               width: 30.0,
               height: 30.0,
             ),
@@ -87,27 +116,7 @@ class _calenderScreenState extends State<calenderScreen> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              'Workout',
-                              style: TextStyle(
-                                  color: Color(0xFF09B44D),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0),
-                            ),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            Text(
-                              '00',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15.0),
-                            )
-                          ],
-                        ),
+                        child: WorkoutColumn('Workout', 15.0, '00'),
                       ),
                       VerticalDivider(
                         thickness: 1.0,
@@ -115,27 +124,7 @@ class _calenderScreenState extends State<calenderScreen> {
                         color: Colors.grey.shade400,
                       ),
                       Expanded(
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              'Time(min)',
-                              style: TextStyle(
-                                  color: Color(0xFF09B44D),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0),
-                            ),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            Text(
-                              '00.00',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15.0),
-                            ),
-                          ],
-                        ),
+                        child: WorkoutColumn('workout(min)', 15.0, '00'),
                       ),
                       VerticalDivider(
                         thickness: 1.0,
@@ -143,25 +132,8 @@ class _calenderScreenState extends State<calenderScreen> {
                         color: Colors.grey.shade400,
                       ),
                       Expanded(
-                          child: Column(children: <Widget>[
-                        Text(
-                          '${widget.numberOfCalories}',
-                          style: TextStyle(
-                              color: Color(0xFF09B44D),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22.0),
-                        ),
-                        SizedBox(
-                          height: 5.0,
-                        ),
-                        Text(
-                          '00',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15.0),
-                        ),
-                      ])),
+                        child: WorkoutColumn('Calories', 15.0, '00'),
+                      ),
                     ],
                   ),
                 ),

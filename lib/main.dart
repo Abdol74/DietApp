@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/view_user.dart';
 import 'package:provider/provider.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/login_screen.dart';
+import 'package:daily_tracker_diet_app/User/screens/Cardio.dart';
+import 'package:daily_tracker_diet_app/User/screens/Workout2.dart';
+import 'package:daily_tracker_diet_app/User/screens/Workout1.dart';
 
 import 'User/screens/register.dart';
 import 'User/screens/step1.dart';
@@ -51,6 +54,9 @@ class MyApp extends StatelessWidget {
         ProfileMeal.id: (context) => ProfileMeal(),
         LoginScreen.id: (context) => LoginScreen(),
         calenderScreen.id: (context) => calenderScreen(),
+        Workout1_screen.id: (context) => Workout1_screen(),
+        Workout2_screen.id: (context) => Workout2_screen(),
+        Cardio.id: (context) => Cardio(),
       },
     );
   }

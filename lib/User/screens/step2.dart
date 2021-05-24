@@ -495,8 +495,8 @@ class _StepTwoState extends State<StepTwo> {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 return calenderScreen(
-                                  numberOfCalories: numberOfCalories,
-                                );
+                                    //numberOfCalories: numberOfCalories,
+                                    );
                               }));
 
                               // await saveClientData(_currentClient,
