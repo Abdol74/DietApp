@@ -18,6 +18,7 @@ import 'User/screens/step2.dart';
 import 'User/screens/step3.dart';
 import 'User/screens/step4.dart';
 import 'User/screens/welcome_screen.dart';
+import 'User/screens/update_profile.dart';
 
 void main() => runApp(MultiProvider(
       providers: [
@@ -41,13 +42,13 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF09B44D),
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: Register.id,
+      initialRoute: LoginScreen.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         StepOne.id: (context) => StepOne(),
         StepTwo.id: (context) => StepTwo(),
-        'Register': (context) => Register(),
+        Register.id: (context) => Register(),
         AddMeal.id: (context) => AddMeal(),
         Profile.id: (context) => Profile(),
         view_user.id: (context) => view_user(),
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
         calenderScreen.id: (context) => calenderScreen(),
         Workout1_screen.id: (context) => Workout1_screen(),
         Workout2_screen.id: (context) => Workout2_screen(),
+        update_profile.id: (context) => update_profile(),
         Cardio.id: (context) => Cardio(),
       },
     );

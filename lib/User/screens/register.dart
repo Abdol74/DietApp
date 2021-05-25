@@ -302,13 +302,7 @@ class _registerState extends State<Register> {
                               'roleId': "1sDEqpaFQmHc9OMz0ESl"
                             });
                             if (newUser != null) {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return WelcomeScreen(
-                                  uId: uid,
-                                  clientName: user.email,
-                                );
-                              }));
+                              Navigator.pushNamed(context, WelcomeScreen.id);
                             }
                           } catch (e) {
                             print(e);

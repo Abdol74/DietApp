@@ -3,10 +3,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daily_tracker_diet_app/Admin/models/users_model.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/add_meal_screen.dart';
+import 'package:daily_tracker_diet_app/User/screens/update_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/admin_home.dart';
 import 'package:flutter/material.dart';
-
 import 'meal_home.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -152,8 +152,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           final currentUser =
                               await _auth.signInWithEmailAndPassword(
                                   email: email, password: password);
+
                           if (currentUser != null) {
                             authorizeAccess(context);
+                            //    Navigator.pushNamed(context, update_profile.id);
                           }
                           setState(() {});
                         } catch (e) {
@@ -235,7 +237,7 @@ authorizeAccess(BuildContext context) {
         .then((docs) {
       if (docs.documents[0].exists) {
         if (docs.documents[0].data['roleId'] == '1sDEqpaFQmHc9OMz0ESl') {
-          Navigator.pushNamed(context, ProfileMeal.id);
+          Navigator.pushNamed(context, update_profile.id);
         } else {
           Navigator.pushNamed(context, Profile.id);
         }
