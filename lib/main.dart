@@ -16,7 +16,6 @@ import 'package:daily_tracker_diet_app/User/screens/Workout1.dart';
 import 'User/screens/register.dart';
 import 'User/screens/step1.dart';
 import 'User/screens/step2.dart';
-import 'User/screens/step3.dart';
 import 'User/screens/step4.dart';
 import 'User/screens/welcome_screen.dart';
 import 'User/screens/update_profile.dart';

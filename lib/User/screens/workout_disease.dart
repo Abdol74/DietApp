@@ -35,7 +35,7 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
       body: new Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/am1.png'),
+            image: AssetImage('assets/images/back1.png'),
             fit: BoxFit.fill,
           ),
         ),
@@ -102,7 +102,7 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
               width: 300,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/run.png'),
+                  image: AssetImage('assets/images/run.png'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -114,19 +114,19 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
               children: <Widget>[
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 12, horizontal: 6),
+                    margin: EdgeInsets.symmetric(vertical: 6, horizontal: 15),
                     child: Material(
                       color: selectedRunning == RunningType.General
                           ? activeColor
                           : inActiveColor,
-                      elevation: 4.0,
+                      elevation: 16.0,
                       borderRadius: BorderRadius.circular(12.0),
-                      shadowColor: Colors.grey[500],
+                      shadowColor: Colors.grey[800],
                       child: InkWell(
                         splashColor: Color(0xFF09C04F),
                         borderRadius: BorderRadius.circular(16.0),
                         child: Container(
-                          height: 20,
+                          height: 40,
                           child: Center(
                               child: Text(
                             "Running General",
@@ -144,19 +144,19 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                 SizedBox(width: 4),
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 12, horizontal: 6),
+                    margin: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
                     child: Material(
                       color: selectedRunning == RunningType.Track
                           ? activeColor
                           : inActiveColor,
-                      elevation: 4.0,
+                      elevation: 20.0,
                       borderRadius: BorderRadius.circular(12.0),
                       shadowColor: Colors.grey,
                       child: InkWell(
                         splashColor: Color(0xFF09C04F),
                         borderRadius: BorderRadius.circular(16.0),
                         child: Container(
-                          height: 20,
+                          height: 40,
                           child: Center(
                               child: Text(
                             "Running Track",
@@ -190,12 +190,12 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                     ),
                     new Flexible(
                       child: new TextFormField(
+                        keyboardType: TextInputType.number,
                         decoration: new InputDecoration(
                           border: new OutlineInputBorder(
                               borderSide: new BorderSide(color: Colors.green)),
                           hintText: "0",
                         ),
-                        keyboardType: TextInputType.number,
                         onChanged: (value) {
                           setState(() {
                             timeMin = double.parse(value);
@@ -218,6 +218,7 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                     ),
                     new Flexible(
                       child: new TextField(
+                        keyboardType: TextInputType.number,
                         decoration: new InputDecoration(
                           border: new OutlineInputBorder(
                               borderSide: new BorderSide(color: Colors.green)),
@@ -231,31 +232,25 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                   ],
                 )),
             SizedBox(
-              height: 40,
+              height: 80,
             ),
-            Container(
-              height: 50,
-              margin: EdgeInsets.symmetric(horizontal: 130),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Color(0xFF09C04F),
-              ),
-              child: Center(
-                child: RaisedButton(
-                  child: Text(
-                    "Calculate",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600),
+
+               Row(
+                children:[
+                  SizedBox(width: 150,),
+                  RaisedButton(
+                  color:  Color(0xFF09C04F),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(8.0),
                   ),
+                  child: Text("Calculate", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),),
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {
+                   // if (_formKey.currentState.validate()) {
                       // If the form is valid, display a snackbar. In the real world,
                       // you'd often call a server or save the information in a database.
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Processing Data')));
-                    }
+                     // ScaffoldMessenger.of(context).showSnackBar(
+                       //   SnackBar(content: Text('Processing Data')));
+                    //}
                     WorkoutDiseaseBrain wDiseaseBrain = WorkoutDiseaseBrain(
                         runningType: selectedRunning,
                         weight: widget.weight,
@@ -264,8 +259,9 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                     print(calories.round());
                   },
                 ),
+                        ],
               ),
-            ),
+
           ],
         ),
       ),

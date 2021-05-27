@@ -26,7 +26,7 @@ class _workout_heartState extends State<workout_heart> {
       body: new Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/am1.png'),
+            image: AssetImage('assets/images/back1.png'),
             fit: BoxFit.fill,
           ),
         ),
@@ -93,7 +93,7 @@ class _workout_heartState extends State<workout_heart> {
               width: 300,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/run.png'),
+                  image: AssetImage('assets/images/run.png'),
                   fit: BoxFit.cover,
                 ),
               ),
