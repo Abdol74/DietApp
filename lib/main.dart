@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF09B44D),
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: WorkoutDisease.id,
+      initialRoute: StepTwo.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
