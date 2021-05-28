@@ -2,7 +2,8 @@ import 'package:daily_tracker_diet_app/User/helpers/workout_disease_noun_brain.d
 import 'package:daily_tracker_diet_app/User/screens/step2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
+
 
 double distance;
 double timeMin;
@@ -28,7 +29,16 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
   Color inActiveColor = Colors.grey[200];
   Color activeColor = Color(0xFF09C04F);
   final _formKey = GlobalKey<FormState>();
+  final StopWatchTimer _stopWatchTimer=StopWatchTimer();
+  final _isHours=true;
 
+
+
+  @override
+  void dispose() {
+    super.dispose();
+    _stopWatchTimer.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -211,7 +221,7 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                             if (widget.diseaseValue == 'Diabetes' ||
                                 widget.diseaseValue == 'Hypertension') {
                               if (time == null || time > minMin) {
-                                return "Must Be lower than that";
+                                return "MAX 20";
                               }
                             }
                             return null;
@@ -247,9 +257,7 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                       ),
                     ],
                   )),
-              SizedBox(
-                height: 80,
-              ),
+              SizedBox(height: 40,),
               Row(
                 children: [
                   SizedBox(
@@ -276,12 +284,95 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                         double calories = wDiseaseBrain.caloriesBurned();
                         print(calories.round());
                       } else {
-                        print("validation failed");
+                        Text("erorr");
                       }
                     },
                   ),
                 ],
               ),
+              SizedBox(
+                height: 40,
+              ),
+              Container(
+                  margin: const EdgeInsets.all(15.0),
+                  height: 300,
+                  padding: const EdgeInsets.all(3.0),
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 4,
+                          color: Color(0xFF09C04F)),
+                        borderRadius:BorderRadius.circular(200),
+                  ),
+              child:Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("STOP WATCH",style: TextStyle(color: Colors.green,fontSize: 22,fontWeight: FontWeight.bold)),
+              SizedBox(height: 20,),
+              StreamBuilder<int>(
+                  stream: _stopWatchTimer.rawTime,
+                  initialData: _stopWatchTimer.rawTime.value,
+                  builder: (context,snapshot) {
+                final value=snapshot.data;
+                final displaytime=StopWatchTimer.getDisplayTime(value,hours: _isHours);
+                return Text(displaytime ,
+                  style: const TextStyle(fontSize: 40,fontWeight:FontWeight.bold,
+                      color:Colors.grey),
+                );
+                  }
+              ),
+                  SizedBox(height: 20,),
+                          Row(
+                    children: <Widget>[
+                      SizedBox(width: 80,),
+                      RaisedButton(
+                        onPressed: () {
+                          _stopWatchTimer.onExecute.add(StopWatchExecute.start);
+                        },
+                        child: Text('start',style: TextStyle(color: Colors.white)),
+                        color: Colors.green,
+                      ),
+                      SizedBox(width: 15,),
+                      RaisedButton(
+                        onPressed: () {
+                          _stopWatchTimer.onExecute.add(StopWatchExecute.stop);
+                        },
+                        child: Text('Stop',style: TextStyle(color: Colors.white)),
+                        color: Colors.red,
+                          ),
+                      SizedBox(width: 15,),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(width: 90,),
+                      ElevatedButton(
+                        onPressed: () {
+                          return(_stopWatchTimer.onExecute.add(StopWatchExecute.reset));
+                        },
+                        child: Text('Reset'),
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12), // <-- Radius
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 20,),
+                      ElevatedButton(
+                        onPressed: () {
+                          return(_stopWatchTimer.rawTime.listen((value) => print('rawTime $value ${StopWatchTimer.getDisplayTime(value)}')));
+                        },
+                        child: Text('Commit'),
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12), // <-- Radius
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+        ),
+              SizedBox(height: 50,),
             ],
           ),
         ),

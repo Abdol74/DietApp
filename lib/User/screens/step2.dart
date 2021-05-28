@@ -458,10 +458,9 @@ class _StepTwoState extends State<StepTwo> {
                                       if (!snapshot.hasData) return Container();
 
                                       return Container(
-                                        margin:
-                                            EdgeInsets.symmetric(vertical: 40),
+                                        margin: EdgeInsets.symmetric(vertical: 40),
                                         height: 35,
-                                        width: 350,
+                                        width: 380,
                                         decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
@@ -475,10 +474,9 @@ class _StepTwoState extends State<StepTwo> {
                                         child: Row(
                                           children: <Widget>[
                                             Container(
-                                              margin: EdgeInsets.symmetric(
-                                                  horizontal: 20.0),
-                                              child: Text(
-                                                "Do you  suffer from any disease ? ",
+
+                                              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10.0),
+                                              child: Text("Do you  suffer from any disease ? ",
                                                 style: TextStyle(
                                                   color: Colors.green,
                                                   fontSize: 14,
@@ -486,10 +484,10 @@ class _StepTwoState extends State<StepTwo> {
                                               ),
                                             ),
                                             DropdownButton(
-                                              elevation: 1,
+                                              elevation: 16,
                                               style: TextStyle(
                                                   color: Colors.grey[800],
-                                                  fontSize: 12.0),
+                                                  fontSize: 18.0),
                                               dropdownColor: Colors.grey[200],
                                               icon: Icon(
                                                 Icons.add,
