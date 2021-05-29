@@ -3,12 +3,20 @@ import 'package:daily_tracker_diet_app/User/screens/step2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'dart:convert';
 
 
 double distance;
 double timeMin;
 double timeSec;
-
+var displaytime;
+String a1=displaytime.toString();
+var split_time=a1.split(":") ;
+final Map<int, String> values = {
+  for (int i = 0; i < split_time.length; i++)
+    i: split_time[i]
+};
+//int time_min=int.parse(values[0]);
 enum RunningType { General, Track }
 
 RunningType selectedRunning;
@@ -31,9 +39,6 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
   final _formKey = GlobalKey<FormState>();
   final StopWatchTimer _stopWatchTimer=StopWatchTimer();
   final _isHours=true;
-
-
-
   @override
   void dispose() {
     super.dispose();
@@ -312,7 +317,7 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                   initialData: _stopWatchTimer.rawTime.value,
                   builder: (context,snapshot) {
                 final value=snapshot.data;
-                final displaytime=StopWatchTimer.getDisplayTime(value,hours: _isHours);
+                displaytime=StopWatchTimer.getDisplayTime(value,hours: _isHours);
                 return Text(displaytime ,
                   style: const TextStyle(fontSize: 40,fontWeight:FontWeight.bold,
                       color:Colors.grey),
@@ -358,7 +363,9 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                       SizedBox(width: 20,),
                       ElevatedButton(
                         onPressed: () {
-                          return(_stopWatchTimer.rawTime.listen((value) => print('rawTime $value ${StopWatchTimer.getDisplayTime(value)}')));
+//                          return(_stopWatchTimer.rawTime.listen((value) => print('rawTime $value ${StopWatchTimer.getDisplayTime(value)}')));
+
+                          print(values[2]);
                         },
                         child: Text('Commit'),
                         style: ElevatedButton.styleFrom(
