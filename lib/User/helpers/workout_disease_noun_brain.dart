@@ -11,10 +11,10 @@ class WorkoutDiseaseBrain {
   double caloriesBurned() {
     if (runningType == RunningType.General) {
       met = 8;
-      return ((met * weight * 3.5) / 200) * duration;
+      return ((met * weight * 3.5) / 200) * (duration/60);
     } else {
       met = 10;
-      return ((met * weight * 3.5) / 200) * duration;
+      return ((met * weight * 3.5) / 200) *( duration/60);
     }
   }
 }

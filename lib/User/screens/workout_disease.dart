@@ -6,17 +6,15 @@ import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'dart:convert';
 
 
-double distance;
-double timeMin;
-double timeSec;
+double timeSec=double.tryParse(values[2]);
 var displaytime;
 String a1=displaytime.toString();
 var split_time=a1.split(":") ;
-final Map<int, String> values = {
+ Map<int, String> values = {
   for (int i = 0; i < split_time.length; i++)
     i: split_time[i]
 };
-//int time_min=int.parse(values[0]);
+
 enum RunningType { General, Track }
 
 RunningType selectedRunning;
@@ -192,109 +190,6 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                   ),
                 ],
               ),
-              Padding(
-                  padding: EdgeInsets.only(left: 40.0, right: 40, top: 30.0),
-                  child: new Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      Text(
-                        "Time",
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        width: 60,
-                      ),
-                      new Flexible(
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          decoration: new InputDecoration(
-                            border: new OutlineInputBorder(
-                                borderSide:
-                                    new BorderSide(color: Colors.green)),
-                            hintText: "0",
-                          ),
-                          onChanged: (value) {
-                            setState(() {
-                              timeMin = double.tryParse(value);
-                            });
-                          },
-                          validator: (String value) {
-                            double time = double.tryParse(value);
-                            if (widget.diseaseValue == 'Diabetes' ||
-                                widget.diseaseValue == 'Hypertension') {
-                              if (time == null || time > minMin) {
-                                return "MAX 20";
-                              }
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        ":",
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      new Flexible(
-                        child: new TextField(
-                          keyboardType: TextInputType.number,
-                          decoration: new InputDecoration(
-                            border: new OutlineInputBorder(
-                                borderSide:
-                                    new BorderSide(color: Colors.green)),
-                            hintText: "0",
-                          ),
-                          onChanged: (value) {
-                            timeSec = double.parse(value);
-                          },
-                        ),
-                      ),
-                    ],
-                  )),
-              SizedBox(height: 40,),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 150,
-                  ),
-                  RaisedButton(
-                    color: Color(0xFF09C04F),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(8.0),
-                    ),
-                    child: Text(
-                      "Calculate",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    onPressed: () {
-                      if (_formKey.currentState.validate()) {
-                        WorkoutDiseaseBrain wDiseaseBrain = WorkoutDiseaseBrain(
-                            runningType: selectedRunning,
-                            weight: widget.weight,
-                            duration: timeMin);
-                        double calories = wDiseaseBrain.caloriesBurned();
-                        print(calories.round());
-                      } else {
-                        Text("erorr");
-                      }
-                    },
-                  ),
-                ],
-              ),
               SizedBox(
                 height: 40,
               ),
@@ -364,7 +259,6 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                       ElevatedButton(
                         onPressed: () {
 //                          return(_stopWatchTimer.rawTime.listen((value) => print('rawTime $value ${StopWatchTimer.getDisplayTime(value)}')));
-
                           print(values[2]);
                         },
                         child: Text('Commit'),
@@ -379,7 +273,40 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                 ],
               ),
         ),
-              SizedBox(height: 50,),
+              SizedBox(height: 30,),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 150,
+                  ),
+                  RaisedButton(
+                    color: Color(0xFF09C04F),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(8.0),
+                    ),
+                    child: Text(
+                      "Calculate",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    onPressed: () {
+                      if (_formKey.currentState.validate()) {
+                        WorkoutDiseaseBrain wDiseaseBrain = WorkoutDiseaseBrain(
+                            runningType: selectedRunning,
+                            weight: widget.weight,
+                            duration: timeSec);
+                        double calories = wDiseaseBrain.caloriesBurned();
+                        print(calories.round());
+                      } else {
+                        Text("erorr");
+                      }
+                    },
+                  ),
+                  SizedBox(height: 30,),
+                ],
+              ),
             ],
           ),
         ),
