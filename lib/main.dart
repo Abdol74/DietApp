@@ -16,6 +16,7 @@ import 'package:daily_tracker_diet_app/Admin/screens/Approve_meal.dart';
 import 'package:daily_tracker_diet_app/User/screens/add_meal_user_screen.dart';
 
 import 'User/screens/register.dart';
+import 'User/screens/mealComponents.dart';
 import 'User/screens/step1.dart';
 import 'User/screens/step2.dart';
 import 'User/screens/step4.dart';
@@ -44,9 +45,10 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF09B44D),
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: ApproveMeal.id,
+      initialRoute: mealComponents.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
+        mealComponents.id: (context) => mealComponents(),
         LoginScreen.id: (context) => LoginScreen(),
         StepOne.id: (context) => StepOne(),
         StepTwo.id: (context) => StepTwo(),
