@@ -12,6 +12,8 @@ import 'package:daily_tracker_diet_app/Admin/screens/login_screen.dart';
 import 'package:daily_tracker_diet_app/User/screens/Cardio.dart';
 import 'package:daily_tracker_diet_app/User/screens/Workout2.dart';
 import 'package:daily_tracker_diet_app/User/screens/Workout1.dart';
+import 'package:daily_tracker_diet_app/Admin/screens/Approve_meal.dart';
+import 'package:daily_tracker_diet_app/User/screens/add_meal_user_screen.dart';
 
 import 'User/screens/register.dart';
 import 'User/screens/step1.dart';
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF09B44D),
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: StepTwo.id,
+      initialRoute: ApproveMeal.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
@@ -60,6 +62,8 @@ class MyApp extends StatelessWidget {
         update_profile.id: (context) => update_profile(),
         Cardio.id: (context) => Cardio(),
         WorkoutDisease.id: (context) => WorkoutDisease(),
+        AddMealUser.id: (context) => AddMealUser(),
+        ApproveMeal.id: (context) => ApproveMeal(),
       },
     );
   }
