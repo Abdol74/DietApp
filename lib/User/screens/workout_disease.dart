@@ -4,17 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'dart:convert';
-
+import 'dart:async';
+import 'package:flutter/material.dart';
 
 double timeSec=double.tryParse(values[2]);
+double timemin=double.tryParse(values[1])*60;
 var displaytime;
 String a1=displaytime.toString();
 var split_time=a1.split(":") ;
- Map<int, String> values = {
+Map<int, String> values = {
   for (int i = 0; i < split_time.length; i++)
     i: split_time[i]
 };
-
 enum RunningType { General, Track }
 
 RunningType selectedRunning;
@@ -36,7 +37,7 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
   Color activeColor = Color(0xFF09C04F);
   final _formKey = GlobalKey<FormState>();
   final StopWatchTimer _stopWatchTimer=StopWatchTimer();
-  final _isHours=true;
+  final _isminute=true;
   @override
   void dispose() {
     super.dispose();
@@ -145,8 +146,8 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                             height: 40,
                             child: Center(
                                 child: Text(
-                              "Running General",
-                            )),
+                                  "Running General",
+                                )),
                           ),
                           onTap: () {
                             setState(() {
@@ -161,7 +162,7 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                   Expanded(
                     child: Container(
                       margin:
-                          EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+                      EdgeInsets.symmetric(vertical: 12, horizontal: 15),
                       child: Material(
                         color: selectedRunning == RunningType.Track
                             ? activeColor
@@ -176,8 +177,8 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                             height: 40,
                             child: Center(
                                 child: Text(
-                              "Running Track",
-                            )),
+                                  "Running Track",
+                                )),
                           ),
                           onTap: () {
                             setState(() {
@@ -194,85 +195,85 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                 height: 40,
               ),
               Container(
-                  margin: const EdgeInsets.all(15.0),
-                  height: 300,
-                  padding: const EdgeInsets.all(3.0),
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 4,
-                          color: Color(0xFF09C04F)),
-                        borderRadius:BorderRadius.circular(200),
-                  ),
-              child:Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("STOP WATCH",style: TextStyle(color: Colors.green,fontSize: 22,fontWeight: FontWeight.bold)),
-              SizedBox(height: 20,),
-              StreamBuilder<int>(
-                  stream: _stopWatchTimer.rawTime,
-                  initialData: _stopWatchTimer.rawTime.value,
-                  builder: (context,snapshot) {
-                final value=snapshot.data;
-                displaytime=StopWatchTimer.getDisplayTime(value,hours: _isHours);
-                return Text(displaytime ,
-                  style: const TextStyle(fontSize: 40,fontWeight:FontWeight.bold,
-                      color:Colors.grey),
-                );
-                  }
-              ),
-                  SizedBox(height: 20,),
-                          Row(
-                    children: <Widget>[
-                      SizedBox(width: 80,),
-                      RaisedButton(
-                        onPressed: () {
-                          _stopWatchTimer.onExecute.add(StopWatchExecute.start);
-                        },
-                        child: Text('start',style: TextStyle(color: Colors.white)),
-                        color: Colors.green,
-                      ),
-                      SizedBox(width: 15,),
-                      RaisedButton(
-                        onPressed: () {
-                          _stopWatchTimer.onExecute.add(StopWatchExecute.stop);
-                        },
-                        child: Text('Stop',style: TextStyle(color: Colors.white)),
-                        color: Colors.red,
-                          ),
-                      SizedBox(width: 15,),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(width: 90,),
-                      ElevatedButton(
-                        onPressed: () {
-                          return(_stopWatchTimer.onExecute.add(StopWatchExecute.reset));
-                        },
-                        child: Text('Reset'),
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12), // <-- Radius
+                margin: const EdgeInsets.all(15.0),
+                height: 300,
+                padding: const EdgeInsets.all(3.0),
+                decoration: BoxDecoration(
+                  border: Border.all(width: 4,
+                      color: Color(0xFF09C04F)),
+                  borderRadius:BorderRadius.circular(200),
+                ),
+                child:Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("STOP WATCH",style: TextStyle(color: Colors.green,fontSize: 22,fontWeight: FontWeight.bold)),
+                    SizedBox(height: 20,),
+                    StreamBuilder<int>(
+                        stream: _stopWatchTimer.rawTime,
+                        initialData: _stopWatchTimer.rawTime.value,
+                        builder: (context,snapshot) {
+                          final value=snapshot.data;
+                          displaytime=StopWatchTimer.getDisplayTime(value,hours: _isminute);
+                          return Text(displaytime ,
+                            style: const TextStyle(fontSize: 40,fontWeight:FontWeight.bold,
+                                color:Colors.grey),
+                          );
+                        }
+                    ),
+                    SizedBox(height: 20,),
+                    Row(
+                      children: <Widget>[
+                        SizedBox(width: 80,),
+                        RaisedButton(
+                          onPressed: () {
+                            _stopWatchTimer.onExecute.add(StopWatchExecute.start);
+                          },
+                          child: Text('start',style: TextStyle(color: Colors.white)),
+                          color: Colors.green,
+                        ),
+                        SizedBox(width: 15,),
+                        RaisedButton(
+                          onPressed: () {
+                            _stopWatchTimer.onExecute.add(StopWatchExecute.stop);
+                          },
+                          child: Text('Stop',style: TextStyle(color: Colors.white)),
+                          color: Colors.red,
+                        ),
+                        SizedBox(width: 15,),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(width: 90,),
+                        ElevatedButton(
+                          onPressed: () {
+                            return(_stopWatchTimer.onExecute.add(StopWatchExecute.reset));
+                          },
+                          child: Text('Reset'),
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12), // <-- Radius
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(width: 20,),
-                      ElevatedButton(
-                        onPressed: () {
+                        SizedBox(width: 20,),
+                        ElevatedButton(
+                          onPressed: () {
 //                          return(_stopWatchTimer.rawTime.listen((value) => print('rawTime $value ${StopWatchTimer.getDisplayTime(value)}')));
-                          print(values[2]);
-                        },
-                        child: Text('Commit'),
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12), // <-- Radius
+                            print(timemin);
+                          },
+                          child: Text('Commit'),
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12), // <-- Radius
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-        ),
               SizedBox(height: 30,),
               Row(
                 children: [
@@ -296,7 +297,7 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                         WorkoutDiseaseBrain wDiseaseBrain = WorkoutDiseaseBrain(
                             runningType: selectedRunning,
                             weight: widget.weight,
-                            duration: timeSec);
+                            duration: timeSec+timemin);
                         double calories = wDiseaseBrain.caloriesBurned();
                         print(calories.round());
                       } else {
