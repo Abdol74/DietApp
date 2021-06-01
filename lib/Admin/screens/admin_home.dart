@@ -1,3 +1,5 @@
+import 'package:daily_tracker_diet_app/User/screens/SupportAdmin.dart';
+
 import 'add_meal_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -81,6 +83,26 @@ class Profile extends StatelessWidget {
                 ),
                 title: Text(
                   "Add Meal",
+                  style: TextStyle(
+                      color: Colors.grey[800],
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              ListTile(
+                leading: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SupportAdmin()),
+                    );                  },
+                  child: Icon(
+                    Icons.message,
+                    size: 30,
+                    color: Color(0xFF09C04F),
+                  ),
+                ),
+                title: Text(
+                  "Support messages",
                   style: TextStyle(
                       color: Colors.grey[800],
                       fontSize: 18,
