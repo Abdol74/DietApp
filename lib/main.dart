@@ -22,6 +22,8 @@ import 'User/screens/step2.dart';
 import 'User/screens/step4.dart';
 import 'User/screens/welcome_screen.dart';
 import 'User/screens/update_profile.dart';
+import 'package:daily_tracker_diet_app/User/screens/SupportAdmin.dart';
+import 'package:daily_tracker_diet_app/User/screens/Support.dart';
 
 void main() => runApp(MultiProvider(
       providers: [
