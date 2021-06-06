@@ -50,5 +50,6 @@ class MealComponentsModel {
     mealName = snapshot.data['mealName'];
     measure = snapshot.data['measure'];
     protein = snapshot.data['protein'];
+    id = snapshot.data['id'];
   }
 }
