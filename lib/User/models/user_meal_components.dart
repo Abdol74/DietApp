@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:daily_tracker_diet_app/User/screens/step1.dart';
 
 class UserMealComponentsModel {
   String mealComponentId;
   String mealTypeId;
-  String mealName;
+  String mealComponentName;
   String userId;
   int mealComponentCounts;
+  int mealCalories;
 
   UserMealComponentsModel();
 
@@ -14,8 +16,9 @@ class UserMealComponentsModel {
     mealComponentId = data['mealComponentId'];
     mealTypeId = data['mealTypeId'];
     mealComponentCounts = data['mealComponentCounts'];
-    mealName = data['mealName'];
+    mealComponentName = data['mealComponentName'];
     userId = data['userId'];
+    mealCalories = data['mealCalories'];
   }
   Map<String, dynamic> toMap() {
     return {
@@ -23,8 +26,9 @@ class UserMealComponentsModel {
       'mealComponentId': mealComponentId,
       'mealTypeId': mealTypeId,
       'mealComponentsCounts': mealComponentCounts,
-      'mealName': mealName,
+      'mealComponentName': mealComponentName,
       'userId': userId,
+      'mealCalories': mealCalories,
     };
   }
 
@@ -32,7 +36,8 @@ class UserMealComponentsModel {
     mealComponentId = snapshot.data['mealComponentId'];
     mealTypeId = snapshot.data['mealTypeId'];
     mealComponentCounts = snapshot.data['mealComponentsCounts'];
-    mealName = snapshot.data['mealName'];
+    mealComponentName = snapshot.data['mealComponentName'];
     userId = snapshot.data['userId'];
+    mealCalories = snapshot.data['mealCalories'];
   }
 }

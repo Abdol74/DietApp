@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daily_tracker_diet_app/Admin/Provider/meal_provider.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/Approve_meal.dart';
 import 'package:daily_tracker_diet_app/User/helpers/measure_brain.dart';
+import 'package:daily_tracker_diet_app/User/screens/meal_by_current_user.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -245,7 +246,18 @@ class _MealCartState extends State<MealCart> {
                         mealProvider.currentMealToAddToUser.measure,
                     'mealTypeId': widget.mealType,
                     'userId': loggedInUser.uid,
+                    'malCalories':
+                        mealProvider.currentMealToAddToUser.caloriesNumber,
                   });
+                  mealProvider.loadMealsByUserAndType(
+                      mealTypeId: widget.mealType, userId: loggedInUser.uid);
+
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return MealUser(
+                        // userId: loggedInUser.uid,
+                        // mealTypeId: widget.mealType,
+                        );
+                  }));
                 },
                 child: Text('Add'),
               )

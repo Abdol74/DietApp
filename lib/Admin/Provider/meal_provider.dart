@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 class MealProvider with ChangeNotifier {
   List<MealComponentsModel> _meals = [];
   List<MealComponentsModel> mealsByCategory = [];
-  List<UserMealComponentsModel> mealsByType = [];
+  List<UserMealComponentsModel> mealsByUserAndType = [];
   MealComponentsModel _currentMeal;
   MealComponentsModel _currentMealToAddToUser;
 
@@ -48,6 +48,12 @@ class MealProvider with ChangeNotifier {
   Future loadMealsByCategory({String categoryId}) async {
     mealsByCategory =
         await MealServices().getMealsOfCategory(category: categoryId);
+    notifyListeners();
+  }
+
+  Future loadMealsByUserAndType({String mealTypeId, String userId}) async {
+    mealsByUserAndType = await MealServices()
+        .getMealOfCurrentUser(mealTypeId: mealTypeId, userId: userId);
     notifyListeners();
   }
 }

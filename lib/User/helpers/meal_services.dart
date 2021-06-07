@@ -19,4 +19,19 @@ class MealServices {
         }
         return meals;
       });
+
+  Future<List<UserMealComponentsModel>> getMealOfCurrentUser(
+          {String mealTypeId, String userId}) async =>
+      Firestore.instance
+          .collection('UserMealComponents')
+          .where('userId', isEqualTo: userId)
+          .where('mealTypeId', isEqualTo: mealTypeId)
+          .getDocuments()
+          .then((result) {
+        List<UserMealComponentsModel> currentUserMeals = [];
+        for (DocumentSnapshot meal in result.documents) {
+          currentUserMeals.add(UserMealComponentsModel.fromSnapshot(meal));
+        }
+        return currentUserMeals;
+      });
 }
