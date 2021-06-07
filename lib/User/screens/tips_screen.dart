@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:daily_tracker_diet_app/User/screens/notfications.dart';
+import 'package:daily_tracker_diet_app/User/screens/notfications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_tracker_diet_app/User/models/tips_button.dart';
@@ -46,12 +46,11 @@ class _tipsScreenState extends State<tipsScreen> {
           ],
         ),
         actions: [
-          // Container(child: GestureDetector(
-          //     onTap: () {
-          //       Navigator.pushNamed(context,notfications.id);
-          //     },
-          //     child:
-          Icon(Icons.notifications),
+          Container(child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context,notfications.id);
+              },
+              child: Icon(Icons.notifications))),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Icon(Icons.search),
