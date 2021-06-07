@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:daily_tracker_diet_app/User/screens/notfications.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_tracker_diet_app/User/models/tips_button.dart';
 import 'package:daily_tracker_diet_app/User/models/bottom_navigation_bar.dart';
@@ -10,6 +13,12 @@ class tipsScreen extends StatefulWidget {
 }
 
 class _tipsScreenState extends State<tipsScreen> {
+  Future getTips() async {
+    var firestore = Firestore.instance;
+    QuerySnapshot qn = await firestore.collection("Tips").getDocuments();
+    return qn.documents;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +46,11 @@ class _tipsScreenState extends State<tipsScreen> {
           ],
         ),
         actions: [
+          // Container(child: GestureDetector(
+          //     onTap: () {
+          //       Navigator.pushNamed(context,notfications.id);
+          //     },
+          //     child:
           Icon(Icons.notifications),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
@@ -46,29 +60,65 @@ class _tipsScreenState extends State<tipsScreen> {
         toolbarHeight: 80.0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-          bottomRight: Radius.circular(40.0),
-          bottomLeft: Radius.circular(40.0),
-        )),
+              bottomRight: Radius.circular(40.0),
+              bottomLeft: Radius.circular(40.0),
+            )),
         backgroundColor: Colors.white,
       ),
       body: Column(
         children: <Widget>[
           Expanded(
-            child: tip(
-              title: 'About training',
-              ontap: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return popup(
-                        title: 'About Training',
-                        dialog:
-                            'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna ',
-                      );
-                    });
-              },
-            ),
+            child: FutureBuilder(
+                future: getTips(),
+                builder: (_, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: Text('Loading ....'),
+                    );
+                  } else {
+                    return ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          return
+                            Column(
+                              children:<Widget> [
+                                tip(
+                                  title: snapshot.data[index].data["tipName"],
+                                  ontap: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return popup(
+                                              title: snapshot.data[index].data["tipName"],
+                                              dialog: snapshot
+                                                  .data[index].data["description"]);
+                                        });
+                                  },
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 5.0),
+                                  child: SizedBox(
+                                    width: 400,
+                                    child: Divider(
+                                      color: Colors.grey[300],
+                                      thickness: 3.0,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+
+
+
+
+
+                        });
+                  }
+
+                }),
+
           ),
+
           Divider(
             height: 10.0,
             endIndent: 35.0,
@@ -76,119 +126,14 @@ class _tipsScreenState extends State<tipsScreen> {
             thickness: 2.0,
             color: Colors.grey.shade300,
           ),
-          Expanded(
-            child: tip(
-              title: 'How to lose Weight?',
-              ontap: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return popup(
-                        title: 'How to lose Weight?',
-                        dialog:
-                            'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna ',
-                      );
-                    });
-              },
+          Padding(
+            padding: EdgeInsets.only(bottom: 10),
+            child: bottomNavigationBar(
+              backgroundcolor: Color(0xFF09B44D),
+              selecteditemcolor: Colors.white,
+              unselecteditemColor: Colors.white.withOpacity(.60),
             ),
-          ),
-          Divider(
-            height: 10.0,
-            endIndent: 35.0,
-            indent: 35.0,
-            thickness: 2.0,
-            color: Colors.grey.shade300,
-          ),
-          Expanded(
-            child: tip(
-              title: 'Introducing about meal plan',
-              ontap: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return popup(
-                        title: 'Introducing about meal plan',
-                        dialog:
-                            'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna ',
-                      );
-                    });
-              },
-            ),
-          ),
-          Divider(
-            height: 10.0,
-            endIndent: 35.0,
-            indent: 35.0,
-            thickness: 2.0,
-            color: Colors.grey.shade300,
-          ),
-          Expanded(
-            child: tip(
-              title: 'Drink Water',
-              ontap: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return popup(
-                        title: 'Drink Water',
-                        dialog:
-                            'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna ',
-                      );
-                    });
-              },
-            ),
-          ),
-          Divider(
-            height: 10.0,
-            endIndent: 35.0,
-            indent: 35.0,
-            thickness: 2.0,
-            color: Colors.grey.shade300,
-          ),
-          Expanded(
-            child: tip(
-              title: 'How many times a day to eat',
-              ontap: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return popup(
-                        title: 'How many times a day to eat',
-                        dialog:
-                            'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna ',
-                      );
-                    });
-              },
-            ),
-          ),
-          Divider(
-            height: 10.0,
-            endIndent: 35.0,
-            indent: 35.0,
-            thickness: 2.0,
-            color: Colors.grey.shade300,
-          ),
-          Expanded(
-            child: tip(
-              title: 'Appeal tips',
-              ontap: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return popup(
-                        title: 'Appeal tips',
-                        dialog:
-                            'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna ',
-                      );
-                    });
-              },
-            ),
-          ),
-          bottomNavigationBar(
-            backgroundcolor: Color(0xFF09B44D),
-            selecteditemcolor: Colors.white,
-            unselecteditemColor: Colors.white.withOpacity(.60),
-          ),
+          )
         ],
       ),
     );
