@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+final _firestore = Firestore.instance;
+final workouts = _firestore.collection('UserWorkouts').getDocuments();
 
 class WorkoutColumn extends StatelessWidget {
-  const WorkoutColumn(this.colName, this.fontSize, this.colVal);
-  final String colName;
+  const WorkoutColumn(this.colName, this.fontSize, this.workoutVal);
+
   final double fontSize;
-  final String colVal;
+  final String colName;
+  final String workoutVal;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,9 +26,9 @@ class WorkoutColumn extends StatelessWidget {
           height: 5.0,
         ),
         Text(
-          '$colVal',
+          '$workoutVal',
           style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15.0),
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12.0),
         ),
       ],
     );
