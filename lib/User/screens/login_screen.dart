@@ -196,28 +196,6 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Row(
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.only(left: 100),
-                              child: Image(
-                                height: 60,
-                                width: 40,
-                                image: AssetImage(
-                                    'assets/images/icons/googleicon.png'),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(right: 80),
-                              child: Image(
-                                height: 60,
-                                width: 40,
-                                image: AssetImage(
-                                    'assets/images/icons/facbook-icon-png-4.jpg'),
-                              ),
-                            )
-                          ],
-                        ),
                       ],
                     ),
                   )

@@ -4,6 +4,7 @@ import 'package:daily_tracker_diet_app/Admin/screens/add_meal_screen.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/admin_home.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/meal_home.dart';
 import 'package:daily_tracker_diet_app/User/screens/history.dart';
+import 'package:daily_tracker_diet_app/User/screens/home_page.dart';
 import 'package:daily_tracker_diet_app/User/screens/workout_disease.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/view_user.dart';
@@ -18,6 +19,8 @@ import 'package:daily_tracker_diet_app/User/screens/add_meal_user_screen.dart';
 import 'User/screens/add_component_meal.dart';
 import 'User/screens/register.dart';
 import 'User/screens/mealComponents.dart';
+import 'User/screens/register.dart';
+import 'User/screens/step1.dart';
 import 'User/screens/step1.dart';
 import 'User/screens/step2.dart';
 import 'User/screens/step4.dart';
@@ -49,7 +52,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF09B44D),
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: MealPage.id,
+      initialRoute:  home_page.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         mealComponents.id: (context) => mealComponents(),
@@ -63,8 +66,6 @@ class MyApp extends StatelessWidget {
         ProfileMeal.id: (context) => ProfileMeal(),
         LoginScreen.id: (context) => LoginScreen(),
         calenderScreen.id: (context) => calenderScreen(),
-        Workout1_screen.id: (context) => Workout1_screen(),
-        Workout2_screen.id: (context) => Workout2_screen(),
         update_profile.id: (context) => update_profile(),
         Cardio.id: (context) => Cardio(),
         WorkoutDisease.id: (context) => WorkoutDisease(),
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
         ApproveMeal.id: (context) => ApproveMeal(),
         MealPage.id: (context) => MealPage(),
         MealCategories.id: (context) => MealCategories(),
+        home_page.id:(context)=>home_page(),
       },
     );
   }

@@ -29,14 +29,13 @@ dependencies:
   provider: ^4.0.1
   image_picker: ^0.6.7+4
   firebase_storage: ^2.1.0
-  #path: ^1.6.0
-  #uuid: ^1.0.1
-  path: ^1.8.0
-  uuid: ^3.0.0
+  path: ^1.6.0
+  uuid: ^1.0.1
+  #  path: ^1.8.0
+  # uuid: ^3.0.0
   liquid_pull_to_refresh: ^2.0.0
- # flutter_form_builder: ^6.0.0-nullsafety.0
+  # flutter_form_builder: ^6.0.0-nullsafety.0
   charts_flutter: ^0.6.0
-
 
 
 dev_dependencies:
@@ -44,7 +43,6 @@ dev_dependencies:
     sdk: flutter
   integration_test:
   #sdk: flutter
-
 
 
 flutter:

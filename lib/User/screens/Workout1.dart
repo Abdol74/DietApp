@@ -44,15 +44,15 @@ class _Workout1_screenState extends State<Workout1_screen> {
           toolbarHeight: 60.0,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
-            bottomRight: Radius.circular(40.0),
-            bottomLeft: Radius.circular(40.0),
-          )),
+                bottomRight: Radius.circular(40.0),
+                bottomLeft: Radius.circular(40.0),
+              )),
           backgroundColor: Colors.white,
         ),
         body: Center(
           child: Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
+            const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
             child: Expanded(
               child: Column(
                 children: <Widget>[

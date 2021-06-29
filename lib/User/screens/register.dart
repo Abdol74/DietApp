@@ -31,48 +31,50 @@ class _registerState extends State<Register> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: Row(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(right: 130),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, WelcomeScreen.id);
-                  },
-                  child: Image.asset(
-                    "assets/images/icons/arrow.png",
-                    height: 55,
-                    width: 20,
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 80),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, WelcomeScreen.id);
-                  },
-                  child: Image.asset(
-                    "assets/images/icons/DAILY-TRACKER-logo.png",
-                    height: 55,
-                    width: 90,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/croppedbackground2.png'),
+              image: AssetImage('assets/images/step1 background.png'),
               fit: BoxFit.cover,
             ),
           ),
-          child: Column(
+          child: ListView(
             children: <Widget>[
+              Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey[600],
+                        blurRadius: 40,
+                      )
+                    ]),
+                child: Row(
+                  children: <Widget>[
+                    SizedBox(width: 20,),
+                    Icon(
+                      Icons.arrow_back,
+                      color: Color(0xFF09C04F),
+                      size: 30.0,
+                    ),
+                    SizedBox(width: 250,),
+                Container(
+                  height: 45,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/logo.png'),
+                    ),
+                  ),
+                ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 40,),
               Container(
                 child: Center(
                   child: Column(
@@ -115,6 +117,7 @@ class _registerState extends State<Register> {
                               ]),
                           child: TextFormField(
                             textAlign: TextAlign.center,
+                            cursorColor: Colors.green,
                             validator: (val) {
                               if (val.isEmpty) {
                                 return 'Enter the First Name';
@@ -148,6 +151,7 @@ class _registerState extends State<Register> {
                               ]),
                           child: TextFormField(
                             textAlign: TextAlign.center,
+                            cursorColor: Colors.green,
                             validator: (val) {
                               if (val.isEmpty) {
                                 return 'Enter the Last Name';
@@ -181,6 +185,7 @@ class _registerState extends State<Register> {
                               ]),
                           child: TextFormField(
                             keyboardType: TextInputType.emailAddress,
+                            cursorColor: Colors.green,
                             textAlign: TextAlign.center,
                             validator: (val) {
                               if (val.isEmpty)
@@ -219,6 +224,7 @@ class _registerState extends State<Register> {
                           child: TextFormField(
                             controller: _passwordController,
                             textAlign: TextAlign.center,
+                            cursorColor: Colors.green,
                             validator: (String value) => value.length < 6
                                 ? 'Please enter atleast 6 characters'
                                 : null,
@@ -248,6 +254,9 @@ class _registerState extends State<Register> {
                               ]),
                           child: TextFormField(
                             controller: _confirmPasswordController,
+                            cursorColor:Colors.green ,
+
+                            textAlign: TextAlign.center,
                             validator: (val) {
                               if (val != _passwordController.value.text) {
                                 return 'passwords don\'t match';
@@ -268,22 +277,19 @@ class _registerState extends State<Register> {
                 height: 5,
               ),
               Container(
-                height: 50,
-                width: 300,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(40),
-                  gradient: LinearGradient(colors: [
-                    Color.fromRGBO(9, 180, 78, 1),
-                    Color.fromRGBO(9, 180, 78, 1)
-                  ]),
-                ),
-                child: Center(
-                  child: RaisedButton(
-                      child: Text(
-                        "Finish",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
+                margin: EdgeInsets.only(left: 70,right: 70),
+                width: 50,
+                height: 40,
+                color: Colors.green,
+              child:
+              ElevatedButton(
+                  child: Text('FINISH'),
+                  style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF09C04F),
+                      padding: EdgeInsets.only(left: 40,right: 40),
+                      textStyle: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold)),
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
                           print(firstName);
@@ -309,7 +315,6 @@ class _registerState extends State<Register> {
                           }
                         }
                       }),
-                ),
               ),
               SizedBox(
                 height: 5,
@@ -330,7 +335,7 @@ class _registerState extends State<Register> {
                       child: Text(
                         "Sign In",
                         style: TextStyle(
-                            color: kPrimaryColor, fontWeight: FontWeight.bold),
+                            color: Colors.grey[700], fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
