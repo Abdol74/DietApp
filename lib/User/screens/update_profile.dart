@@ -300,10 +300,8 @@ class _update_profileState extends State<update_profile> {
                         await FirebaseAuth.instance.currentUser();
                     print(user.uid);
                     //  final String uid = user.uid.;
-                    fireStore
-                        .collection("Users")
-                        .document(user.uid)
-                        .setData({"FirstName": firstName}).then((_) {
+                    fireStore.collection("Users").document(user.uid).updateData(
+                        {"FirstName": firstName.toString()}).then((_) {
                       print("success!");
                     });
                     user.updateEmail(newEmail);

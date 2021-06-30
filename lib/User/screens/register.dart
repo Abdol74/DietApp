@@ -55,26 +55,32 @@ class _registerState extends State<Register> {
                     ]),
                 child: Row(
                   children: <Widget>[
-                    SizedBox(width: 20,),
+                    SizedBox(
+                      width: 20,
+                    ),
                     Icon(
                       Icons.arrow_back,
                       color: Color(0xFF09C04F),
                       size: 30.0,
                     ),
-                    SizedBox(width: 250,),
-                Container(
-                  height: 45,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/logo.png'),
+                    SizedBox(
+                      width: 250,
                     ),
-                  ),
-                ),
+                    Container(
+                      height: 45,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/logo.png'),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
-              SizedBox(height: 40,),
+              SizedBox(
+                height: 40,
+              ),
               Container(
                 child: Center(
                   child: Column(
@@ -105,80 +111,81 @@ class _registerState extends State<Register> {
                     child: Column(
                       children: <Widget>[
                         TextFormField(
-                      cursorWidth: 4,
-                      cursorColor: Colors.green,
-                      decoration: InputDecoration(
-                        labelText: 'first Name',
-                        labelStyle: TextStyle(color: Colors.black, fontSize: 20),
-                        fillColor: Colors.white.withOpacity(0.6),
-                        filled: true,
-                        border: new OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(8.0),
+                          cursorWidth: 4,
+                          cursorColor: Colors.green,
+                          decoration: InputDecoration(
+                            labelText: 'first Name',
+                            labelStyle:
+                                TextStyle(color: Colors.black, fontSize: 20),
+                            fillColor: Colors.white.withOpacity(0.6),
+                            filled: true,
+                            border: new OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(8.0),
+                              ),
+                              borderSide: new BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                            ),
                           ),
-                          borderSide: new BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
-                          ),
+                          validator: (val) {
+                            if (val.isEmpty) {
+                              return 'Enter the First Name';
+                            } else if (val.length < 3)
+                              return 'The length of the name must be greater than 3';
+                            else
+                              return null;
+                          },
+                          onChanged: (val) {
+                            setState(() => firstName = val);
+                          },
                         ),
-                      ),
-                            validator: (val) {
-                              if (val.isEmpty) {
-                                return 'Enter the First Name';
-                              } else if (val.length < 3)
-                                return 'The length of the name must be greater than 3';
-                              else
-                                return null;
-                            },
-                            onChanged: (val) {
-                              setState(() => firstName = val);
-                            },
-                          ),
-
-                        SizedBox(
-                          height: 10,
-                        ),
-                         TextFormField(
-                           cursorWidth: 4,
-                           cursorColor: Colors.green,
-                           decoration: InputDecoration(
-                             labelText: 'LastName',
-                             labelStyle: TextStyle(color: Colors.black, fontSize: 20),
-                             fillColor: Colors.white.withOpacity(0.6),
-                             filled: true,
-                             border: new OutlineInputBorder(
-                               borderRadius: const BorderRadius.all(
-                                 const Radius.circular(8.0),
-                               ),
-                               borderSide: new BorderSide(
-                                 color: Colors.green,
-                                 width: 3.0,
-                               ),
-                             ),
-                           ),
-                            validator: (val) {
-                              if (val.isEmpty) {
-                                return 'Enter the Last Name';
-                              } else if (val.length < 3)
-                                return 'The length of the name must be greater than 3';
-                              else
-                                return null;
-                            },
-                            onChanged: (val) {
-                              setState(() => lastName = val);
-                            },
-                          ),
-
                         SizedBox(
                           height: 10,
                         ),
                         TextFormField(
-                            keyboardType: TextInputType.emailAddress,
+                          cursorWidth: 4,
+                          cursorColor: Colors.green,
+                          decoration: InputDecoration(
+                            labelText: 'LastName',
+                            labelStyle:
+                                TextStyle(color: Colors.black, fontSize: 20),
+                            fillColor: Colors.white.withOpacity(0.6),
+                            filled: true,
+                            border: new OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(8.0),
+                              ),
+                              borderSide: new BorderSide(
+                                color: Colors.green,
+                                width: 3.0,
+                              ),
+                            ),
+                          ),
+                          validator: (val) {
+                            if (val.isEmpty) {
+                              return 'Enter the Last Name';
+                            } else if (val.length < 3)
+                              return 'The length of the name must be greater than 3';
+                            else
+                              return null;
+                          },
+                          onChanged: (val) {
+                            setState(() => lastName = val);
+                          },
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          keyboardType: TextInputType.emailAddress,
                           cursorWidth: 4,
                           cursorColor: Colors.green,
                           decoration: InputDecoration(
                             labelText: 'E-mail',
-                            labelStyle: TextStyle(color: Colors.black, fontSize: 20),
+                            labelStyle:
+                                TextStyle(color: Colors.black, fontSize: 20),
                             fillColor: Colors.white.withOpacity(0.6),
                             filled: true,
                             border: new OutlineInputBorder(
@@ -191,33 +198,32 @@ class _registerState extends State<Register> {
                               ),
                             ),
                           ),
-                            validator: (val) {
-                              if (val.isEmpty)
-                                return 'Enter the Email';
-                              else {
-                                RegExp regexp = new RegExp(pattern);
-                                if (!regexp.hasMatch(val))
-                                  return 'Enter a valid Email';
-                                else
-                                  return null;
-                              }
-                            },
-
-                            onChanged: (val) {
-                              setState(() => email = val);
-                            },
-                          ),
-
+                          validator: (val) {
+                            if (val.isEmpty)
+                              return 'Enter the Email';
+                            else {
+                              RegExp regexp = new RegExp(pattern);
+                              if (!regexp.hasMatch(val))
+                                return 'Enter a valid Email';
+                              else
+                                return null;
+                            }
+                          },
+                          onChanged: (val) {
+                            setState(() => email = val);
+                          },
+                        ),
                         SizedBox(
                           height: 10,
                         ),
                         TextFormField(
-                            controller: _passwordController,
+                          controller: _passwordController,
                           cursorWidth: 4,
                           cursorColor: Colors.green,
                           decoration: InputDecoration(
                             labelText: 'Password',
-                            labelStyle: TextStyle(color: Colors.black, fontSize: 20),
+                            labelStyle:
+                                TextStyle(color: Colors.black, fontSize: 20),
                             fillColor: Colors.white.withOpacity(0.6),
                             filled: true,
                             border: new OutlineInputBorder(
@@ -230,46 +236,45 @@ class _registerState extends State<Register> {
                               ),
                             ),
                           ),
-                            validator: (String value) => value.length < 6
-                                ? 'Please enter atleast 6 characters'
-                                : null,
-                            obscureText: true,
-                            onChanged: (val) {
-                              setState(() => password = val);
-                            },
-                          ),
-
+                          validator: (String value) => value.length < 6
+                              ? 'Please enter atleast 6 characters'
+                              : null,
+                          obscureText: true,
+                          onChanged: (val) {
+                            setState(() => password = val);
+                          },
+                        ),
                         SizedBox(
                           height: 10,
                         ),
-                       TextFormField(
-                            controller: _confirmPasswordController,
-                         cursorWidth: 4,
-                         cursorColor: Colors.green,
-                         decoration: InputDecoration(
-                           labelText: 'Confirm password',
-                           labelStyle: TextStyle(color: Colors.black, fontSize: 20),
-                           fillColor: Colors.white.withOpacity(0.6),
-                           filled: true,
-                           border: new OutlineInputBorder(
-                             borderRadius: const BorderRadius.all(
-                               const Radius.circular(8.0),
-                             ),
-                             borderSide: new BorderSide(
-                               color: Colors.transparent,
-                               width: 1.0,
-                             ),
-                           ),
-                         ),
-                            validator: (val) {
-                              if (val != _passwordController.value.text) {
-                                return 'passwords don\'t match';
-                              } else
-                                return null;
-                            },
-                            obscureText: true,
-
+                        TextFormField(
+                          controller: _confirmPasswordController,
+                          cursorWidth: 4,
+                          cursorColor: Colors.green,
+                          decoration: InputDecoration(
+                            labelText: 'Confirm password',
+                            labelStyle:
+                                TextStyle(color: Colors.black, fontSize: 20),
+                            fillColor: Colors.white.withOpacity(0.6),
+                            filled: true,
+                            border: new OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(8.0),
+                              ),
+                              borderSide: new BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                            ),
                           ),
+                          validator: (val) {
+                            if (val != _passwordController.value.text) {
+                              return 'passwords don\'t match';
+                            } else
+                              return null;
+                          },
+                          obscureText: true,
+                        ),
                       ],
                     )),
               ),
@@ -277,44 +282,45 @@ class _registerState extends State<Register> {
                 height: 5,
               ),
               Container(
-                margin: EdgeInsets.only(left: 70,right: 70),
+                margin: EdgeInsets.only(left: 70, right: 70),
                 width: 50,
                 height: 40,
                 color: Colors.green,
-              child:
-              ElevatedButton(
-                  child: Text('FINISH'),
-                  style: ElevatedButton.styleFrom(
-                      primary: Color(0xFF09C04F),
-                      padding: EdgeInsets.only(left: 40,right: 40),
-                      textStyle: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold)),
-                      onPressed: () async {
-                        if (_formKey.currentState.validate()) {
-                          print(firstName);
-                          try {
-                            final newUser =
-                                await _auth.createUserWithEmailAndPassword(
-                                    email: email, password: password);
-                            final FirebaseUser user =
-                                await FirebaseAuth.instance.currentUser();
-                            final String uid = user.uid.toString();
-                            fireStore.collection('Users').add({
-                              'FirstName': firstName,
-                              'LastName': lastName,
-                              'Email': email,
-                              'id': uid,
-                              'roleId': "1sDEqpaFQmHc9OMz0ESl"
-                            });
-                            if (newUser != null) {
-                              Navigator.pushNamed(context, LoginScreen.id);
-                            }
-                          } catch (e) {
-                            print(e);
+                child: ElevatedButton(
+                    child: Text('FINISH'),
+                    style: ElevatedButton.styleFrom(
+                        primary: Color(0xFF09C04F),
+                        padding: EdgeInsets.only(left: 40, right: 40),
+                        textStyle: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold)),
+                    onPressed: () async {
+                      if (_formKey.currentState.validate()) {
+                        print(firstName);
+                        try {
+                          final newUser =
+                              await _auth.createUserWithEmailAndPassword(
+                                  email: email, password: password);
+                          final FirebaseUser user =
+                              await FirebaseAuth.instance.currentUser();
+                          final String uid = user.uid.toString();
+                          fireStore
+                              .collection('Users')
+                              .document(user.uid)
+                              .setData({
+                            'FirstName': firstName,
+                            'LastName': lastName,
+                            'Email': email,
+                            'id': uid,
+                            'roleId': "1sDEqpaFQmHc9OMz0ESl"
+                          });
+                          if (newUser != null) {
+                            Navigator.pushNamed(context, LoginScreen.id);
                           }
+                        } catch (e) {
+                          print(e);
                         }
-                      }),
+                      }
+                    }),
               ),
               SizedBox(
                 height: 5,
@@ -335,7 +341,8 @@ class _registerState extends State<Register> {
                       child: Text(
                         "Sign In",
                         style: TextStyle(
-                            color: Colors.grey[700], fontWeight: FontWeight.bold),
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
