@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daily_tracker_diet_app/Admin/Provider/meal_provider.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/Approve_meal.dart';
 import 'package:daily_tracker_diet_app/User/helpers/measure_brain.dart';
-import 'package:daily_tracker_diet_app/User/screens/meal_by_current_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -316,19 +315,6 @@ class _MealCartState extends State<MealCart> {
                         mealProvider.currentMealToAddToUser.carb *
                             newMeasure.toInt();
                   });
-
-                  setState(() {
-                    currentCalories -=
-                        mealProvider.currentMealToAddToUser.caloriesNumber;
-                  });
-                  final fireStore = Firestore.instance;
-                  fireStore
-                      .collection("UserCurrentCalory")
-                      .document("l1qhUkw25ZjKJkk1Jzv5")
-                      .updateData({"remaingCalories": currentCalories}).then(
-                          (_) {
-                    print(currentCalories);
-                  });
                 },
                 child: Text('Calculate'),
               ),
@@ -338,29 +324,43 @@ class _MealCartState extends State<MealCart> {
                   primary: Colors.green, // background
                   onPrimary: Colors.white, // foreground
                 ),
-                onPressed: () async {
-                  await Firestore.instance
-                      .collection('UserMealComponents')
-                      .add({
-                    'mealComponentId': mealProvider.currentMealToAddToUser.id,
-                    'mealComponentName':
-                        mealProvider.currentMealToAddToUser.mealName,
-                    'mealComponentCounts':
-                        mealProvider.currentMealToAddToUser.measure,
-                    'mealTypeId': widget.mealType,
-                    'userId': loggedInUser.uid,
-                    'malCalories':
-                        mealProvider.currentMealToAddToUser.caloriesNumber,
-                  });
-                  mealProvider.loadMealsByUserAndType(
-                      mealTypeId: widget.mealType, userId: loggedInUser.uid);
+                onPressed: () {
+                  print(mealProvider.currentMealToAddToUser.measure);
+                  double newMeasure =
+                      mealProvider.currentMealToAddToUser.measure / 100;
 
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return MealUser(
-                        // userId: loggedInUser.uid,
-                        // mealTypeId: widget.mealType,
-                        );
-                  }));
+                  setState(() {
+                    mealProvider.currentMealToAddToUser.caloriesNumber =
+                        mealProvider.currentMealToAddToUser.caloriesNumber *
+                            newMeasure.toInt();
+
+                    mealProvider.currentMealToAddToUser.protein =
+                        mealProvider.currentMealToAddToUser.protein *
+                            newMeasure.toInt();
+
+                    mealProvider.currentMealToAddToUser.fats =
+                        mealProvider.currentMealToAddToUser.fats *
+                            newMeasure.toInt();
+                    mealProvider.currentMealToAddToUser.carb =
+                        mealProvider.currentMealToAddToUser.carb *
+                            newMeasure.toInt();
+                  });
+                  setState(() {
+                    if (currentCalories >=
+                        mealProvider.currentMealToAddToUser.caloriesNumber)
+                      currentCalories -=
+                          mealProvider.currentMealToAddToUser.caloriesNumber;
+                    else
+                      print("You need to burn calories to eat more");
+                  });
+                  final fireStore = Firestore.instance;
+                  fireStore
+                      .collection("UserCurrentCalory")
+                      .document("l1qhUkw25ZjKJkk1Jzv5")
+                      .updateData({"remaingCalories": currentCalories}).then(
+                          (_) {
+                    print(currentCalories);
+                  });
                 },
                 child: Text('Add'),
               )

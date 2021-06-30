@@ -302,7 +302,7 @@ class _registerState extends State<Register> {
                               'roleId': "1sDEqpaFQmHc9OMz0ESl"
                             });
                             if (newUser != null) {
-                              Navigator.pushNamed(context, WelcomeScreen.id);
+                              Navigator.pushNamed(context, LoginScreen.id);
                             }
                           } catch (e) {
                             print(e);
