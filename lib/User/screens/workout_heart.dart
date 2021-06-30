@@ -231,14 +231,15 @@ class _workout_heartState extends State<workout_heart> {
               margin: EdgeInsets.symmetric(horizontal: 130),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color(0xFF09C04F),
+
               ),
               child: Center(
                 child: RaisedButton(
+                  color: Colors.green,
                   child: Text(
                     "Calculate",
                     style: TextStyle(
-                        color: Colors.grey[200],
+                        color: Colors.white,
                         fontSize: 22,
                         fontWeight: FontWeight.w600),
                   ),
@@ -264,35 +265,7 @@ class _workout_heartState extends State<workout_heart> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Color(0xFF09B44D),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white.withOpacity(.60),
-        selectedFontSize: 14,
-        unselectedFontSize: 14,
-        onTap: (value) {
-          // Respond to item press.
-        },
-        items: [
-          BottomNavigationBarItem(
-            title: Text('Favorites'),
-            icon: Icon(Icons.favorite),
-          ),
-          BottomNavigationBarItem(
-            title: Text('Home'),
-            icon: Icon(Icons.home),
-          ),
-          BottomNavigationBarItem(
-            title: Text('Places'),
-            icon: Icon(Icons.location_on),
-          ),
-          BottomNavigationBarItem(
-            title: Text('News'),
-            icon: Icon(Icons.library_books),
-          ),
-        ],
-      ),
+
     );
   }
 }

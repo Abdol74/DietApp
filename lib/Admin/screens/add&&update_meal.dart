@@ -11,6 +11,8 @@ import 'dart:math' as math;
 import 'package:daily_tracker_diet_app/Admin/helpers/meal_api.dart';
 import 'package:provider/provider.dart';
 
+import 'meal_home.dart';
+
 class UpdateMeal extends StatefulWidget {
   final bool isUpdating;
   UpdateMeal({this.isUpdating});
@@ -22,7 +24,7 @@ class _UpdateMealState extends State<UpdateMeal> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final CollectionReference _collectionReference =
-      Firestore.instance.collection('MealComponents');
+  Firestore.instance.collection('MealComponents');
   var category;
   File _imageFile;
   String _imageUrl;
@@ -33,7 +35,7 @@ class _UpdateMealState extends State<UpdateMeal> {
     // TODO: implement initState
     super.initState();
     MealProvider mealProvider =
-        Provider.of<MealProvider>(context, listen: false);
+    Provider.of<MealProvider>(context, listen: false);
     if (mealProvider.currentMeal != null) {
       _currentMeal = mealProvider.currentMeal;
     } else {
@@ -445,11 +447,16 @@ class _UpdateMealState extends State<UpdateMeal> {
 
   _mealUpdated(MealComponentsModel meal) {
     MealProvider mealProvider =
-        Provider.of<MealProvider>(context, listen: false);
+    Provider.of<MealProvider>(context, listen: false);
     mealProvider.addMeal(meal);
     Navigator.pop(context);
   }
-
+  _mealUpdated2(MealComponentsModel meal) {
+    MealProvider mealProvider =
+    Provider.of<MealProvider>(context, listen: false);
+    mealProvider.currentMeal = meal;
+    Navigator.popAndPushNamed(context, ProfileMeal.id);
+  }
   _saveMeal() {
     print('saveFood Called');
     if (!_formKey.currentState.validate()) {
@@ -461,7 +468,7 @@ class _UpdateMealState extends State<UpdateMeal> {
     print('form saved');
 
     uploadMealAndImage(
-        _currentMeal, widget.isUpdating, _imageFile, _mealUpdated);
+        _currentMeal, widget.isUpdating, _imageFile, _mealUpdated,_mealUpdated2);
 
     print("name: ${_currentMeal.mealName}");
     print("category: ${_currentMeal.mealDescription}");
@@ -487,9 +494,9 @@ class _UpdateMealState extends State<UpdateMeal> {
         toolbarHeight: 60.0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-          bottomRight: Radius.circular(40.0),
-          bottomLeft: Radius.circular(40.0),
-        )),
+              bottomRight: Radius.circular(40.0),
+              bottomLeft: Radius.circular(40.0),
+            )),
         backgroundColor: Colors.white,
       ),
       body: Padding(
@@ -497,7 +504,7 @@ class _UpdateMealState extends State<UpdateMeal> {
         child: new Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/am1.png'),
+              image: AssetImage('assets/images/back1.png'),
               fit: BoxFit.fill,
             ),
           ),
@@ -518,22 +525,22 @@ class _UpdateMealState extends State<UpdateMeal> {
                   SizedBox(height: 16),
                   _imageFile == null && _imageUrl == null
                       ? Container(
-                          height: 40,
-                          width: 40,
-                          margin: EdgeInsets.symmetric(horizontal: 70),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Color(0xFF09C04F),
-                          ),
-                          child: TextButton(
-                            onPressed: () => _getLocalImage(),
-                            child: Icon(
-                              Icons.camera_alt,
-                              color: Colors.white,
-                              size: 25,
-                            ),
-                          ),
-                        )
+                    height: 40,
+                    width: 40,
+                    margin: EdgeInsets.symmetric(horizontal: 70),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xFF09C04F),
+                    ),
+                    child: TextButton(
+                      onPressed: () => _getLocalImage(),
+                      child: Icon(
+                        Icons.camera_alt,
+                        color: Colors.white,
+                        size: 25,
+                      ),
+                    ),
+                  )
                       : SizedBox(height: 0),
                   _buildMealNameField(),
                   _buildMealCaloriesField(),
@@ -591,7 +598,7 @@ class _UpdateMealState extends State<UpdateMeal> {
                                   return DropdownMenuItem(
                                     value: value.documentID,
                                     child:
-                                        Text('${value.data['categoryName']}'),
+                                    Text('${value.data['categoryName']}'),
                                   );
                                 }).toList(),
                                 onChanged: (value) {
