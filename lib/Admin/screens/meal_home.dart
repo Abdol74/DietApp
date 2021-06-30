@@ -44,7 +44,7 @@ class _ProfileState extends State<ProfileMeal> {
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.green),
         title: Text(
-          "Home",
+          "My food",
           style: TextStyle(
               color: Color(0xFF09C04F),
               fontSize: 25,
@@ -152,7 +152,7 @@ class _ProfileState extends State<ProfileMeal> {
         child: new Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/am1.png'),
+              image: AssetImage('assets/images/back1.png'),
               fit: BoxFit.fill,
             ),
           ),
@@ -161,24 +161,27 @@ class _ProfileState extends State<ProfileMeal> {
             itemBuilder: (context, index) {
               return Column(
                 children: <Widget>[
-                  SizedBox(height: 20,),
+                  SizedBox(height: 5,),
                   Row(
                     children:<Widget> [
-                      SizedBox(width: 130,),
-                      Column(
+                      SizedBox(width: 0,),
+                      Row(
                         children:<Widget>[
+                          SizedBox(width: 10,),
                           Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                            ),
+                            width: 180,
+                            height: 130,
+
                             child: (mealProvider.meals[index].imageUrl == null)
-                                ? Image.asset('assets/images/person.png')
+                                ? Image.asset('assets/images/noopic.png')
                                 : Image.network(
                               mealProvider.meals[index].imageUrl,
                               fit: BoxFit.cover,),),
-                          SizedBox(height: 10,),
+                         Column(
+                           children:[
+                             Text("Meal Name",style: TextStyle(color: Colors.green,fontSize: 25,fontWeight: FontWeight.bold,
+                             fontFamily: 'Roboto'
+                             ),),
                              Padding(
                               padding: EdgeInsets.only(left: 10),
                               child: Text(
@@ -187,7 +190,7 @@ class _ProfileState extends State<ProfileMeal> {
                                     : mealProvider.meals[index].mealName,
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 16,
+                                  fontSize: 18,
                                 ),
                               ),
                             ),
@@ -339,6 +342,9 @@ class _ProfileState extends State<ProfileMeal> {
                               ),
                             ],
                           ),
+                          ],
+                          ),
+                          ////
                         ],
                       ),
                       SizedBox(width: 20,),

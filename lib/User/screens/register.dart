@@ -104,20 +104,24 @@ class _registerState extends State<Register> {
                     key: _formKey,
                     child: Column(
                       children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(40),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 9.0,
-                                    offset: Offset(5, 5)),
-                              ]),
-                          child: TextFormField(
-                            textAlign: TextAlign.center,
-                            cursorColor: Colors.green,
+                        TextFormField(
+                      cursorWidth: 4,
+                      cursorColor: Colors.green,
+                      decoration: InputDecoration(
+                        labelText: 'first Name',
+                        labelStyle: TextStyle(color: Colors.black, fontSize: 20),
+                        fillColor: Colors.white.withOpacity(0.6),
+                        filled: true,
+                        border: new OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            const Radius.circular(8.0),
+                          ),
+                          borderSide: new BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                        ),
+                      ),
                             validator: (val) {
                               if (val.isEmpty) {
                                 return 'Enter the First Name';
@@ -126,32 +130,32 @@ class _registerState extends State<Register> {
                               else
                                 return null;
                             },
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "First Name",
-                                hintStyle: TextStyle(color: Colors.grey[400])),
                             onChanged: (val) {
                               setState(() => firstName = val);
                             },
                           ),
-                        ),
+
                         SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          padding: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(40),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 9.0,
-                                    offset: Offset(5, 5)),
-                              ]),
-                          child: TextFormField(
-                            textAlign: TextAlign.center,
-                            cursorColor: Colors.green,
+                         TextFormField(
+                           cursorWidth: 4,
+                           cursorColor: Colors.green,
+                           decoration: InputDecoration(
+                             labelText: 'LastName',
+                             labelStyle: TextStyle(color: Colors.black, fontSize: 20),
+                             fillColor: Colors.white.withOpacity(0.6),
+                             filled: true,
+                             border: new OutlineInputBorder(
+                               borderRadius: const BorderRadius.all(
+                                 const Radius.circular(8.0),
+                               ),
+                               borderSide: new BorderSide(
+                                 color: Colors.green,
+                                 width: 3.0,
+                               ),
+                             ),
+                           ),
                             validator: (val) {
                               if (val.isEmpty) {
                                 return 'Enter the Last Name';
@@ -160,33 +164,33 @@ class _registerState extends State<Register> {
                               else
                                 return null;
                             },
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Last Name",
-                                hintStyle: TextStyle(color: Colors.grey[400])),
                             onChanged: (val) {
                               setState(() => lastName = val);
                             },
                           ),
-                        ),
+
                         SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          padding: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(40),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 9.0,
-                                    offset: Offset(5, 5)),
-                              ]),
-                          child: TextFormField(
+                        TextFormField(
                             keyboardType: TextInputType.emailAddress,
-                            cursorColor: Colors.green,
-                            textAlign: TextAlign.center,
+                          cursorWidth: 4,
+                          cursorColor: Colors.green,
+                          decoration: InputDecoration(
+                            labelText: 'E-mail',
+                            labelStyle: TextStyle(color: Colors.black, fontSize: 20),
+                            fillColor: Colors.white.withOpacity(0.6),
+                            filled: true,
+                            border: new OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(8.0),
+                              ),
+                              borderSide: new BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                            ),
+                          ),
                             validator: (val) {
                               if (val.isEmpty)
                                 return 'Enter the Email';
@@ -198,65 +202,65 @@ class _registerState extends State<Register> {
                                   return null;
                               }
                             },
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Email",
-                                hintStyle: TextStyle(color: Colors.grey[400])),
+
                             onChanged: (val) {
                               setState(() => email = val);
                             },
                           ),
-                        ),
+
                         SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          padding: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(40),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 9.0,
-                                    offset: Offset(5, 5)),
-                              ]),
-                          child: TextFormField(
+                        TextFormField(
                             controller: _passwordController,
-                            textAlign: TextAlign.center,
-                            cursorColor: Colors.green,
+                          cursorWidth: 4,
+                          cursorColor: Colors.green,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            labelStyle: TextStyle(color: Colors.black, fontSize: 20),
+                            fillColor: Colors.white.withOpacity(0.6),
+                            filled: true,
+                            border: new OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(8.0),
+                              ),
+                              borderSide: new BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                            ),
+                          ),
                             validator: (String value) => value.length < 6
                                 ? 'Please enter atleast 6 characters'
                                 : null,
                             obscureText: true,
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Password",
-                                hintStyle: TextStyle(color: Colors.grey[400])),
                             onChanged: (val) {
                               setState(() => password = val);
                             },
                           ),
-                        ),
+
                         SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          padding: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(40),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 9.0,
-                                    offset: Offset(5, 5)),
-                              ]),
-                          child: TextFormField(
+                       TextFormField(
                             controller: _confirmPasswordController,
-                            cursorColor:Colors.green ,
-
-                            textAlign: TextAlign.center,
+                         cursorWidth: 4,
+                         cursorColor: Colors.green,
+                         decoration: InputDecoration(
+                           labelText: 'Confirm password',
+                           labelStyle: TextStyle(color: Colors.black, fontSize: 20),
+                           fillColor: Colors.white.withOpacity(0.6),
+                           filled: true,
+                           border: new OutlineInputBorder(
+                             borderRadius: const BorderRadius.all(
+                               const Radius.circular(8.0),
+                             ),
+                             borderSide: new BorderSide(
+                               color: Colors.transparent,
+                               width: 1.0,
+                             ),
+                           ),
+                         ),
                             validator: (val) {
                               if (val != _passwordController.value.text) {
                                 return 'passwords don\'t match';
@@ -264,12 +268,8 @@ class _registerState extends State<Register> {
                                 return null;
                             },
                             obscureText: true,
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Confirm Password",
-                                hintStyle: TextStyle(color: Colors.grey[400])),
+
                           ),
-                        ),
                       ],
                     )),
               ),
