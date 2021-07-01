@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
         view_user.id: (context) => view_user(),
         ProfileMeal.id: (context) => ProfileMeal(),
         LoginScreen.id: (context) => LoginScreen(),
-        calenderScreen.id: (context) => calenderScreen(),
+        //calenderScreen.id: (context) => calenderScreen(),
         Workout1_screen.id: (context) => Workout1_screen(),
         Workout2_screen.id: (context) => Workout2_screen(),
         update_profile.id: (context) => update_profile(),

@@ -296,13 +296,24 @@ class _update_profileState extends State<update_profile> {
                     ),
                   ),
                   onPressed: () async {
+                    String getDocumentID;
                     final FirebaseUser user =
                         await FirebaseAuth.instance.currentUser();
-                    print(user.uid);
-                    //  final String uid = user.uid.;
-                    fireStore.collection("Users").document(user.uid).updateData(
-                        {"FirstName": firstName.toString()}).then((_) {
-                      print("success!");
+
+                    await Firestore.instance
+                        .collection("Users")
+                        .where("id", isEqualTo: user.uid.toString())
+                        .getDocuments()
+                        .then((cal) {
+                      getDocumentID = cal.documents[0].documentID;
+                      Firestore.instance
+                          .collection("Users")
+                          .document(getDocumentID)
+                          .updateData({
+                        "FirstName": firstName,
+                        "Email": newEmail,
+                      }).then((_) {});
+                      print("Successs !!!");
                     });
                     user.updateEmail(newEmail);
                     user.updatePassword(newPassword);
