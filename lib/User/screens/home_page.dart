@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class home_page extends StatelessWidget{
+class home_page extends StatelessWidget {
   static String id = 'home_page';
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class home_page extends StatelessWidget{
                           width: 90,
                         ),
                         Column(
-                          children:<Widget> [
+                          children: <Widget>[
                             Container(
                               width: 100,
                               height: 80,
@@ -78,10 +78,14 @@ class home_page extends StatelessWidget{
                   ],
                 ),
               ),
-              SizedBox(height: 70,),
+              SizedBox(
+                height: 70,
+              ),
               Row(
                 children: [
-                  SizedBox(width: 50,),
+                  SizedBox(
+                    width: 50,
+                  ),
                   Container(
                     height: 110,
                     width: 120,
@@ -96,7 +100,9 @@ class home_page extends StatelessWidget{
                         ]),
                     child: Column(
                       children: [
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Container(
                           width: 80,
                           height: 60,
@@ -106,7 +112,9 @@ class home_page extends StatelessWidget{
                             ),
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
                           "Meal",
                           style: TextStyle(
@@ -117,7 +125,9 @@ class home_page extends StatelessWidget{
                       ],
                     ),
                   ),
-                  SizedBox(width: 60,),
+                  SizedBox(
+                    width: 60,
+                  ),
                   Container(
                     height: 110,
                     width: 120,
@@ -132,7 +142,9 @@ class home_page extends StatelessWidget{
                         ]),
                     child: Column(
                       children: [
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Container(
                           width: 80,
                           height: 60,
@@ -142,7 +154,9 @@ class home_page extends StatelessWidget{
                             ),
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
                           "Workout",
                           style: TextStyle(
@@ -155,10 +169,14 @@ class home_page extends StatelessWidget{
                   ),
                 ],
               ),
-              SizedBox(height: 15,),
+              SizedBox(
+                height: 15,
+              ),
               Row(
                 children: [
-                  SizedBox(width: 50,),
+                  SizedBox(
+                    width: 50,
+                  ),
                   Container(
                     height: 110,
                     width: 120,
@@ -173,7 +191,9 @@ class home_page extends StatelessWidget{
                         ]),
                     child: Column(
                       children: [
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Container(
                           width: 80,
                           height: 60,
@@ -183,7 +203,9 @@ class home_page extends StatelessWidget{
                             ),
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
                           "WEIGHT",
                           style: TextStyle(
@@ -194,7 +216,9 @@ class home_page extends StatelessWidget{
                       ],
                     ),
                   ),
-                  SizedBox(width: 60,),
+                  SizedBox(
+                    width: 60,
+                  ),
                   Container(
                     height: 110,
                     width: 120,
@@ -209,7 +233,9 @@ class home_page extends StatelessWidget{
                         ]),
                     child: Column(
                       children: [
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Container(
                           width: 80,
                           height: 60,
@@ -219,7 +245,9 @@ class home_page extends StatelessWidget{
                             ),
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
                           "TIPS",
                           style: TextStyle(
@@ -232,10 +260,14 @@ class home_page extends StatelessWidget{
                   ),
                 ],
               ),
-              SizedBox(height: 15,),
+              SizedBox(
+                height: 15,
+              ),
               Row(
                 children: [
-                  SizedBox(width: 50,),
+                  SizedBox(
+                    width: 50,
+                  ),
                   Container(
                     height: 110,
                     width: 120,
@@ -248,10 +280,11 @@ class home_page extends StatelessWidget{
                             blurRadius: 40,
                           )
                         ]),
-
                     child: Column(
                       children: [
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Container(
                           width: 80,
                           height: 60,
@@ -261,7 +294,9 @@ class home_page extends StatelessWidget{
                             ),
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
                           "Charts",
                           style: TextStyle(
@@ -272,7 +307,9 @@ class home_page extends StatelessWidget{
                       ],
                     ),
                   ),
-                  SizedBox(width: 60,),
+                  SizedBox(
+                    width: 60,
+                  ),
                   Container(
                     height: 110,
                     width: 120,
@@ -287,7 +324,9 @@ class home_page extends StatelessWidget{
                         ]),
                     child: Column(
                       children: [
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Container(
                           width: 80,
                           height: 60,
@@ -297,7 +336,9 @@ class home_page extends StatelessWidget{
                             ),
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
                           "Support",
                           style: TextStyle(
@@ -310,10 +351,14 @@ class home_page extends StatelessWidget{
                   ),
                 ],
               ),
-              SizedBox(height: 15,),
+              SizedBox(
+                height: 15,
+              ),
               Row(
                 children: [
-                  SizedBox(width: 50,),
+                  SizedBox(
+                    width: 50,
+                  ),
                   Container(
                     height: 110,
                     width: 120,
@@ -328,7 +373,9 @@ class home_page extends StatelessWidget{
                         ]),
                     child: Column(
                       children: [
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Container(
                           width: 80,
                           height: 60,
@@ -338,7 +385,9 @@ class home_page extends StatelessWidget{
                             ),
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
                           "Home",
                           style: TextStyle(
@@ -349,7 +398,9 @@ class home_page extends StatelessWidget{
                       ],
                     ),
                   ),
-                  SizedBox(width: 60,),
+                  SizedBox(
+                    width: 60,
+                  ),
                   Container(
                     height: 110,
                     width: 120,
@@ -364,7 +415,9 @@ class home_page extends StatelessWidget{
                         ]),
                     child: Column(
                       children: [
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Container(
                           width: 80,
                           height: 60,
@@ -374,7 +427,9 @@ class home_page extends StatelessWidget{
                             ),
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
                           "Update profile",
                           style: TextStyle(

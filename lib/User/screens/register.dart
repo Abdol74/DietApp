@@ -303,10 +303,7 @@ class _registerState extends State<Register> {
                           final FirebaseUser user =
                               await FirebaseAuth.instance.currentUser();
                           final String uid = user.uid.toString();
-                          fireStore
-                              .collection('Users')
-                              .document(user.uid)
-                              .setData({
+                          fireStore.collection('Users').add({
                             'FirstName': firstName,
                             'LastName': lastName,
                             'Email': email,
@@ -314,7 +311,13 @@ class _registerState extends State<Register> {
                             'roleId': "1sDEqpaFQmHc9OMz0ESl"
                           });
                           if (newUser != null) {
-                            Navigator.pushNamed(context, LoginScreen.id);
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return WelcomeScreen(
+                                uId: uid,
+                                clientName: firstName,
+                              );
+                            }));
                           }
                         } catch (e) {
                           print(e);

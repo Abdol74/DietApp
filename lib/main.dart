@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF09B44D),
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: LoginScreen.id,
+      initialRoute: update_profile.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         mealComponents.id: (context) => mealComponents(),

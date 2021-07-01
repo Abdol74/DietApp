@@ -296,7 +296,7 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                         ElevatedButton(
                           onPressed: () {
 //                          return(_stopWatchTimer.rawTime.listen((value) => print('rawTime $value ${StopWatchTimer.getDisplayTime(value)}')));
-                            print(timemin);
+                            print(timemin + timeSec);
                           },
                           child: Text('Commit'),
                           style: ElevatedButton.styleFrom(
@@ -331,23 +331,16 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                           fontSize: 16,
                           fontWeight: FontWeight.w600),
                     ),
-                    onPressed: () async {
+                    onPressed: () {
                       if (_formKey.currentState.validate()) {
                         WorkoutDiseaseBrain wDiseaseBrain = WorkoutDiseaseBrain(
                             runningType: selectedRunning,
                             weight: widget.weight,
                             duration: timeSec + timemin);
-                        int calories = wDiseaseBrain.caloriesBurned().toInt();
-                        DocumentReference docref =
-                            await _firestore.collection("UserWorkouts").add({
-                          'caloriesNumber': calories,
-                          'WorkoutDay': workoutDate,
-                          'WorkoutTime': timemin.toInt(),
-                          'WorkoutName': selectedRunning.toString(),
-                        });
-                        workoutid = docref.documentID;
+                        double calories = wDiseaseBrain.caloriesBurned();
+                        print(calories.round());
                       } else {
-                        Text("error");
+                        Text("erorr");
                       }
                     },
                   ),

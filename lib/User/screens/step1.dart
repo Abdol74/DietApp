@@ -22,7 +22,7 @@ class StepOne extends StatelessWidget {
             ),
           ),
           child: Column(
-            children:<Widget> [
+            children: <Widget>[
               Container(
                 height: 50,
                 decoration: BoxDecoration(
@@ -38,7 +38,9 @@ class StepOne extends StatelessWidget {
                     ]),
                 child: Row(
                   children: <Widget>[
-                    SizedBox(width: 140,),
+                    SizedBox(
+                      width: 140,
+                    ),
                     Text(
                       "STEP 1 of 2",
                       style: TextStyle(
@@ -49,7 +51,9 @@ class StepOne extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 70,),
+              SizedBox(
+                height: 70,
+              ),
               Text(
                 "Welcome",
                 style: TextStyle(
@@ -57,7 +61,9 @@ class StepOne extends StatelessWidget {
                     color: Colors.grey[600],
                     fontSize: 50),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Container(
                 child: Image(
                   width: 370,
@@ -67,7 +73,9 @@ class StepOne extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 50,),
+              SizedBox(
+                height: 50,
+              ),
               Container(
                 margin: EdgeInsets.only(bottom: 190),
                 height: 50,
@@ -81,15 +89,16 @@ class StepOne extends StatelessWidget {
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                            return StepTwo(
-                                currentClientId: uId, clientName: clientName);
-                          }));
+                        return StepTwo(
+                            currentClientId: uId, clientName: clientName);
+                      }));
                     },
                     child: Text(
                       "Get Started",
                       style: TextStyle(
                           fontSize: 20,
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),

@@ -231,7 +231,6 @@ class _workout_heartState extends State<workout_heart> {
               margin: EdgeInsets.symmetric(horizontal: 130),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-
               ),
               child: Center(
                 child: RaisedButton(
@@ -265,7 +264,6 @@ class _workout_heartState extends State<workout_heart> {
           ],
         ),
       ),
-
     );
   }
 }
