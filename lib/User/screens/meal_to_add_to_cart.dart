@@ -3,6 +3,7 @@ import 'package:daily_tracker_diet_app/Admin/Provider/meal_provider.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/Approve_meal.dart';
 import 'package:daily_tracker_diet_app/User/helpers/measure_brain.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,21 +20,27 @@ class MealCart extends StatefulWidget {
 }
 
 class _MealCartState extends State<MealCart> {
-  int currentCalories;
+  double differenceCalories;
+  double currentCalories;
   bool equalDate = true;
   String todaydate;
   String userDate;
   int standardCalory;
-  int requiredCalories;
+  double requiredCalories;
+  int shouldburnCalories = 0;
+  String getdocumentID = "";
+
   @override
   void initState() {
     // TODO: implement initState
     MealProvider mealProvider =
         Provider.of<MealProvider>(context, listen: false);
+    getDifferenceCalories();
     getRequiredCalories();
     updateCalory();
     getCurrentDate();
     printDates();
+
     //getRemaingCalories();
 
     getCurrentUser();
@@ -50,6 +57,22 @@ class _MealCartState extends State<MealCart> {
     });
   }
 
+  getDifferenceCalories() async* {
+    try {
+      await Firestore.instance
+          .collection("UserCurrentCalory")
+          .document("l1qhUkw25ZjKJkk1Jzv5")
+          .get()
+          .then((cal) {
+        setState(() {
+          differenceCalories = cal.data["requiredCalories"];
+        });
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   void printDates() {
     print("function Print Dates");
     print(todaydate);
@@ -58,21 +81,24 @@ class _MealCartState extends State<MealCart> {
 
   final fireStore = Firestore.instance;
   updateCalory() async {
+    final user = await _auth.currentUser();
     await Firestore.instance
-        .collection("UserCurrentCalory")
-        .document("l1qhUkw25ZjKJkk1Jzv5")
-        .get()
-        .then((da) {
-      userDate = da.data["date"].toString();
-      print("updateCalory");
-      print(requiredCalories);
+        .collection("Clients")
+        .where("clientId", isEqualTo: user.uid.toString())
+        .getDocuments()
+        .then((cal) {
+      userDate = cal.documents[0].data["date"].toString();
+      requiredCalories = cal.documents[0].data["caloriesRequired"];
+      getdocumentID = cal.documents[0].documentID;
 
       if (userDate != todaydate) {
         Firestore.instance
-            .collection("UserCurrentCalory")
-            .document("l1qhUkw25ZjKJkk1Jzv5")
-            .updateData({"date": todaydate, "remaingCalories": 1000}).then(
-                (_) {});
+            .collection("Clients")
+            .document(getdocumentID)
+            .updateData({
+          "date": todaydate,
+          " remaining calories": requiredCalories,
+        }).then((_) {});
         getRemaingCalories();
       } else
         getRemaingCalories();
@@ -97,13 +123,16 @@ class _MealCartState extends State<MealCart> {
 
   getRemaingCalories() async {
     try {
+      final user = await _auth.currentUser();
+
       await Firestore.instance
-          .collection("UserCurrentCalory")
-          .document("l1qhUkw25ZjKJkk1Jzv5")
-          .get()
+          .collection("Clients")
+          .where("clientId", isEqualTo: user.uid.toString())
+          .getDocuments()
           .then((cal) {
         setState(() {
-          currentCalories = cal.data["remaingCalories"];
+          currentCalories = cal.documents[0].data[" remaining calories"];
+          getdocumentID = cal.documents[0].documentID;
         });
 
         print(currentCalories);
@@ -215,7 +244,10 @@ class _MealCartState extends State<MealCart> {
                   child: Text(currentCalories.toString()),
                 ),
                 SizedBox(
-                  height: 040,
+                  height: 10,
+                ),
+                Container(
+                  child: Text(differenceCalories.toString()),
                 ),
                 Row(
                   children: [
@@ -345,21 +377,34 @@ class _MealCartState extends State<MealCart> {
                         mealProvider.currentMealToAddToUser.carb *
                             newMeasure.toInt();
                   });
-                  setState(() {
-                    if (currentCalories >=
-                        mealProvider.currentMealToAddToUser.caloriesNumber)
-                      currentCalories -=
-                          mealProvider.currentMealToAddToUser.caloriesNumber;
-                    else
-                      print("You need to burn calories to eat more");
-                  });
+
+                  String userGoal;
+
                   final fireStore = Firestore.instance;
                   fireStore
                       .collection("UserCurrentCalory")
                       .document("l1qhUkw25ZjKJkk1Jzv5")
-                      .updateData({"remaingCalories": currentCalories}).then(
-                          (_) {
-                    print(currentCalories);
+                      .get()
+                      .then((da) {
+                    userGoal = da.data["goalName"].toString();
+                    shouldburnCalories = da.data["shouldburnCalory"];
+
+                    setState(() {
+                      if (currentCalories >=
+                          mealProvider.currentMealToAddToUser.caloriesNumber) {
+                        currentCalories -=
+                            mealProvider.currentMealToAddToUser.caloriesNumber;
+                        fireStore
+                            .collection("Clients")
+                            .document(getdocumentID)
+                            .updateData({
+                          " remaining calories": currentCalories,
+                        }).then((_) {
+                          print(currentCalories);
+                        });
+                      } else
+                        print("You should burn calories to eat more");
+                    });
                   });
                 },
                 child: Text('Add'),

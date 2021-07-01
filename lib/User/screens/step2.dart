@@ -25,14 +25,27 @@ class StepTwo extends StatefulWidget {
 class _StepTwoState extends State<StepTwo> {
   DateTime _datetime;
   static String id = 'StepTwoState';
+  String todaydate;
 
   double height = 170;
   double weight = 60;
   double age = 20;
   double numberOfCalories;
+  @override
+  void initState() {
+    getCurrentDate();
+  }
 
   Color inActiveColor = Colors.grey[200];
   Color activeColor = Color(0xFF09C04F);
+  getCurrentDate() async {
+    var date = new DateTime.now().toString();
+    var dateParse = DateTime.parse(date);
+    var formattedDate = "${dateParse.day}-${dateParse.month}-${dateParse.year}";
+    setState(() {
+      todaydate = formattedDate.toString();
+    });
+  }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
@@ -63,15 +76,10 @@ class _StepTwoState extends State<StepTwo> {
                         SizedBox(
                           width: 10,
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Icon(
-                            Icons.arrow_back,
-                            color: Color(0xFF09C04F),
-                            size: 30.0,
-                          ),
+                        Icon(
+                          Icons.arrow_back,
+                          color: Color(0xFF09C04F),
+                          size: 30.0,
                         ),
                         SizedBox(
                           width: 105,
@@ -243,6 +251,7 @@ class _StepTwoState extends State<StepTwo> {
                     ),
                   ),
                   /////////////////////////////
+
                   Row(
                     children: <Widget>[
                       Expanded(
@@ -663,13 +672,15 @@ class _StepTwoState extends State<StepTwo> {
                     'clientId': widget.currentClientId,
                     'clientName': widget.clientName,
                     'caloriesRequired': numberOfCalories,
+                    ' remaining calories': numberOfCalories,
                     'height': height,
                     'weight': weight,
                     'age': age,
                     'activityLevelValue': activityLevelValue,
                     'goalName': goalValue,
                     'birthday': _datetime,
-                    'diseaseStatus': diseaseValue
+                    'diseaseStatus': diseaseValue,
+                    'date': todaydate,
                   });
 
                   if (diseaseValue == 'Heart Disease') {
