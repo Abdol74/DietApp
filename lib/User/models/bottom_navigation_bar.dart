@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class bottomNavigationBar extends StatelessWidget {
   bottomNavigationBar(
@@ -36,8 +38,10 @@ class bottomNavigationBar extends StatelessWidget {
           icon: Icon(Icons.location_on),
         ),
         BottomNavigationBarItem(
-          title: Text('News'),
-          icon: Icon(Icons.library_books),
+          title: Text('LogOut'),
+          icon: Icon(
+            Icons.logout,
+          ),
         ),
       ],
     );

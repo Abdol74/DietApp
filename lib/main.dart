@@ -14,7 +14,6 @@ import 'package:daily_tracker_diet_app/User/screens/Workout2.dart';
 import 'package:daily_tracker_diet_app/User/screens/Workout1.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/Approve_meal.dart';
 import 'package:daily_tracker_diet_app/User/screens/add_meal_user_screen.dart';
-
 import 'User/screens/add_component_meal.dart';
 import 'User/screens/register.dart';
 import 'User/screens/mealComponents.dart';

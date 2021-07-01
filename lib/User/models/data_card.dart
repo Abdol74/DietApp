@@ -12,7 +12,7 @@ class DataCardbar extends StatelessWidget {
       charts.Series(
         data: data,
         id: "ChartBar",
-        domainFn: (ChartBar series, _) => series.workoutDay.toString(),
+        domainFn: (ChartBar series, _) => series.workoutDay.substring(0, 5),
         measureFn: (ChartBar series, _) => series.workoutTime,
         colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
         labelAccessorFn: (ChartBar row, _) => "${row.workoutDay}",

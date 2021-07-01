@@ -55,7 +55,7 @@ class _AddMealUserState extends State<AddMealUser> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15.0),
+          padding: const EdgeInsets.only(bottom: 15.0),
           child: new Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -144,15 +144,6 @@ class _AddMealUserState extends State<AddMealUser> {
                                   : Image(
                                       image: AssetImage(
                                           "assets/images/person.png")),
-                              // decoration: new BoxDecoration(
-                              //     shape: BoxShape.circle,
-                              //     image: (file == null)
-                              //         ? DecorationImage(
-                              //             image: AssetImage(
-                              //                 "assets/images/person.png"),
-                              //             fit: BoxFit.cover,
-                              //           )
-                              //         : FileImage(file)),
                             ),
                             onTap: () {
                               getImage();
@@ -187,6 +178,7 @@ class _AddMealUserState extends State<AddMealUser> {
                 MealDetails(
                   hintName: 'Meal Name',
                   textEditingController: mealNameController,
+                  type: TextInputType.text,
                 ),
 
                 SizedBox(
@@ -231,9 +223,15 @@ class _AddMealUserState extends State<AddMealUser> {
                   margin: EdgeInsets.symmetric(horizontal: 30.0),
                   height: 200,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                  ),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20.0),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.shade400,
+                            blurRadius: 5.0,
+                            spreadRadius: 0.5,
+                            offset: Offset(0, 5))
+                      ]),
                   child: Padding(
                     padding: EdgeInsets.only(left: 30),
                     child: TextFormField(
@@ -265,25 +263,53 @@ class _AddMealUserState extends State<AddMealUser> {
                       AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (!snapshot.hasData) return Container();
 
-                    return Center(
-                      child: DropdownButton(
-                        icon: Icon(
-                          Icons.add,
-                          color: Colors.teal,
-                        ),
-                        value: category,
-                        isExpanded: false,
-                        items: snapshot.data.documents.map((value) {
-                          return DropdownMenuItem(
-                            value: value.documentID,
-                            child: Text('${value.data['categoryName']}'),
-                          );
-                        }).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            category = value;
-                          });
-                        },
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15.0, horizontal: 20.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20.0),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.shade400,
+                                  blurRadius: 5.0,
+                                  spreadRadius: 0.5,
+                                  offset: Offset(0, 5))
+                            ]),
+                        child: Row(children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: 40.0),
+                            child: Text(
+                              "Choose category Meal",
+                              style: TextStyle(
+                                color: Colors.green,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: DropdownButton(
+                              icon: Icon(
+                                Icons.add,
+                                color: Colors.teal,
+                              ),
+                              value: category,
+                              isExpanded: false,
+                              items: snapshot.data.documents.map((value) {
+                                return DropdownMenuItem(
+                                  value: value.documentID,
+                                  child: Text('${value.data['categoryName']}'),
+                                );
+                              }).toList(),
+                              onChanged: (value) {
+                                setState(() {
+                                  category = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ]),
                       ),
                     );
                   },
@@ -338,8 +364,9 @@ class _AddMealUserState extends State<AddMealUser> {
 class MealDetails extends StatelessWidget {
   final String hintName;
   final TextEditingController textEditingController;
+  final TextInputType type;
 
-  MealDetails({this.hintName, this.textEditingController});
+  MealDetails({this.hintName, this.textEditingController, this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -364,6 +391,7 @@ class MealDetails extends StatelessWidget {
             }
             return null;
           },
+          keyboardType: type,
           controller: textEditingController,
           maxLines: 1,
           cursorColor: Colors.green,

@@ -12,8 +12,8 @@ class reusableCode extends StatelessWidget {
       onTap: onPress,
       child: Container(
           child: cardChild,
-          height: 100.0,
-          width: 60.0,
+          height: 230.0,
+          width: 200.0,
           margin: EdgeInsets.only(
             left: 40.0,
             right: 40.0,

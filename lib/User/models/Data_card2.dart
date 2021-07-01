@@ -13,22 +13,24 @@ class DataCardpie extends StatelessWidget {
       charts.Series(
         data: data,
         id: "ChartPie",
-        domainFn: (ChartPie series, _) => series.workoutDay.toString(),
+        domainFn: (ChartPie series, _) => series.workoutDay.substring(0, 5),
         measureFn: (ChartPie series, _) => series.caloriesNumber,
-        colorFn: (_, __) => charts.MaterialPalette.purple.shadeDefault,
+        colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
         labelAccessorFn: (ChartPie row, _) =>
-            '${row.workoutDay}: ${row.caloriesNumber}',
+            '${row.workoutDay.substring(0, 5)}->${row.caloriesNumber}',
       )
     ];
 
     return charts.PieChart(
       series,
       animate: true,
-      defaultRenderer:
-          new charts.ArcRendererConfig(arcWidth: 200, arcRendererDecorators: [
-        // <-- add this to the code
-        charts.ArcLabelDecorator() // <-- and this of course
-      ]),
+      defaultRenderer: new charts.ArcRendererConfig(
+          arcWidth: 30,
+          arcLength: 50,
+          arcRendererDecorators: [
+            // <-- add this to the code
+            charts.ArcLabelDecorator() // <-- and this of course
+          ]),
     );
   }
 }

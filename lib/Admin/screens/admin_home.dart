@@ -1,12 +1,21 @@
 import 'package:daily_tracker_diet_app/User/screens/SupportAdmin.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'add_meal_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/view_user.dart';
+import 'package:daily_tracker_diet_app/User/models/bottom_navigation_bar.dart';
+import 'package:daily_tracker_diet_app/Admin/screens/login_screen.dart';
 
-class Profile extends StatelessWidget {
-  static const String id = 'AdminHome';
+class Profile extends StatefulWidget {
+  static const String id = 'login_screen';
+  @override
+  _ProfileState createState() => new _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,9 +101,11 @@ class Profile extends StatelessWidget {
               ListTile(
                 leading: GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
+                    Navigator.push(
+                      context,
                       MaterialPageRoute(builder: (context) => SupportAdmin()),
-                    );                  },
+                    );
+                  },
                   child: Icon(
                     Icons.message,
                     size: 30,
@@ -120,7 +131,10 @@ class Profile extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _auth.signOut();
+                    Navigator.pushNamed(context, LoginScreen.id);
+                  },
                   child: Text(
                     "Logout",
                     style: TextStyle(
