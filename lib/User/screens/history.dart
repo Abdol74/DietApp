@@ -11,8 +11,8 @@ import 'package:daily_tracker_diet_app/User/models/data_card.dart';
 import 'package:daily_tracker_diet_app/User/models/Data_card2.dart';
 import 'package:daily_tracker_diet_app/User/models/chart_pie.dart';
 import 'package:daily_tracker_diet_app/User/models/reusable_card.dart';
-//import 'package:animated_text_kit/animated_text_kit.dart';
-/*
+import 'package:animated_text_kit/animated_text_kit.dart';
+
 FirebaseUser loggedInUser;
 
 DateTime day = DateTime.now();
@@ -391,4 +391,4 @@ class _calenderScreenState extends State<calenderScreen> {
         ));
   }
 }
-*/
+
