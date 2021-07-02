@@ -46,11 +46,14 @@ class _update_profileState extends State<update_profile> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: new Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/step1 background.png'),
+            fit: BoxFit.fill,
+          ),
+        ),
         child: new ListView(
           children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
             new Container(
               height: 50,
               width: 20,
@@ -101,72 +104,22 @@ class _update_profileState extends State<update_profile> {
                           SizedBox(
                             width: 70,
                           ),
-                          Icon(
-                            Icons.notifications,
-                            color: Color(0xFF09C04F),
-                            size: 30.0,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Icon(
-                            Icons.search,
-                            color: Color(0xFF09C04F),
-                            size: 30.0,
-                          ),
                         ],
                       ),
                     ],
                   )),
             ),
             SizedBox(
-              height: 60,
+              height: 10,
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 20.0),
-              child: new Stack(
-                fit: StackFit.loose,
-                children: <Widget>[
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Container(
-                        width: 140.0,
-                        height: 140.0,
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: new DecorationImage(
-                            image: AssetImage("assets/person.png"),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 100, right: 120),
-                    child: new Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 25.0,
-                          child: new Icon(
-                            Icons.camera_alt,
-                            color: Color(0xFF09C04F),
-                            size: 30,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
+            Container(
+              width:100,
+              height: 200,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/update.png'),
+                ),
               ),
-            ),
-            //kda klsna el md5lat
-            SizedBox(
-              height: 20,
             ),
             Padding(
                 padding: EdgeInsets.only(left: 50.0, right: 50.0, top: 6.0),
@@ -175,7 +128,24 @@ class _update_profileState extends State<update_profile> {
                   children: <Widget>[
                     new Flexible(
                       child: new TextFormField(
-                        textAlign: TextAlign.center,
+                        cursorWidth: 4,
+                        cursorColor: Colors.green,
+                        decoration: InputDecoration(
+                          labelText: 'New Name',
+                          labelStyle:
+                          TextStyle(color: Colors.green, fontSize: 15),
+                          fillColor: Colors.white.withOpacity(0.6),
+                          filled: true,
+                          border: new OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(8.0),
+                            ),
+                            borderSide: new BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                          ),
+                        ),
                         validator: (val) {
                           if (val.isEmpty) {
                             return 'Enter the First Name';
@@ -184,9 +154,7 @@ class _update_profileState extends State<update_profile> {
                           else
                             return null;
                         },
-                        decoration: const InputDecoration(
-                          hintText: "New Name",
-                        ),
+
                         onChanged: (val) {
                           setState(() => firstName = val);
                         },
@@ -204,7 +172,24 @@ class _update_profileState extends State<update_profile> {
                   children: <Widget>[
                     new Flexible(
                       child: new TextFormField(
-                        textAlign: TextAlign.center,
+                        cursorWidth: 4,
+                        cursorColor: Colors.green,
+                        decoration: InputDecoration(
+                          labelText: 'New E-mail',
+                          labelStyle:
+                          TextStyle(color: Colors.green, fontSize: 15),
+                          fillColor: Colors.white.withOpacity(0.6),
+                          filled: true,
+                          border: new OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(8.0),
+                            ),
+                            borderSide: new BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                          ),
+                        ),
                         validator: (val) {
                           if (val.isEmpty)
                             return 'Enter the Email';
@@ -216,9 +201,7 @@ class _update_profileState extends State<update_profile> {
                               return null;
                           }
                         },
-                        decoration: const InputDecoration(
-                          hintText: "New Email",
-                        ),
+
                         onChanged: (val) {
                           setState(() => newEmail = val);
                         },
@@ -234,14 +217,29 @@ class _update_profileState extends State<update_profile> {
                     new Flexible(
                       child: new TextFormField(
                         controller: _passwordController,
-                        textAlign: TextAlign.center,
+                        cursorWidth: 4,
+                        cursorColor: Colors.green,
+                        decoration: InputDecoration(
+                          labelText: 'New password',
+                          labelStyle:
+                          TextStyle(color: Colors.green, fontSize: 15),
+                          fillColor: Colors.white.withOpacity(0.6),
+                          filled: true,
+                          border: new OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(8.0),
+                            ),
+                            borderSide: new BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                          ),
+                        ),
                         validator: (String value) => value.length < 6
                             ? 'Please enter atleast 6 characters'
                             : null,
                         obscureText: true,
-                        decoration: const InputDecoration(
-                          hintText: "New Password",
-                        ),
+
                         onChanged: (val) {
                           setState(() => newPassword = val);
                         },
@@ -259,7 +257,24 @@ class _update_profileState extends State<update_profile> {
                   children: <Widget>[
                     new Flexible(
                       child: new TextFormField(
-                        textAlign: TextAlign.center,
+                        cursorWidth: 4,
+                        cursorColor: Colors.green,
+                        decoration: InputDecoration(
+                          labelText: 'confirm password',
+                          labelStyle:
+                          TextStyle(color: Colors.green, fontSize: 15),
+                          fillColor: Colors.white.withOpacity(0.6),
+                          filled: true,
+                          border: new OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(8.0),
+                            ),
+                            borderSide: new BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                          ),
+                        ),
                         controller: _confirmPasswordController,
                         validator: (val) {
                           if (val != _passwordController.value.text) {
@@ -268,26 +283,24 @@ class _update_profileState extends State<update_profile> {
                             return null;
                         },
                         obscureText: true,
-                        decoration: const InputDecoration(
-                          hintText: "Confirm Password",
-                        ),
                       ),
                     ),
                   ],
                 )),
             SizedBox(
-              height: 100,
+              height: 30,
             ),
 
             Container(
               height: 50,
               margin: EdgeInsets.symmetric(horizontal: 70),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: Color(0xFF09C04F),
-              ),
               child: Center(
-                child: RaisedButton(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF09C04F),
+                      padding: EdgeInsets.only(left: 40, right: 40),
+                      textStyle: TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold)),
                   child: Text(
                     "Update Profile",
                     style: TextStyle(
@@ -319,40 +332,6 @@ class _update_profileState extends State<update_profile> {
                     user.updatePassword(newPassword);
                   },
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 60,
-            ),
-            Container(
-              child: BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                backgroundColor: Color(0xFF09B44D),
-                selectedItemColor: Colors.white,
-                unselectedItemColor: Colors.white.withOpacity(.60),
-                selectedFontSize: 14,
-                unselectedFontSize: 14,
-                onTap: (value) {
-                  // Respond to item press.
-                },
-                items: [
-                  BottomNavigationBarItem(
-                    title: Text('Favorites'),
-                    icon: Icon(Icons.favorite),
-                  ),
-                  BottomNavigationBarItem(
-                    title: Text('Home'),
-                    icon: Icon(Icons.home),
-                  ),
-                  BottomNavigationBarItem(
-                    title: Text('Places'),
-                    icon: Icon(Icons.location_on),
-                  ),
-                  BottomNavigationBarItem(
-                    title: Text('News'),
-                    icon: Icon(Icons.library_books),
-                  ),
-                ],
               ),
             ),
           ],

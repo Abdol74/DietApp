@@ -26,19 +26,33 @@ class _LoginScreenState extends State<LoginScreen> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: Column(
+        body:Container(
+        decoration: BoxDecoration(
+        image: DecorationImage(
+        image: AssetImage('assets/images/back1.png'),
+            fit: BoxFit.fill,
+           ),
+                ),
+        child:ListView(
           children: <Widget>[
-            // TODO: Implement fields
             Container(
               margin: EdgeInsets.only(
-                top: 50.0,
+                top: 0.0,
                 bottom: 10.0,
                 left: 300.0,
               ),
               child: Image(image: AssetImage('assets/images/logosmall.png')),
             ),
+        Container(
+          height: 200,
+          width: 400,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/log.png'),
+            ),
+          ),),
             Container(
-              margin: EdgeInsets.only(top: 30.0),
+              margin: EdgeInsets.only(top: 5.0),
               child: Center(
                 child: Text(
                   "Welcome",
@@ -46,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.bold,
                       color: Colors.grey[600],
-                      fontSize: 40),
+                      fontSize: 50),
                 ),
               ),
             ),
@@ -55,94 +69,80 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.all(5.0),
+                    padding: EdgeInsets.all(14.0),
                     child: Column(
                       children: <Widget>[
                         TextField(
                           keyboardType: TextInputType.emailAddress,
-                          textAlign: TextAlign.center,
+                          cursorWidth: 4,
+                          cursorColor: Colors.green,
+                          decoration: InputDecoration(
+                            labelText: 'Enter your Mail',
+                            labelStyle:
+                            TextStyle(color: Colors.green, fontSize: 14),
+                            fillColor: Colors.white.withOpacity(0.10),
+                            filled: true,
+                            border: new OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(40.0),
+                              ),
+                              borderSide: new BorderSide(
+                                color: Colors.green,
+                                width: 1.0,
+                              ),
+                            ),
+                          ),
                           onChanged: (value) {
                             email = value;
                           },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextField(
+                          obscureText: true,
+                          onChanged: (value) {
+                            password = value;
+                          },
+                          cursorWidth: 4,
+                          cursorColor: Colors.green,
                           decoration: InputDecoration(
-                            hintText: 'Enter your email',
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 20.0),
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(32.0)),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.lightBlueAccent, width: 1.0),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(32.0)),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.lightBlueAccent, width: 2.0),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(32.0)),
+                            labelText: 'Enter your Password',
+                            labelStyle:
+                            TextStyle(color: Colors.green, fontSize: 14),
+                            fillColor: Colors.white.withOpacity(0.10),
+                            filled: true,
+                            border: new OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(40.0),
+                              ),
+                              borderSide: new BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
                             ),
                           ),
-                        )
+                        ),
                       ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextField(
-                    obscureText: true,
-                    textAlign: TextAlign.center,
-                    onChanged: (value) {
-                      password = value;
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'Enter your password.',
-                      contentPadding: EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 20.0),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.lightBlueAccent, width: 1.0),
-                        borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.lightBlueAccent, width: 2.0),
-                        borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                      ),
                     ),
                   ),
                   SizedBox(
                     height: 30.0,
                   ),
-                  Text(
-                    "Forget your password?",
-                    style: TextStyle(
-                      fontFamily: 'RobotoL',
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
+
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30.0),
+                      borderRadius: BorderRadius.circular(10.0),
                       color: Color(0xFF09B44D),
                     ),
-                    height: 50.0,
-                    width: 300.0,
+                    height: 40.0,
+                    width: 250.0,
                     child: FlatButton(
                       child: Text(
                         "Sign in",
                         style: TextStyle(
                           fontFamily: 'Roboto',
-                          fontSize: 18,
+                          fontSize: 20,
                           color: const Color(0xffffffff),
                         ),
                       ),
@@ -167,9 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10, bottom: 10),
-                  ),
+                  SizedBox(height: 10,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -222,6 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ],
+        ),
         ),
       ),
     );
