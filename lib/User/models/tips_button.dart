@@ -12,20 +12,29 @@ class tip extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 35.0, vertical: 10.0),
         child: Container(
+          padding: EdgeInsets.only(right: 24),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(
-                title,
-                style: TextStyle(
-                    color: Color(0xFF09B44D),
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold),
+              Flexible(
+                child: Text(
+                  title,
+                  overflow: TextOverflow.fade,
+                  maxLines: 1,
+                  softWrap: false,
+                  style: TextStyle(
+                      color: Color(0xFF09B44D),
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-              Icon(
-                Icons.chevron_right_sharp,
-                color: Color(0xFF09B44D),
-                size: 25.0,
+              Padding(
+                padding: const EdgeInsets.only(left:10.0),
+                child: Icon(
+                  Icons.chevron_right_sharp,
+                  color: Color(0xFF09B44D),
+                  size: 25.0,
+                ),
               )
             ],
           ),

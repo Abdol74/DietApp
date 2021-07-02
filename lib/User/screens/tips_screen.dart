@@ -30,7 +30,7 @@ class _tipsScreenState extends State<tipsScreen> {
         title: Row(
           children: <Widget>[
             Image.asset(
-              'images/bulb-63.png',
+              'assets/images/bulb-63.png',
               width: 30.0,
               height: 30.0,
             ),

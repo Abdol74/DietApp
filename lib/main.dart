@@ -16,12 +16,17 @@ import 'package:daily_tracker_diet_app/Admin/screens/Approve_meal.dart';
 import 'package:daily_tracker_diet_app/User/screens/add_meal_user_screen.dart';
 import 'Admin/screens/login_screen.dart';
 import 'User/screens/add_component_meal.dart';
+import 'User/screens/notfications.dart';
+import 'User/screens/notfications.dart';
 import 'User/screens/register.dart';
 import 'User/screens/mealComponents.dart';
 import 'User/screens/step1.dart';
 import 'User/screens/step1.dart';
 import 'User/screens/step2.dart';
 import 'User/screens/step4.dart';
+import 'User/screens/tips_screen.dart';
+import 'User/screens/tips_screen.dart';
+import 'User/screens/tips_screen.dart';
 import 'User/screens/update_profile.dart';
 import 'User/screens/update_profile.dart';
 import 'User/screens/view_categories.dart';
@@ -52,7 +57,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF09B44D),
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: LoginScreen.id,
+      initialRoute: tipsScreen.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         mealComponents.id: (context) => mealComponents(),
@@ -75,6 +80,8 @@ class MyApp extends StatelessWidget {
         ApproveMeal.id: (context) => ApproveMeal(),
         MealPage.id: (context) => MealPage(),
         MealCategories.id: (context) => MealCategories(),
+        tipsScreen.id: (context) => tipsScreen(),
+        notfications.id: (context) => notfications(),
 
       },
     );
