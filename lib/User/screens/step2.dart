@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:daily_tracker_diet_app/User/screens/home_page.dart';
 
 import 'package:daily_tracker_diet_app/User/screens/workout_disease.dart';
 import 'package:daily_tracker_diet_app/User/screens/workout_heart.dart';
@@ -76,10 +77,17 @@ class _StepTwoState extends State<StepTwo> {
                         SizedBox(
                           width: 10,
                         ),
-                        Icon(
-                          Icons.arrow_back,
-                          color: Color(0xFF09C04F),
-                          size: 30.0,
+                        RaisedButton(
+                          elevation: 0.10,
+                          color: Colors.white,
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: Color(0xFF09C04F),
+                            size: 30.0,
+                          ),
                         ),
                         SizedBox(
                           width: 105,
@@ -683,29 +691,14 @@ class _StepTwoState extends State<StepTwo> {
                     'date': todaydate,
                   });
 
-                  if (diseaseValue == 'Heart Disease') {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return workout_heart(
-                        age: age,
-                        gender: selectedGender,
-                        weight: weight,
-                        diseaseValue: diseaseValue,
-                      );
-                    }));
-                  }
-                  if (diseaseValue == 'Diabetes' ||
-                      diseaseValue == 'Hypertension' ||
-                      diseaseValue == 'None') {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return WorkoutDisease(
-                        diseaseValue: diseaseValue,
-                        weight: weight,
-                        age: age,
-                      );
-                    }));
-                  }
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return home_page(
+                      age: age,
+                      diseaseValue: diseaseValue,
+                      gender: selectedGender,
+                      weight: weight,
+                    );
+                  }));
                 }),
           ],
         ),

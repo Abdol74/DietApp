@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:daily_tracker_diet_app/Admin/Provider/catogery_provider.dart';
 
 import 'package:daily_tracker_diet_app/User/screens/view_categories.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -48,9 +49,10 @@ class _MealPageState extends State<MealPage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => MealCategories(
-                                    mealType: snapshot
-                                        .data.documents[index].documentID,
-                                  )));
+                                  mealType:
+                                      snapshot.data.documents[index].documentID,
+                                  mealTypeName: snapshot.data.documents[index]
+                                      .data['typeName'])));
                     },
                     child: Container(
                       margin: EdgeInsets.all(10),

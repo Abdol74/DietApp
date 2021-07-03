@@ -4,6 +4,7 @@ import 'package:daily_tracker_diet_app/User/screens/step1.dart';
 class UserMealComponentsModel {
   String mealComponentId;
   String mealTypeId;
+  String mealTypeName;
   String mealComponentName;
   String userId;
   int mealComponentCounts;
@@ -19,11 +20,13 @@ class UserMealComponentsModel {
     mealComponentName = data['mealComponentName'];
     userId = data['userId'];
     mealCalories = data['mealCalories'];
+    mealTypeName = data['typeName'];
   }
   Map<String, dynamic> toMap() {
     return {
       // 'id': id,
       'mealComponentId': mealComponentId,
+      'typeName': mealTypeName,
       'mealTypeId': mealTypeId,
       'mealComponentsCounts': mealComponentCounts,
       'mealComponentName': mealComponentName,
@@ -34,6 +37,7 @@ class UserMealComponentsModel {
 
   UserMealComponentsModel.fromSnapshot(DocumentSnapshot snapshot) {
     mealComponentId = snapshot.data['mealComponentId'];
+    mealTypeName = snapshot.data['mealTypeName'];
     mealTypeId = snapshot.data['mealTypeId'];
     mealComponentCounts = snapshot.data['mealComponentsCounts'];
     mealComponentName = snapshot.data['mealComponentName'];

@@ -1,7 +1,7 @@
+import 'package:daily_tracker_diet_app/Admin/screens/login_screen.dart';
 import 'package:daily_tracker_diet_app/User/screens/step2.dart';
 
 import 'constants.dart';
-import 'package:daily_tracker_diet_app/User/screens/login_screen.dart';
 import 'package:daily_tracker_diet_app/User/screens/step1.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';

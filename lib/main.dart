@@ -4,6 +4,8 @@ import 'package:daily_tracker_diet_app/Admin/screens/add_meal_screen.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/admin_home.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/meal_home.dart';
 import 'package:daily_tracker_diet_app/User/screens/history.dart';
+import 'package:daily_tracker_diet_app/User/screens/home_page.dart';
+import 'package:daily_tracker_diet_app/User/screens/meals_by_user_type.dart';
 import 'package:daily_tracker_diet_app/User/screens/workout_disease.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/view_user.dart';
@@ -57,7 +59,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF09B44D),
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: tipsScreen.id,
+      initialRoute: Register.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         mealComponents.id: (context) => mealComponents(),
@@ -82,6 +84,8 @@ class MyApp extends StatelessWidget {
         MealCategories.id: (context) => MealCategories(),
         tipsScreen.id: (context) => tipsScreen(),
         notfications.id: (context) => notfications(),
+        MealsByUserAndType.id: (context) => MealsByUserAndType(),
+        home_page.id: (context) => home_page()
       },
     );
   }

@@ -24,8 +24,13 @@ class _tipsScreenState extends State<tipsScreen> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Color(0xFF09B44D)),
-        leading: Icon(
-          Icons.arrow_back,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back,
+          ),
         ),
         title: Row(
           children: <Widget>[
@@ -46,22 +51,22 @@ class _tipsScreenState extends State<tipsScreen> {
           ],
         ),
         actions: [
-          Container(child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context,notfications.id);
-              },
-              child: Icon(Icons.notifications))),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Icon(Icons.search),
-          ),
+          Container(
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, notfications.id);
+                  },
+                  child: Icon(
+                    Icons.notifications,
+                    size: 30,
+                  ))),
         ],
         toolbarHeight: 80.0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(40.0),
-              bottomLeft: Radius.circular(40.0),
-            )),
+          bottomRight: Radius.circular(40.0),
+          bottomLeft: Radius.circular(40.0),
+        )),
         backgroundColor: Colors.white,
       ),
       body: Column(
@@ -78,46 +83,38 @@ class _tipsScreenState extends State<tipsScreen> {
                     return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, index) {
-                          return
-                            Column(
-                              children:<Widget> [
-                                tip(
-                                  title: snapshot.data[index].data["tipName"],
-                                  ontap: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return popup(
-                                              title: snapshot.data[index].data["tipName"],
-                                              dialog: snapshot
-                                                  .data[index].data["description"]);
-                                        });
-                                  },
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 5.0),
-                                  child: SizedBox(
-                                    width: 400,
-                                    child: Divider(
-                                      color: Colors.grey[300],
-                                      thickness: 3.0,
-                                    ),
+                          return Column(
+                            children: <Widget>[
+                              tip(
+                                title: snapshot.data[index].data["tipName"],
+                                ontap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return popup(
+                                            title: snapshot
+                                                .data[index].data["tipName"],
+                                            dialog: snapshot.data[index]
+                                                .data["description"]);
+                                      });
+                                },
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 5.0),
+                                child: SizedBox(
+                                  width: 400,
+                                  child: Divider(
+                                    color: Colors.grey[300],
+                                    thickness: 3.0,
                                   ),
                                 ),
-                              ],
-                            );
-
-
-
-
-
+                              ),
+                            ],
+                          );
                         });
                   }
-
                 }),
-
           ),
-
           Divider(
             height: 10.0,
             endIndent: 35.0,
@@ -125,14 +122,6 @@ class _tipsScreenState extends State<tipsScreen> {
             thickness: 2.0,
             color: Colors.grey.shade300,
           ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 10),
-            child: bottomNavigationBar(
-              backgroundcolor: Color(0xFF09B44D),
-              selecteditemcolor: Colors.white,
-              unselecteditemColor: Colors.white.withOpacity(.60),
-            ),
-          )
         ],
       ),
     );

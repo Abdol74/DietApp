@@ -36,8 +36,13 @@ class _notficationsState extends State<notfications> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(0xFF09B44D)),
-          leading: Icon(
-            Icons.arrow_back,
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back,
+            ),
           ),
           title: Row(
             children: <Widget>[
@@ -56,9 +61,9 @@ class _notficationsState extends State<notfications> {
           toolbarHeight: 80.0,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(40.0),
-                bottomLeft: Radius.circular(40.0),
-              )),
+            bottomRight: Radius.circular(40.0),
+            bottomLeft: Radius.circular(40.0),
+          )),
           backgroundColor: Colors.white,
         ),
         body: Container(
@@ -73,12 +78,12 @@ class _notficationsState extends State<notfications> {
                         builder: (context, snapshot2) {
                           return Container(
                             child: ListView.builder(
-                                itemCount: snapshot1.data.documents.length ,
+                                itemCount: snapshot1.data.documents.length,
                                 itemBuilder: (context, index) {
                                   DocumentSnapshot data =
-                                  snapshot1.data.documents[index];
+                                      snapshot1.data.documents[index];
                                   DocumentSnapshot data2 =
-                                  snapshot2.data.documents[index];
+                                      snapshot2.data.documents[index];
                                   Map getDocs = data.data;
                                   Map getDocs2 = data2.data;
                                   return Column(children: [
@@ -131,7 +136,6 @@ class _notficationsState extends State<notfications> {
                                           ),
                                         ),
                                       ],
-
                                     ),
                                   ]);
                                 }),

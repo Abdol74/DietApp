@@ -10,7 +10,8 @@ class MealByCategories extends StatefulWidget {
   // final MealProvider mealProvider;
   // MealByCategories({this.mealProvider});
   final String mealType;
-  MealByCategories({this.mealType});
+  final String mealTypeName;
+  MealByCategories({this.mealType, this.mealTypeName});
   @override
   _MealByCategoriesState createState() => _MealByCategoriesState();
 }
@@ -416,6 +417,9 @@ class _MealByCategoriesState extends State<MealByCategories> {
                                                                   return MealCart(
                                                                     mealType: widget
                                                                         .mealType,
+                                                                    mealTypeName:
+                                                                        widget
+                                                                            .mealTypeName,
                                                                   );
                                                                 }));
                                                               },

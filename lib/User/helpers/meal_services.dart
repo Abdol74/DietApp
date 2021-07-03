@@ -25,7 +25,7 @@ class MealServices {
       Firestore.instance
           .collection('UserMealComponents')
           .where('userId', isEqualTo: userId)
-          .where('mealTypeId', isEqualTo: mealTypeId)
+          // .where('mealTypeId', isEqualTo: mealTypeId)
           .getDocuments()
           .then((result) {
         List<UserMealComponentsModel> currentUserMeals = [];

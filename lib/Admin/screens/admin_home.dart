@@ -9,7 +9,7 @@ import 'package:daily_tracker_diet_app/User/models/bottom_navigation_bar.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/login_screen.dart';
 
 class Profile extends StatefulWidget {
-  static const String id = 'login_screen';
+  static const String id = 'admin_screen';
   @override
   _ProfileState createState() => new _ProfileState();
 }

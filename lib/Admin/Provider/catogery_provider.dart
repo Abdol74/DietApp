@@ -8,6 +8,7 @@ class CategoryProvider with ChangeNotifier {
 
   Future<List<MealCategoriesModel>> loadCategories() async {
     categories = await _categoryServices.getCategories();
+    notifyListeners();
     return categories;
   }
 }

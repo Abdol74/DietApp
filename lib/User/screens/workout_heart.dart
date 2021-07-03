@@ -54,10 +54,15 @@ class _workout_heartState extends State<workout_heart> {
                       SizedBox(
                         height: 20,
                       ),
-                      Icon(
-                        Icons.arrow_back,
-                        color: Color(0xFF09C04F),
-                        size: 30.0,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Color(0xFF09C04F),
+                          size: 30.0,
+                        ),
                       ),
                       SizedBox(
                         width: 40,

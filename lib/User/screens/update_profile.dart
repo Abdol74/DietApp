@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -78,10 +79,15 @@ class _update_profileState extends State<update_profile> {
                           SizedBox(
                             height: 20,
                           ),
-                          Icon(
-                            Icons.arrow_back,
-                            color: Color(0xFF09C04F),
-                            size: 30.0,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: Color(0xFF09C04F),
+                              size: 30.0,
+                            ),
                           ),
                           SizedBox(
                             width: 10,
@@ -113,7 +119,7 @@ class _update_profileState extends State<update_profile> {
               height: 10,
             ),
             Container(
-              width:100,
+              width: 100,
               height: 200,
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -133,7 +139,7 @@ class _update_profileState extends State<update_profile> {
                         decoration: InputDecoration(
                           labelText: 'New Name',
                           labelStyle:
-                          TextStyle(color: Colors.green, fontSize: 15),
+                              TextStyle(color: Colors.green, fontSize: 15),
                           fillColor: Colors.white.withOpacity(0.6),
                           filled: true,
                           border: new OutlineInputBorder(
@@ -154,7 +160,6 @@ class _update_profileState extends State<update_profile> {
                           else
                             return null;
                         },
-
                         onChanged: (val) {
                           setState(() => firstName = val);
                         },
@@ -177,7 +182,7 @@ class _update_profileState extends State<update_profile> {
                         decoration: InputDecoration(
                           labelText: 'New E-mail',
                           labelStyle:
-                          TextStyle(color: Colors.green, fontSize: 15),
+                              TextStyle(color: Colors.green, fontSize: 15),
                           fillColor: Colors.white.withOpacity(0.6),
                           filled: true,
                           border: new OutlineInputBorder(
@@ -201,7 +206,6 @@ class _update_profileState extends State<update_profile> {
                               return null;
                           }
                         },
-
                         onChanged: (val) {
                           setState(() => newEmail = val);
                         },
@@ -222,7 +226,7 @@ class _update_profileState extends State<update_profile> {
                         decoration: InputDecoration(
                           labelText: 'New password',
                           labelStyle:
-                          TextStyle(color: Colors.green, fontSize: 15),
+                              TextStyle(color: Colors.green, fontSize: 15),
                           fillColor: Colors.white.withOpacity(0.6),
                           filled: true,
                           border: new OutlineInputBorder(
@@ -239,7 +243,6 @@ class _update_profileState extends State<update_profile> {
                             ? 'Please enter atleast 6 characters'
                             : null,
                         obscureText: true,
-
                         onChanged: (val) {
                           setState(() => newPassword = val);
                         },
@@ -262,7 +265,7 @@ class _update_profileState extends State<update_profile> {
                         decoration: InputDecoration(
                           labelText: 'confirm password',
                           labelStyle:
-                          TextStyle(color: Colors.green, fontSize: 15),
+                              TextStyle(color: Colors.green, fontSize: 15),
                           fillColor: Colors.white.withOpacity(0.6),
                           filled: true,
                           border: new OutlineInputBorder(
@@ -290,7 +293,6 @@ class _update_profileState extends State<update_profile> {
             SizedBox(
               height: 30,
             ),
-
             Container(
               height: 50,
               margin: EdgeInsets.symmetric(horizontal: 70),
@@ -299,8 +301,8 @@ class _update_profileState extends State<update_profile> {
                   style: ElevatedButton.styleFrom(
                       primary: Color(0xFF09C04F),
                       padding: EdgeInsets.only(left: 40, right: 40),
-                      textStyle: TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold)),
+                      textStyle:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                   child: Text(
                     "Update Profile",
                     style: TextStyle(

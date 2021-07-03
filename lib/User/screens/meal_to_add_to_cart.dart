@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daily_tracker_diet_app/Admin/Provider/meal_provider.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/Approve_meal.dart';
+import 'package:daily_tracker_diet_app/User/helpers/meal_services.dart';
 import 'package:daily_tracker_diet_app/User/helpers/measure_brain.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:daily_tracker_diet_app/User/screens/meals_by_user_type.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +16,8 @@ FirebaseUser loggedInUser;
 
 class MealCart extends StatefulWidget {
   final String mealType;
-  MealCart({this.mealType});
+  final String mealTypeName;
+  MealCart({this.mealType, this.mealTypeName});
   @override
   _MealCartState createState() => _MealCartState();
 }
@@ -401,6 +404,25 @@ class _MealCartState extends State<MealCart> {
                           " remaining calories": currentCalories,
                         }).then((_) {
                           print(currentCalories);
+                          fireStore.collection('UserMealComponents').add({
+                            'mealTypeId': widget.mealType,
+                            'mealTypeName': widget.mealTypeName,
+                            'mealComponentName':
+                                mealProvider.currentMealToAddToUser.mealName,
+                            'mealComponentId':
+                                mealProvider.currentMealToAddToUser.id,
+                            'userId': loggedInUser.uid,
+                            'mealComponentsCounts':
+                                mealProvider.currentMealToAddToUser.measure,
+                          });
+
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return MealsByUserAndType(
+                              uid: loggedInUser.uid,
+                              mealType: widget.mealType,
+                            );
+                          }));
                         });
                       } else
                         print("You should burn calories to eat more");

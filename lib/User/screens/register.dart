@@ -1,9 +1,8 @@
+import 'package:daily_tracker_diet_app/Admin/screens/login_screen.dart';
 import 'package:daily_tracker_diet_app/User/screens/step1.dart';
 import 'package:daily_tracker_diet_app/User/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'constants.dart';
-import 'login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Register extends StatefulWidget {
@@ -335,17 +334,22 @@ class _registerState extends State<Register> {
                   children: <Widget>[
                     Text(
                       "Already have an account?",
-                      style: TextStyle(color: kPrimaryColor),
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    SizedBox(
+                      width: 5,
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, LoginScreen.id);
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return LoginScreen();
+                        }));
                       },
                       child: Text(
                         "Sign In",
                         style: TextStyle(
-                            color: Colors.grey[700],
-                            fontWeight: FontWeight.bold),
+                            color: Colors.green, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
