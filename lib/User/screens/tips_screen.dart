@@ -3,7 +3,6 @@ import 'package:daily_tracker_diet_app/User/screens/notfications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_tracker_diet_app/User/models/tips_button.dart';
-import 'package:daily_tracker_diet_app/User/models/bottom_navigation_bar.dart';
 import 'package:daily_tracker_diet_app/User/screens/popup_screen.dart';
 
 class tipsScreen extends StatefulWidget {
@@ -48,20 +47,18 @@ class _tipsScreenState extends State<tipsScreen> {
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF09B44D),
                 )),
+            SizedBox(width: 180,),
+            GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, notfications.id);
+                },
+                child: Icon(
+                  Icons.notifications,
+                  size: 30,
+                )),
           ],
         ),
-        actions: [
-          Container(
-              child: GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, notfications.id);
-                  },
-                  child: Icon(
-                    Icons.notifications,
-                    size: 30,
-                  ))),
-        ],
-        toolbarHeight: 80.0,
+        toolbarHeight: 50.0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
           bottomRight: Radius.circular(40.0),
@@ -69,8 +66,15 @@ class _tipsScreenState extends State<tipsScreen> {
         )),
         backgroundColor: Colors.white,
       ),
-      body: Column(
+      body:Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/back1.png'),
+            fit: BoxFit.fill,
+          ),
+        ),      child:Column(
         children: <Widget>[
+          SizedBox(height: 20,),
           Expanded(
             child: FutureBuilder(
                 future: getTips(),
@@ -117,12 +121,11 @@ class _tipsScreenState extends State<tipsScreen> {
           ),
           Divider(
             height: 10.0,
-            endIndent: 35.0,
-            indent: 35.0,
-            thickness: 2.0,
-            color: Colors.grey.shade300,
+            thickness: 4.0,
+            color: Colors.grey[400],
           ),
         ],
+      ),
       ),
     );
   }

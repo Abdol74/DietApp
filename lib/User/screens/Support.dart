@@ -23,14 +23,17 @@ class _SupportState extends State<Support> {
           onTap: () {
             Navigator.pop(context);
           },
-          child: Icon(Icons.arrow_back),
+          child: Icon(Icons.arrow_back
+          ,size: 25,
+          ),
         ),
         title: const Text('Support',
             style: TextStyle(
+              fontSize: 20,
               fontFamily: 'Roboto',
               color: Color(0xFF09B44D),
             )),
-        toolbarHeight: 80.0,
+        toolbarHeight: 50.0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
           bottomRight: Radius.circular(40.0),
@@ -38,7 +41,13 @@ class _SupportState extends State<Support> {
         )),
         backgroundColor: Colors.white,
       ),
-      body: Center(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/back1.png'),
+            fit: BoxFit.fill,
+          ),
+        ),
         child: ListView(children: [
           Stack(
             children: [
@@ -132,7 +141,7 @@ class _SupportState extends State<Support> {
                             },
                           ),
                         );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        //ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0),

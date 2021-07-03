@@ -42,14 +42,15 @@ class _notficationsState extends State<notfications> {
             },
             child: Icon(
               Icons.arrow_back,
+              size: 25,
             ),
           ),
           title: Row(
             children: <Widget>[
-              Icon(Icons.notifications),
               SizedBox(
-                width: 10.0,
+                width: 50.0,
               ),
+              Icon(Icons.notifications),
               const Text('Notifcations',
                   style: TextStyle(
                     fontFamily: 'Roboto',
@@ -58,7 +59,7 @@ class _notficationsState extends State<notfications> {
                   )),
             ],
           ),
-          toolbarHeight: 80.0,
+          toolbarHeight: 50.0,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
             bottomRight: Radius.circular(40.0),
@@ -67,7 +68,7 @@ class _notficationsState extends State<notfications> {
           backgroundColor: Colors.white,
         ),
         body: Container(
-          color: Colors.white,
+          color: Colors.green,
           child: Column(children: <Widget>[
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
@@ -93,18 +94,18 @@ class _notficationsState extends State<notfications> {
                                       child: Text(
                                         "Recent",
                                         style: TextStyle(
-                                            color: Color(0xFF09B44D),
+                                            color: Colors.white,
                                             fontSize: 17.0,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     ListTile(
                                       title: Text(
-                                        '-' + data['tipName'],
+                                         data['tipName'],
                                         style: TextStyle(
-                                            color: Color(0xFF09B44D),
+                                            color: Colors.black,
                                             fontSize: 15.0,
-                                            fontWeight: FontWeight.w200),
+                                            fontWeight: FontWeight.w400),
                                       ),
                                     ),
                                     Divider(
@@ -121,18 +122,19 @@ class _notficationsState extends State<notfications> {
                                           child: Text(
                                             "Earlier",
                                             style: TextStyle(
-                                                color: Colors.green,
+                                              fontFamily: 'Roboto',
+                                                color: Colors.white,
                                                 fontSize: 17.0,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         ),
                                         ListTile(
                                           title: Text(
-                                            '-' + data2['tipName'],
+                                           data2['tipName'],
                                             style: TextStyle(
-                                                color: Color(0xFF09B44D),
+                                                color: Colors.black,
                                                 fontSize: 15.0,
-                                                fontWeight: FontWeight.w200),
+                                                fontWeight: FontWeight.w400),
                                           ),
                                         ),
                                       ],

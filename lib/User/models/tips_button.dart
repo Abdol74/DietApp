@@ -24,15 +24,17 @@ class tip extends StatelessWidget {
                   softWrap: false,
                   style: TextStyle(
                       color: Color(0xFF09B44D),
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.bold),
+                      fontSize: 17.0,
+                      fontWeight: FontWeight.bold,
+                    fontFamily: "ROPOTO"
+                  ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left:10.0),
+                padding: const EdgeInsets.only(left:5.0),
                 child: Icon(
                   Icons.chevron_right_sharp,
-                  color: Color(0xFF09B44D),
+                  color: Colors.grey[700],
                   size: 25.0,
                 ),
               )

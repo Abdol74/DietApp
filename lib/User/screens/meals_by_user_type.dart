@@ -38,8 +38,8 @@ class _ProfileState extends State<MealsByUserAndType> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: LiquidPullToRefresh(
-        child: new Container(
+      body:
+        new Container(
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/back1.png'),
@@ -51,29 +51,41 @@ class _ProfileState extends State<MealsByUserAndType> {
             itemBuilder: (context, index) {
               return Column(
                 children: <Widget>[
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      SizedBox(
-                        width: 0,
-                      ),
-                      Row(
+                  SizedBox(height: 10),
+                      Column(
                         children: <Widget>[
                           SizedBox(
                             width: 10,
                           ),
 
-                          Column(
+                          Row(
                             children: [
-                              Text(
-                                "Meal Name",
-                                style: TextStyle(
+                              SizedBox(width: 5,),
+                              Container(
+                                height:40 ,
+                                width:100,
+                                decoration: BoxDecoration(
                                     color: Colors.green,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Roboto'),
+                                    borderRadius: BorderRadius.only(
+                                        bottomRight: Radius.circular(30),
+                                        bottomLeft: Radius.circular(30)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey[600],
+                                        blurRadius: 40,
+                                      )
+                                    ]),
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 12,top: 8),
+                                  child: Text(
+                                    "Meal Name",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Roboto'),
+                                  ) ,
+                                ),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: 10),
@@ -85,19 +97,40 @@ class _ProfileState extends State<MealsByUserAndType> {
                                       : mealProvider.mealsByUserAndType[index]
                                           .mealComponentName,
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.grey[800],
                                     fontSize: 18,
                                   ),
                                 ),
                               ),
-                              Text(
-                                "Meal Type",
-                                style: TextStyle(
+                              SizedBox(width: 15,),
+                              Container(
+                                height:40 ,
+                               width:100,
+                                decoration: BoxDecoration(
                                     color: Colors.green,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Roboto'),
+                                    borderRadius: BorderRadius.only(
+                                        bottomRight: Radius.circular(30),
+                                        bottomLeft: Radius.circular(30)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey[600],
+                                        blurRadius: 40,
+                                      )
+                                    ]),
+                                child:Padding(
+                                  padding: EdgeInsets.only(left: 16,top: 8),
+                                  child:Text(
+                                    "Meal Type",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Roboto'),
+                                  ),
+                                ),
+
                               ),
+
                               Padding(
                                 padding: EdgeInsets.only(left: 10),
                                 child: Text(
@@ -107,53 +140,17 @@ class _ProfileState extends State<MealsByUserAndType> {
                                       ? 'mealName'
                                       : mealProvider.mealsByUserAndType[index]
                                           .mealTypeName,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ),
-                              //////////////////////////
-                              Column(
-                                children: [
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Container(
-                                        width: 100,
-                                        height: 30,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            color: Color(0xFF09C04F),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey[400],
-                                                blurRadius: 5,
-                                              )
-                                            ]),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                  style: TextStyle(color: Colors.black, fontSize: 18,),),
                               ),
                             ],
                           ),
-                          ////
                         ],
                       ),
                       SizedBox(
                         width: 20,
                       ),
-                    ],
-                  ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    padding: EdgeInsets.symmetric(vertical: 15.0),
                     child: SizedBox(
                       width: 400,
                       child: Divider(
@@ -167,9 +164,30 @@ class _ProfileState extends State<MealsByUserAndType> {
             },
           ),
         ),
-        onRefresh: _refreshList,
-        showChildOpacityTransition: true,
-        color: Color(0xFF09C04F),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Color(0xFF09B44D),
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white.withOpacity(.60),
+        selectedFontSize: 14,
+        unselectedFontSize: 14,
+        onTap: (value) {
+          // Respond to item press.
+        },
+        items: [
+          BottomNavigationBarItem(
+            title: Text('back'),
+            icon: Icon(Icons.arrow_back),
+          ),
+          BottomNavigationBarItem(
+            title: Text('Home'),
+            icon: Icon(Icons.home),
+          ),
+          BottomNavigationBarItem(
+            title: Text('Notification'),
+            icon: Icon(Icons.notifications),
+          ),
+        ],
       ),
     );
   }

@@ -32,7 +32,7 @@ class _home_pageState extends State<home_page> {
     // TODO: implement initState
     super.initState();
     getCurrentUser();
-    getMail();
+   // getMail();
   }
 
   void getCurrentUser() async {
@@ -47,10 +47,10 @@ class _home_pageState extends State<home_page> {
     }
   }
 
-  String getMail() {
-    var mailName = loggedInUser.email;
-    return mailName;
-  }
+ // String getMail() {
+   // var mailName = loggedInUser.email;
+  //  return mailName;
+ // }
 
   @override
   Widget build(BuildContext context) {
@@ -286,7 +286,7 @@ class _home_pageState extends State<home_page> {
                           height: 60,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage('assets/images/my meal.png'),
+                              image: AssetImage('assets/images/own_meal.png'),
                             ),
                           ),
                         ),
