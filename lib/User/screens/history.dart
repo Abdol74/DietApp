@@ -11,7 +11,7 @@ import 'package:daily_tracker_diet_app/User/models/data_card.dart';
 import 'package:daily_tracker_diet_app/User/models/Data_card2.dart';
 import 'package:daily_tracker_diet_app/User/models/chart_pie.dart';
 import 'package:daily_tracker_diet_app/User/models/reusable_card.dart';
-//import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 FirebaseUser loggedInUser;
 
@@ -76,15 +76,22 @@ class _calenderScreenState extends State<calenderScreen> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(0xFF09B44D)),
-          leading: Icon(
-            Icons.arrow_back,
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back,
+            ),
           ),
           title: Row(
             children: <Widget>[
-              Image.asset(
-                'assets/images/calendar-grid-61.png',
-                width: 20.0,
-                height: 20.0,
+              Expanded(
+                child: Image.asset(
+                  'assets/images/icons/calendar-grid-61.png',
+                  width: 10.0,
+                  height: 20.0,
+                ),
               ),
               SizedBox(
                 width: 10.0,
@@ -238,14 +245,14 @@ class _calenderScreenState extends State<calenderScreen> {
                                             SizedBox(
                                               height: 10.0,
                                             ),
-                                          //  TypewriterAnimatedTextKit(
-                                             // text: ["Expand Piechart -->"],
-                                            //  textStyle: TextStyle(
-                                              //  fontSize: 17.0,
-                                                //fontWeight: FontWeight.bold,
-                                                //color: Color(0xFF09B44D),
-                                              //),
-                                            //),
+                                            TypewriterAnimatedTextKit(
+                                              text: ["Expand Piechart -->"],
+                                              textStyle: TextStyle(
+                                                fontSize: 17.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xFF09B44D),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                         onPress: () {
@@ -391,4 +398,3 @@ class _calenderScreenState extends State<calenderScreen> {
         ));
   }
 }
-

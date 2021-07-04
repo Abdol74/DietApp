@@ -336,14 +336,23 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
                           fontSize: 16,
                           fontWeight: FontWeight.w600),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState.validate()) {
                         WorkoutDiseaseBrain wDiseaseBrain = WorkoutDiseaseBrain(
                             runningType: selectedRunning,
                             weight: widget.weight,
                             duration: timeSec + timemin);
-                        double calories = wDiseaseBrain.caloriesBurned();
-                        print(calories.round());
+
+                        int calories = wDiseaseBrain.caloriesBurned().toInt();
+                        print(calories);
+                        DocumentReference docref =
+                            await _firestore.collection("UserWorkouts").add({
+                          'caloriesNumber': calories,
+                          'WorkoutDay': workoutDate,
+                          'WorkoutTime': timemin.toInt(),
+                          'WorkoutName': selectedRunning.toString(),
+                        });
+                        workoutid = docref.documentID;
                       } else {
                         Text("erorr");
                       }
@@ -357,35 +366,6 @@ class _WorkoutDiseaseState extends State<WorkoutDisease> {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Color(0xFF09B44D),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white.withOpacity(.60),
-        selectedFontSize: 14,
-        unselectedFontSize: 14,
-        onTap: (value) {
-          // Respond to item press.
-        },
-        items: [
-          BottomNavigationBarItem(
-            title: Text('Favorites'),
-            icon: Icon(Icons.favorite),
-          ),
-          BottomNavigationBarItem(
-            title: Text('Home'),
-            icon: Icon(Icons.home),
-          ),
-          BottomNavigationBarItem(
-            title: Text('Places'),
-            icon: Icon(Icons.location_on),
-          ),
-          BottomNavigationBarItem(
-            title: Text('News'),
-            icon: Icon(Icons.library_books),
-          ),
-        ],
       ),
     );
   }

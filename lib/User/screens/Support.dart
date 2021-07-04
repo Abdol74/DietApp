@@ -23,8 +23,9 @@ class _SupportState extends State<Support> {
           onTap: () {
             Navigator.pop(context);
           },
-          child: Icon(Icons.arrow_back
-          ,size: 25,
+          child: Icon(
+            Icons.arrow_back,
+            size: 25,
           ),
         ),
         title: const Text('Support',
@@ -141,7 +142,7 @@ class _SupportState extends State<Support> {
                             },
                           ),
                         );
-                        //ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0),

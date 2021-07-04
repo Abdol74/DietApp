@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:daily_tracker_diet_app/Admin/screens/meal_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
 
+// ignore: camel_case_types
 class view_user extends StatefulWidget {
   static const String id = 'view_user';
 
@@ -12,11 +14,12 @@ class view_user extends StatefulWidget {
   _view_userState createState() => _view_userState();
 }
 
+// ignore: camel_case_types
 class _view_userState extends State<view_user> {
   final clientdataController = TextEditingController();
   final _auth = FirebaseAuth.instance;
   String clientName;
-  final userId = _firestore.collection('Users').document('id');
+
   @override
   void initState() {
     super.initState();
@@ -43,22 +46,18 @@ class _view_userState extends State<view_user> {
     }
   }
 
-  Stream<QuerySnapshot> getDocs(BuildContext context) async* {
-    final userId = _firestore.collection('Users').document('id');
-    print(userId);
-    yield* Firestore.instance
-        .collection('Clients')
-        .where("clientId", isEqualTo: userId)
-        .snapshots();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Color(0xFF09B44D)),
-        leading: Icon(
-          Icons.arrow_back,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.popAndPushNamed(context, ProfileMeal.id);
+          },
+          child: Icon(
+            Icons.arrow_back,
+          ),
         ),
         title: Row(
           children: <Widget>[
@@ -73,19 +72,13 @@ class _view_userState extends State<view_user> {
                 )),
           ],
         ),
-        actions: [
-          Icon(Icons.notifications),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Icon(Icons.search),
-          ),
-        ],
+        actions: [],
         toolbarHeight: 80.0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(40.0),
-              bottomLeft: Radius.circular(40.0),
-            )),
+          bottomRight: Radius.circular(40.0),
+          bottomLeft: Radius.circular(40.0),
+        )),
         backgroundColor: Colors.white,
       ),
       body: Container(
@@ -113,10 +106,11 @@ class _view_userState extends State<view_user> {
                         ),
                       );
                     }
-                    // ignore: missing_return
+                    // ignore: missing_return, non_constant_identifier_names
                     final Users = snapshot.data.documents;
                     List<ClientTable> clientTables = [];
                     for (var User in Users) {
+                      // ignore: non_constant_identifier_names
                       final UserName = User.data['FirstName'];
                       final id = User.documentID;
                       final userid = User.data['id'];
@@ -125,16 +119,86 @@ class _view_userState extends State<view_user> {
                       final clientTable = ClientTable(
                         Name: UserName,
                         clientid: id,
+                        onPress: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Center(
+                                  child: Container(
+                                    width: 300,
+                                    height: 300,
+                                    child: Column(
+                                      children: <Widget>[
+                                        StreamBuilder<QuerySnapshot>(
+                                            stream: _firestore
+                                                .collection('Clients')
+                                                .where("clientId",
+                                                    isEqualTo: userid)
+                                                .snapshots(),
+                                            builder: (context, snapshot) {
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    backgroundColor:
+                                                        Color(0xFF09B44D),
+                                                  ),
+                                                );
+                                              }
+                                              final details =
+                                                  snapshot.data.documents;
+                                              // ignore: non_constant_identifier_names
+                                              List<DetailsFrame> DetailsFrames =
+                                                  [];
+                                              for (var detail in details) {
+                                                final detName =
+                                                    detail.data['clientName'];
+                                                final age = detail.data['age']
+                                                    .toString();
+                                                final birthday = detail
+                                                    .data['birthday']
+                                                    .toString();
+                                                final goalName =
+                                                    detail.data['goalName'];
+                                                final deseasestts = detail
+                                                    .data['diseaseStatus'];
+                                                final activityLevel = detail
+                                                    .data['activityLevelValue'];
+                                                final calreq = detail
+                                                    .data['caloriesRequired']
+                                                    .toString();
 
+                                                final detailframe =
+                                                    DetailsFrame(
+                                                  ClientName: detName,
+                                                  Age: age,
+                                                  Birthday: birthday,
+                                                  goalName: goalName,
+                                                  ActivityLevel: activityLevel,
+                                                  diseaseStatus: deseasestts,
+                                                  caloriesReq: calreq,
+                                                );
+                                                DetailsFrames.add(detailframe);
+                                              }
+                                              return Expanded(
+                                                  child: ListView(
+                                                children: DetailsFrames,
+                                              ));
+                                            })
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              });
+                        },
                       );
                       clientTables.add(clientTable);
                     }
-                    ;
 
                     return Expanded(
                         child: ListView(
-                          children: clientTables,
-                        ));
+                      children: clientTables,
+                    ));
                   },
                 ),
               ],
@@ -149,8 +213,10 @@ class _view_userState extends State<view_user> {
 class ClientTable extends StatelessWidget {
   ClientTable({this.Name, this.clientid, this.Buttonclr, this.onPress});
 
+  // ignore: non_constant_identifier_names
   final Name;
   final clientid;
+  // ignore: non_constant_identifier_names
   final Buttonclr;
   final Function onPress;
 
@@ -170,17 +236,21 @@ class ClientTable extends StatelessWidget {
 class TableRow extends StatelessWidget {
   TableRow(
       {this.ID,
-        this.NAME,
-        this.color,
-        this.btnText,
-        this.clientid,
-        this.Buttonclr,
-        this.onPress});
+      // ignore: non_constant_identifier_names
+      this.NAME,
+      this.color,
+      this.btnText,
+      this.clientid,
+      // ignore: non_constant_identifier_names
+      this.Buttonclr,
+      this.onPress});
   final NAME;
+  // ignore: non_constant_identifier_names
   final ID;
   final color;
   final btnText;
   final String clientid;
+  // ignore: non_constant_identifier_names
   final Buttonclr;
   final Function onPress;
   @override
@@ -201,43 +271,42 @@ class TableRow extends StatelessWidget {
             ]),
         child: Padding(
           padding:
-          const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
+              const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
           child: Row(
             children: <Widget>[
               Expanded(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        '$NAME',
-                        style: TextStyle(
-                            color: color,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    '$NAME',
+                    style: TextStyle(
+                        color: color,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30.0),
+                      color: Buttonclr,
+                    ),
+                    height: 20.0,
+                    // ignore: deprecated_member_use
+                    child: FlatButton(
+                      onPressed: () async {
+                        await _firestore
+                            .collection('Users')
+                            .document('$clientid')
+                            .delete();
+                      },
+                      child: Text(
+                        '$btnText',
+                        style: TextStyle(fontSize: 10.0, color: Colors.white),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30.0),
-                          color: Buttonclr,
-                        ),
-                        height: 20.0,
-                        child: FlatButton(
-                          onPressed: () async {
-                            await _firestore
-                                .collection('Users')
-                                .document('$clientid')
-                                .delete();
-
-                          },
-                          child: Text(
-                            '$btnText',
-                            style: TextStyle(
-                                fontSize: 10.0, color: Colors.grey.shade300),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ))
+                    ),
+                  ),
+                ],
+              ))
             ],
           ),
         ),
@@ -246,3 +315,206 @@ class TableRow extends StatelessWidget {
   }
 }
 
+class DetailsFrame extends StatelessWidget {
+  const DetailsFrame(
+      // ignore: non_constant_identifier_names
+      {this.ActivityLevel,
+      // ignore: non_constant_identifier_names
+      this.Age,
+      // ignore: non_constant_identifier_names
+      this.Birthday,
+      this.caloriesReq,
+      // ignore: non_constant_identifier_names
+      this.ClientName,
+      this.goalName,
+      this.diseaseStatus});
+  // ignore: non_constant_identifier_names
+  final ClientName;
+  // ignore: non_constant_identifier_names
+  final Age;
+  final Birthday;
+  final goalName;
+  final diseaseStatus;
+  // ignore: non_constant_identifier_names
+  final ActivityLevel;
+  final caloriesReq;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(15.0),
+      width: 300,
+      height: 250,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.0),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.shade400,
+                blurRadius: 5.0,
+                spreadRadius: 0.5,
+                offset: Offset(0, 5))
+          ]),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 20.0, top: 20.0, bottom: 5.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    'UserName :',
+                    style: TextStyle(
+                        color: Color(0xFF09B44D), fontWeight: FontWeight.w300),
+                  ),
+                  SizedBox(
+                    width: 5.0,
+                  ),
+                  Text(ClientName),
+                ]),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 20.0, bottom: 5.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    'Age :',
+                    style: TextStyle(
+                        color: Color(0xFF09B44D), fontWeight: FontWeight.w300),
+                  ),
+                  SizedBox(
+                    width: 5.0,
+                  ),
+                  Text(Age),
+                ]),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 20.0, bottom: 30.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    'BirthDate :',
+                    style: TextStyle(
+                        color: Color(0xFF09B44D), fontWeight: FontWeight.w300),
+                  ),
+                  SizedBox(
+                    width: 5.0,
+                  ),
+                  Text(Birthday),
+                ]),
+          ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    height: 30.0,
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Goal :',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.w300),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                    child: Container(
+                        height: 30.0,
+                        decoration: BoxDecoration(
+                          color: Colors.green.shade200,
+                        ),
+                        child: Center(child: Text(goalName)))),
+              ]),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    height: 30.0,
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade200,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Disease :',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.w300),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                    child: Container(
+                        height: 30.0,
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                        ),
+                        child: Center(child: Text(diseaseStatus)))),
+              ]),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    height: 30.0,
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Activity Level :',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.w300),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                    child: Container(
+                        height: 30.0,
+                        decoration: BoxDecoration(
+                          color: Colors.green.shade200,
+                        ),
+                        child: Center(child: Text(ActivityLevel)))),
+              ]),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    height: 30.0,
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade200,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Calories Req :',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.w300),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                    child: Container(
+                        height: 30.0,
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                        ),
+                        child: Center(child: Text(caloriesReq)))),
+              ]),
+        ],
+      ),
+    );
+  }
+}

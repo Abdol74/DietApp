@@ -32,7 +32,6 @@ class _MealCartState extends State<MealCart> {
   double requiredCalories;
   int shouldburnCalories = 0;
   String getdocumentID = "";
-
   @override
   void initState() {
     // TODO: implement initState
@@ -89,13 +88,13 @@ class _MealCartState extends State<MealCart> {
         .collection("Clients")
         .where("clientId", isEqualTo: user.uid.toString())
         .getDocuments()
-        .then((cal) {
+        .then((cal) async {
       userDate = cal.documents[0].data["date"].toString();
       requiredCalories = cal.documents[0].data["caloriesRequired"];
       getdocumentID = cal.documents[0].documentID;
 
       if (userDate != todaydate) {
-        Firestore.instance
+        await Firestore.instance
             .collection("Clients")
             .document(getdocumentID)
             .updateData({
@@ -167,53 +166,64 @@ class _MealCartState extends State<MealCart> {
       return Column(
         children: <Widget>[
           SizedBox(
-            height: 10,
+            height: 5,
           ),
           Padding(
-            padding: EdgeInsets.only(left: 10),
-            child: TextFormField(
-              cursorWidth: 4,
-              cursorColor: Colors.green,
-              decoration: InputDecoration(
-                labelText: 'measure',
-                labelStyle: TextStyle(color: Colors.black, fontSize: 20),
-                fillColor: Colors.white.withOpacity(0.6),
-                filled: true,
-                border: new OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(
-                    const Radius.circular(8.0),
-                  ),
-                  borderSide: new BorderSide(
-                    color: Colors.transparent,
-                    width: 1.0,
+            padding: EdgeInsets.only(left: 60, right: 60),
+            child: Center(
+              child: TextFormField(
+                cursorWidth: 4,
+                cursorColor: Colors.black,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  labelText: 'Quantity',
+                  labelStyle: TextStyle(
+                      fontSize: 17,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'cairoSemiBold'),
+                  fillColor: Colors.white.withOpacity(.85),
+                  filled: true,
+                  border: new OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(25),
+                    ),
+                    borderSide: new BorderSide(
+                      color: Colors.red,
+                      width: 1.0,
+                    ),
                   ),
                 ),
-              ),
-              initialValue:
-                  (mealProvider.currentMealToAddToUser.measure == null)
-                      ? 'Insert Measure '
-                      : mealProvider.currentMealToAddToUser.measure.toString(),
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                WhitelistingTextInputFormatter.digitsOnly
-              ],
-              style: TextStyle(fontSize: 15, color: Colors.green),
-              validator: (String value) {
-                if (value.isEmpty) {
-                  return 'Measure is required';
-                }
+                initialValue: (mealProvider.currentMealToAddToUser.measure ==
+                        null)
+                    ? 'Insert Measure '
+                    : mealProvider.currentMealToAddToUser.measure.toString(),
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  WhitelistingTextInputFormatter.digitsOnly
+                ],
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
+                validator: (String value) {
+                  if (value.isEmpty) {
+                    return 'Measure is required';
+                  }
 
-                return null;
-              },
-              // onSaved: (String value) {
-              //   setState(() {
-              //     mealProvider.currentMealToAddToUser.measure =
-              //         int.parse(value);
-              //   });
-              // },
-              onChanged: (String value) {
-                mealProvider.currentMealToAddToUser.measure = int.parse(value);
-              },
+                  return null;
+                },
+                // onSaved: (String value) {
+                //   setState(() {
+                //     mealProvider.currentMealToAddToUser.measure =
+                //         int.parse(value);
+                //   });
+                // },
+                onChanged: (String value) {
+                  mealProvider.currentMealToAddToUser.measure =
+                      int.parse(value);
+                },
+              ),
             ),
           ),
         ],
@@ -227,11 +237,21 @@ class _MealCartState extends State<MealCart> {
       body: new ListView(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(top: 10),
-            height: 500,
+            decoration: BoxDecoration(color: Color(0xFF09C04F)),
+            child: Row(
+              children: [
+                Text("Remaining Calories"),
+                SizedBox(width: 30),
+                Text(currentCalories.toString()),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 5),
+            height: 350,
             width: 20,
             decoration: BoxDecoration(
-                color: Colors.green,
+                color: Color(0xFF09C04F),
                 borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(25),
                     bottomLeft: Radius.circular(25)),
@@ -243,74 +263,163 @@ class _MealCartState extends State<MealCart> {
                 ]),
             child: Column(
               children: <Widget>[
-                Container(
-                  child: Text(currentCalories.toString()),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  child: Text(differenceCalories.toString()),
-                ),
-                Row(
+                Column(
                   children: [
                     SizedBox(
-                      width: 20,
+                      width: 10,
                     ),
                     Container(
-                      height: 150,
-                      width: 190,
-                      child: Image.network(
-                          mealProvider.currentMealToAddToUser.imageUrl),
-                    ),
-                    SizedBox(
-                      width: 30,
+                      child: Text(
+                        mealProvider.currentMealToAddToUser.mealName,
+                        style: TextStyle(
+                            fontSize: 32,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Shadows'),
+                      ),
                     ),
                     Column(
                       children: <Widget>[
-                        Text(
-                          mealProvider.currentMealToAddToUser.mealName,
-                          style: TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                        SizedBox(
+                          height: 10,
                         ),
-                        Text(
-                          'Calories : ${mealProvider.currentMealToAddToUser.caloriesNumber}'
-                              .toString(),
-                          style: TextStyle(
-                              fontSize: 16,
+                        Container(
+                          margin: EdgeInsets.only(left: 25, right: 26),
+                          decoration: BoxDecoration(
                               color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                              borderRadius: BorderRadius.circular(32)),
+                          padding: EdgeInsets.only(left: 3, right: 8),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Calories ',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'cairoSemiBold'),
+                              ),
+                              SizedBox(
+                                width: 40,
+                              ),
+                              Text(
+                                '${mealProvider.currentMealToAddToUser.caloriesNumber}'
+                                    .toString(),
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'cairoSemiBold'),
+                              ),
+                            ],
+                          ),
                         ),
-                        Text(
-                          'Protein : ${mealProvider.currentMealToAddToUser.protein}'
-                              .toString(),
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                        SizedBox(
+                          height: 3,
                         ),
-                        Text(
-                          'carb : ${mealProvider.currentMealToAddToUser.carb.toString()}',
-                          style: TextStyle(
-                              fontSize: 16,
+                        Container(
+                          margin: EdgeInsets.only(left: 25, right: 26),
+                          decoration: BoxDecoration(
                               color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                              borderRadius: BorderRadius.circular(32)),
+                          padding: EdgeInsets.only(left: 3, right: 2),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Protein',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'cairoSemiBold'),
+                              ),
+                              SizedBox(
+                                width: 60,
+                              ),
+                              Text(
+                                '${mealProvider.currentMealToAddToUser.protein}'
+                                    .toString(),
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'cairoSemiBold'),
+                              ),
+                            ],
+                          ),
                         ),
-                        Text(
-                          'fats : ${mealProvider.currentMealToAddToUser.fats.toString()}',
-                          style: TextStyle(
-                              fontSize: 16,
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 25, right: 26),
+                          decoration: BoxDecoration(
                               color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                              borderRadius: BorderRadius.circular(32)),
+                          padding: EdgeInsets.only(left: 3, right: 2),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Carb',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'cairoSemiBold'),
+                              ),
+                              SizedBox(
+                                width: 95,
+                              ),
+                              Text(
+                                '${mealProvider.currentMealToAddToUser.carb.toString()}',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'cairoSemiBold'),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 25, right: 26),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(32)),
+                          padding: EdgeInsets.only(left: 3, right: 2),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Fats',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'cairoSemiBold'),
+                              ),
+                              SizedBox(
+                                width: 95,
+                              ),
+                              Text(
+                                '${mealProvider.currentMealToAddToUser.fats.toString()}',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'cairoSemiBold'),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 100,
+                  height: 8,
                 ),
                 _buildMealMeasureField(),
               ],
@@ -322,114 +431,136 @@ class _MealCartState extends State<MealCart> {
           Row(
             children: <Widget>[
               SizedBox(
-                width: 100,
+                width: 20,
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.green, // background
-                  onPrimary: Colors.white, // foreground
-                ),
-                onPressed: () {
-                  print(mealProvider.currentMealToAddToUser.measure);
-                  double newMeasure =
-                      mealProvider.currentMealToAddToUser.measure / 100;
-
-                  setState(() {
-                    mealProvider.currentMealToAddToUser.caloriesNumber =
-                        mealProvider.currentMealToAddToUser.caloriesNumber *
-                            newMeasure.toInt();
-
-                    mealProvider.currentMealToAddToUser.protein =
-                        mealProvider.currentMealToAddToUser.protein *
-                            newMeasure.toInt();
-
-                    mealProvider.currentMealToAddToUser.fats =
-                        mealProvider.currentMealToAddToUser.fats *
-                            newMeasure.toInt();
-                    mealProvider.currentMealToAddToUser.carb =
-                        mealProvider.currentMealToAddToUser.carb *
-                            newMeasure.toInt();
-                  });
-                },
-                child: Text('Calculate'),
-              ),
-              SizedBox(width: 40),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.green, // background
-                  onPrimary: Colors.white, // foreground
-                ),
-                onPressed: () {
-                  print(mealProvider.currentMealToAddToUser.measure);
-                  double newMeasure =
-                      mealProvider.currentMealToAddToUser.measure / 100;
-
-                  setState(() {
-                    mealProvider.currentMealToAddToUser.caloriesNumber =
-                        mealProvider.currentMealToAddToUser.caloriesNumber *
-                            newMeasure.toInt();
-
-                    mealProvider.currentMealToAddToUser.protein =
-                        mealProvider.currentMealToAddToUser.protein *
-                            newMeasure.toInt();
-
-                    mealProvider.currentMealToAddToUser.fats =
-                        mealProvider.currentMealToAddToUser.fats *
-                            newMeasure.toInt();
-                    mealProvider.currentMealToAddToUser.carb =
-                        mealProvider.currentMealToAddToUser.carb *
-                            newMeasure.toInt();
-                  });
-
-                  String userGoal;
-
-                  final fireStore = Firestore.instance;
-                  fireStore
-                      .collection("UserCurrentCalory")
-                      .document("l1qhUkw25ZjKJkk1Jzv5")
-                      .get()
-                      .then((da) {
-                    userGoal = da.data["goalName"].toString();
-                    shouldburnCalories = da.data["shouldburnCalory"];
+              ConstrainedBox(
+                constraints: BoxConstraints.tightFor(width: 90, height: 90),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: CircleBorder(),
+                    primary: Colors.green, // background
+                    onPrimary: Colors.white,
+                    // foreground
+                  ),
+                  onPressed: () {
+                    print(mealProvider.currentMealToAddToUser.measure);
+                    double newMeasure =
+                        mealProvider.currentMealToAddToUser.measure / 100;
 
                     setState(() {
-                      if (currentCalories >=
-                          mealProvider.currentMealToAddToUser.caloriesNumber) {
-                        currentCalories -=
-                            mealProvider.currentMealToAddToUser.caloriesNumber;
-                        fireStore
-                            .collection("Clients")
-                            .document(getdocumentID)
-                            .updateData({
-                          " remaining calories": currentCalories,
-                        }).then((_) {
-                          print(currentCalories);
-                          fireStore.collection('UserMealComponents').add({
-                            'mealTypeId': widget.mealType,
-                            'mealTypeName': widget.mealTypeName,
-                            'mealComponentName':
-                                mealProvider.currentMealToAddToUser.mealName,
-                            'mealComponentId':
-                                mealProvider.currentMealToAddToUser.id,
-                            'userId': loggedInUser.uid,
-                            'mealComponentsCounts':
-                                mealProvider.currentMealToAddToUser.measure,
-                          });
+                      mealProvider.currentMealToAddToUser.caloriesNumber =
+                          mealProvider.currentMealToAddToUser.caloriesNumber *
+                              newMeasure.toInt();
 
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return MealsByUserAndType(
-                              uid: loggedInUser.uid,
-                              mealType: widget.mealType,
-                            );
-                          }));
-                        });
-                      } else
-                        print("You should burn calories to eat more");
+                      mealProvider.currentMealToAddToUser.protein =
+                          mealProvider.currentMealToAddToUser.protein *
+                              newMeasure.toInt();
+
+                      mealProvider.currentMealToAddToUser.fats =
+                          mealProvider.currentMealToAddToUser.fats *
+                              newMeasure.toInt();
+                      mealProvider.currentMealToAddToUser.carb =
+                          mealProvider.currentMealToAddToUser.carb *
+                              newMeasure.toInt();
                     });
-                  });
-                },
-                child: Text('Add'),
+                  },
+                  child: Container(
+                      child: Text('Calculate',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Shadows'))),
+                ),
+              ),
+              SizedBox(width: 20),
+              ConstrainedBox(
+                constraints: BoxConstraints.tightFor(width: 90, height: 90),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: CircleBorder(),
+                    primary: Colors.green, // background
+                    onPrimary: Colors.white, // foreground
+                  ),
+                  onPressed: () {
+                    print(mealProvider.currentMealToAddToUser.measure);
+                    double newMeasure =
+                        mealProvider.currentMealToAddToUser.measure / 100;
+
+                    setState(() {
+                      mealProvider.currentMealToAddToUser.caloriesNumber =
+                          mealProvider.currentMealToAddToUser.caloriesNumber *
+                              newMeasure.toInt();
+
+                      mealProvider.currentMealToAddToUser.protein =
+                          mealProvider.currentMealToAddToUser.protein *
+                              newMeasure.toInt();
+
+                      mealProvider.currentMealToAddToUser.fats =
+                          mealProvider.currentMealToAddToUser.fats *
+                              newMeasure.toInt();
+                      mealProvider.currentMealToAddToUser.carb =
+                          mealProvider.currentMealToAddToUser.carb *
+                              newMeasure.toInt();
+                    });
+
+                    String userGoal;
+
+                    final fireStore = Firestore.instance;
+                    fireStore
+                        .collection("UserCurrentCalory")
+                        .document("l1qhUkw25ZjKJkk1Jzv5")
+                        .get()
+                        .then((da) {
+                      userGoal = da.data["goalName"].toString();
+                      shouldburnCalories = da.data["shouldburnCalory"];
+
+                      setState(() {
+                        if (currentCalories >=
+                            mealProvider
+                                .currentMealToAddToUser.caloriesNumber) {
+                          currentCalories -= mealProvider
+                              .currentMealToAddToUser.caloriesNumber;
+                          fireStore
+                              .collection("Clients")
+                              .document(getdocumentID)
+                              .updateData({
+                            " remaining calories": currentCalories,
+                          }).then((_) {
+                            print(currentCalories);
+                            fireStore.collection('UserMealComponents').add({
+                              'mealTypeId': widget.mealType,
+                              'mealTypeName': widget.mealTypeName,
+                              'mealComponentName':
+                                  mealProvider.currentMealToAddToUser.mealName,
+                              'mealComponentId':
+                                  mealProvider.currentMealToAddToUser.id,
+                              'userId': loggedInUser.uid,
+                              'mealComponentsCounts':
+                                  mealProvider.currentMealToAddToUser.measure,
+                            });
+
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return MealsByUserAndType(
+                                uid: loggedInUser.uid,
+                                mealType: widget.mealType,
+                              );
+                            }));
+                          });
+                        } else
+                          print("You should burn calories to eat more");
+                      });
+                    });
+                  },
+                  child: Text('Add',
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Shadows')),
+                ),
               )
             ],
           ),

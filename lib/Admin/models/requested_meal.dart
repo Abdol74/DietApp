@@ -21,11 +21,11 @@ class MealBubble extends StatelessWidget {
   final String mealImage;
   final String mealName;
   final String desc;
-  final String calories;
-  final String carb;
+  final int calories;
+  final int carb;
   final String id;
-  final String fat;
-  final String protein;
+  final int fat;
+  final int protein;
   final deleteMeal;
   final addMeal;
 

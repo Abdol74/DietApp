@@ -6,6 +6,7 @@ import 'package:daily_tracker_diet_app/Admin/screens/meal_home.dart';
 import 'package:daily_tracker_diet_app/User/screens/history.dart';
 import 'package:daily_tracker_diet_app/User/screens/home_page.dart';
 import 'package:daily_tracker_diet_app/User/screens/meals_by_user_type.dart';
+import 'package:daily_tracker_diet_app/User/screens/updateProfile2.dart';
 import 'package:daily_tracker_diet_app/User/screens/workout_disease.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/view_user.dart';
@@ -64,7 +65,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF09B44D),
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute:LoginScreen.id,
+      initialRoute: LoginScreen.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         mealComponents.id: (context) => mealComponents(),
@@ -80,7 +81,7 @@ class MyApp extends StatelessWidget {
         //calenderScreen.id: (context) => calenderScreen(),
         Workout1_screen.id: (context) => Workout1_screen(),
         Workout2_screen.id: (context) => Workout2_screen(),
-        update_profile.id: (context) => update_profile(),
+        updateProfile2.id: (context) => updateProfile2(),
         Cardio.id: (context) => Cardio(),
         WorkoutDisease.id: (context) => WorkoutDisease(),
         AddMealUser.id: (context) => AddMealUser(),
@@ -90,7 +91,8 @@ class MyApp extends StatelessWidget {
         tipsScreen.id: (context) => tipsScreen(),
         notfications.id: (context) => notfications(),
         MealsByUserAndType.id: (context) => MealsByUserAndType(),
-        home_page.id: (context) => home_page()
+        home_page.id: (context) => home_page(),
+        calenderScreen.id: (context) => calenderScreen(),
       },
     );
   }

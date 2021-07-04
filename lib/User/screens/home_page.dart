@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/Approve_meal.dart';
 import 'package:daily_tracker_diet_app/User/screens/Support.dart';
 import 'package:daily_tracker_diet_app/User/screens/add_component_meal.dart';
+import 'package:daily_tracker_diet_app/User/screens/add_meal_user_screen.dart';
+import 'package:daily_tracker_diet_app/User/screens/history.dart';
 import 'package:daily_tracker_diet_app/User/screens/meals_by_user_type.dart';
 import 'package:daily_tracker_diet_app/User/screens/step2.dart';
 import 'package:daily_tracker_diet_app/User/screens/tips_screen.dart';
+import 'package:daily_tracker_diet_app/User/screens/updateProfile2.dart';
 import 'package:daily_tracker_diet_app/User/screens/update_profile.dart';
 import 'package:daily_tracker_diet_app/User/screens/workout_disease.dart';
 import 'package:daily_tracker_diet_app/User/screens/workout_heart.dart';
@@ -32,7 +35,7 @@ class _home_pageState extends State<home_page> {
     // TODO: implement initState
     super.initState();
     getCurrentUser();
-   // getMail();
+    // getMail();
   }
 
   void getCurrentUser() async {
@@ -47,10 +50,10 @@ class _home_pageState extends State<home_page> {
     }
   }
 
- // String getMail() {
-   // var mailName = loggedInUser.email;
+  // String getMail() {
+  // var mailName = loggedInUser.email;
   //  return mailName;
- // }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -400,12 +403,17 @@ class _home_pageState extends State<home_page> {
                         SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          "Charts",
-                          style: TextStyle(
-                              color: Colors.green,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, calenderScreen.id);
+                          },
+                          child: Text(
+                            "Charts",
+                            style: TextStyle(
+                                color: Colors.green,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ],
                     ),
@@ -492,19 +500,25 @@ class _home_pageState extends State<home_page> {
                           height: 60,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage('assets/images/h3.png'),
+                              image: AssetImage(
+                                  'assets/images/add_meal_user.jfif'),
                             ),
                           ),
                         ),
                         SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          "Home",
-                          style: TextStyle(
-                              color: Colors.green,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, AddMealUser.id);
+                          },
+                          child: Text(
+                            "Add Meal ",
+                            style: TextStyle(
+                                color: Colors.green,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ],
                     ),
@@ -543,7 +557,7 @@ class _home_pageState extends State<home_page> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, update_profile.id);
+                            Navigator.pushNamed(context, updateProfile2.id);
                           },
                           child: Text(
                             "Update profile",

@@ -4,7 +4,6 @@ import 'package:daily_tracker_diet_app/User/models/icon_content.dart';
 import 'package:daily_tracker_diet_app/User/models/reusable_card.dart';
 import 'package:daily_tracker_diet_app/User/models/bottom_navigation_bar.dart';
 import 'package:daily_tracker_diet_app/User//screens/tips_screen.dart';
-import 'history.dart';
 
 class profileScreen extends StatefulWidget {
   static const String id = 'profile_screen';

@@ -1,3 +1,4 @@
+import 'package:daily_tracker_diet_app/User/screens/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,7 +7,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class update_profile extends StatefulWidget {
   static String id = 'updateUserProfile';
-
+  String firstName;
+  String newEmail;
+  String lastName;
+  update_profile(this.firstName, this.newEmail, this.lastName);
   @override
   _update_profileState createState() => _update_profileState();
 }
@@ -81,7 +85,7 @@ class _update_profileState extends State<update_profile> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pop(context);
+                              Navigator.popAndPushNamed(context, home_page.id);
                             },
                             child: Icon(
                               Icons.arrow_back,
@@ -116,7 +120,7 @@ class _update_profileState extends State<update_profile> {
                   )),
             ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             Container(
               width: 100,
@@ -137,7 +141,7 @@ class _update_profileState extends State<update_profile> {
                         cursorWidth: 4,
                         cursorColor: Colors.green,
                         decoration: InputDecoration(
-                          labelText: 'New Name',
+                          labelText: 'First Name',
                           labelStyle:
                               TextStyle(color: Colors.green, fontSize: 15),
                           fillColor: Colors.white.withOpacity(0.6),
@@ -152,6 +156,11 @@ class _update_profileState extends State<update_profile> {
                             ),
                           ),
                         ),
+                        initialValue: widget.firstName.toString(),
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                        ),
                         validator: (val) {
                           if (val.isEmpty) {
                             return 'Enter the First Name';
@@ -161,14 +170,62 @@ class _update_profileState extends State<update_profile> {
                             return null;
                         },
                         onChanged: (val) {
-                          setState(() => firstName = val);
+                          setState(() => firstName =
+                              val == null ? widget.firstName.toString() : val);
+                        },
+                      ),
+                    ),
+                  ],
+                )),
+            SizedBox(height: 5),
+            Padding(
+                padding: EdgeInsets.only(left: 50.0, right: 50.0, top: 6.0),
+                child: new Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    new Flexible(
+                      child: new TextFormField(
+                        cursorWidth: 4,
+                        cursorColor: Colors.green,
+                        decoration: InputDecoration(
+                          labelText: 'Last Name',
+                          labelStyle:
+                              TextStyle(color: Colors.green, fontSize: 15),
+                          fillColor: Colors.white.withOpacity(0.6),
+                          filled: true,
+                          border: new OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(8.0),
+                            ),
+                            borderSide: new BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                          ),
+                        ),
+                        initialValue: widget.lastName.toString(),
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                        ),
+                        validator: (val) {
+                          if (val.isEmpty) {
+                            return 'Enter the Last Name';
+                          } else if (val.length < 3)
+                            return 'The length of the name must be greater than 3';
+                          else
+                            return null;
+                        },
+                        onChanged: (val) {
+                          setState(() => lastName =
+                              val == null ? widget.lastName.toString() : val);
                         },
                       ),
                     ),
                   ],
                 )),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             Padding(
                 padding: EdgeInsets.only(left: 50.0, right: 50.0, top: 6.0),
@@ -179,6 +236,7 @@ class _update_profileState extends State<update_profile> {
                       child: new TextFormField(
                         cursorWidth: 4,
                         cursorColor: Colors.green,
+                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           labelText: 'New E-mail',
                           labelStyle:
@@ -195,6 +253,7 @@ class _update_profileState extends State<update_profile> {
                             ),
                           ),
                         ),
+                        initialValue: widget.newEmail.toString(),
                         validator: (val) {
                           if (val.isEmpty)
                             return 'Enter the Email';
@@ -207,7 +266,8 @@ class _update_profileState extends State<update_profile> {
                           }
                         },
                         onChanged: (val) {
-                          setState(() => newEmail = val);
+                          setState(() => newEmail =
+                              val == null ? widget.newEmail.toString() : val);
                         },
                       ),
                     ),
@@ -220,38 +280,37 @@ class _update_profileState extends State<update_profile> {
                   children: <Widget>[
                     new Flexible(
                       child: new TextFormField(
-                        controller: _passwordController,
-                        cursorWidth: 4,
-                        cursorColor: Colors.green,
-                        decoration: InputDecoration(
-                          labelText: 'New password',
-                          labelStyle:
-                              TextStyle(color: Colors.green, fontSize: 15),
-                          fillColor: Colors.white.withOpacity(0.6),
-                          filled: true,
-                          border: new OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(
-                              const Radius.circular(8.0),
-                            ),
-                            borderSide: new BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
+                          controller: _passwordController,
+                          cursorWidth: 4,
+                          cursorColor: Colors.green,
+                          decoration: InputDecoration(
+                            labelText: 'New password',
+                            labelStyle:
+                                TextStyle(color: Colors.green, fontSize: 15),
+                            fillColor: Colors.white.withOpacity(0.6),
+                            filled: true,
+                            border: new OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(8.0),
+                              ),
+                              borderSide: new BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
                             ),
                           ),
-                        ),
-                        validator: (String value) => value.length < 6
-                            ? 'Please enter atleast 6 characters'
-                            : null,
-                        obscureText: true,
-                        onChanged: (val) {
-                          setState(() => newPassword = val);
-                        },
-                      ),
+                          validator: (String value) => value.length < 6
+                              ? 'Please enter atleast 6 characters'
+                              : null,
+                          obscureText: true,
+                          onChanged: (val) {
+                            setState(() => newPassword = val);
+                          }),
                     ),
                   ],
                 )),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             Padding(
                 padding: EdgeInsets.only(left: 50.0, right: 50.0, top: 6.0),
@@ -291,7 +350,7 @@ class _update_profileState extends State<update_profile> {
                   ],
                 )),
             SizedBox(
-              height: 30,
+              height: 15,
             ),
             Container(
               height: 50,
@@ -327,6 +386,7 @@ class _update_profileState extends State<update_profile> {
                           .updateData({
                         "FirstName": firstName,
                         "Email": newEmail,
+                        'LastName': lastName
                       }).then((_) {});
                       print("Successs !!!");
                     });

@@ -1,7 +1,9 @@
 import 'package:daily_tracker_diet_app/Admin/Provider/meal_provider.dart';
 import 'package:daily_tracker_diet_app/Admin/models/meal_components_model.dart';
+import 'package:daily_tracker_diet_app/Admin/screens/Approve_meal.dart';
 import 'package:daily_tracker_diet_app/Admin/screens/add&&update_meal.dart';
 import 'package:daily_tracker_diet_app/Admin/helpers/meal_api.dart';
+import 'package:daily_tracker_diet_app/Admin/screens/view_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -89,12 +91,36 @@ class _ProfileState extends State<ProfileMeal> {
                   size: 30,
                   color: Color(0xFF09C04F),
                 ),
-                title: Text(
-                  "View Users",
-                  style: TextStyle(
-                      color: Colors.grey[800],
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
+                title: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, view_user.id);
+                  },
+                  child: Text(
+                    "View Users",
+                    style: TextStyle(
+                        color: Colors.grey[800],
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.account_box,
+                  size: 30,
+                  color: Color(0xFF09C04F),
+                ),
+                title: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, ApproveMeal.id);
+                  },
+                  child: Text(
+                    "Approve Meal",
+                    style: TextStyle(
+                        color: Colors.grey[800],
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
               ListTile(

@@ -94,10 +94,15 @@ class _AddMealUserState extends State<AddMealUser> {
                             onTap: () {
                               Navigator.pop(context);
                             },
-                            child: Icon(
-                              Icons.arrow_back,
-                              color: Color(0xFF09C04F),
-                              size: 30.0,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Icon(
+                                Icons.arrow_back,
+                                color: Color(0xFF09C04F),
+                                size: 30.0,
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -112,11 +117,6 @@ class _AddMealUserState extends State<AddMealUser> {
                           ),
                           SizedBox(
                             width: 180,
-                          ),
-                          Icon(
-                            Icons.notifications,
-                            color: Color(0xFF09C04F),
-                            size: 30.0,
                           ),
                         ],
                       ),
@@ -339,10 +339,11 @@ class _AddMealUserState extends State<AddMealUser> {
                           await uploadImage(file);
                           await _collectionReference.add({
                             'mealName': mealNameController.text,
-                            'caloriesNumber': carbController.text,
-                            'carb': carbController.text,
-                            'fats': fatsController.text,
-                            'protein': proteinController.text,
+                            'caloriesNumber':
+                                int.parse(caloriesController.text),
+                            'carb': int.parse(carbController.text),
+                            'fats': int.parse(fatsController.text),
+                            'protein': int.parse(proteinController.text),
                             'mealCategoryId': category,
                             'image': mediaUrl,
                             'description': descController.text
